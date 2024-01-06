@@ -199,7 +199,6 @@ body {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    background-color: var(--background-color);
     color: var(--text-color);
 }
 
