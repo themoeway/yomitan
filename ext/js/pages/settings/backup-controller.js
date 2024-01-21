@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,10 @@
  */
 
 import {Dexie} from '../../../lib/dexie.js';
-import {isObject, log} from '../../core.js';
 import {parseJson} from '../../core/json.js';
+import {log} from '../../core/logger.js';
+import {toError} from '../../core/to-error.js';
+import {isObject} from '../../core/utilities.js';
 import {OptionsUtil} from '../../data/options-util.js';
 import {ArrayBufferUtil} from '../../data/sandbox/array-buffer-util.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
@@ -498,7 +500,7 @@ export class BackupController {
         try {
             await this._importSettingsFile(file);
         } catch (error) {
-            this._showSettingsImportError(error instanceof Error ? error : new Error(`${error}`));
+            this._showSettingsImportError(toError(error));
         }
     }
 

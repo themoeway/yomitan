@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,3 +24,25 @@
  * - `3` - Character should be added to the content and is a newline.
  */
 export type CharacterAttributes = 0 | 1 | 2 | 3;
+
+/**
+ * Seek information about an element.
+ * The `enterable` value indicates whether the content of this node should be entered.
+ * The `newlines` value corresponds to the number of newline characters that should be added.
+ * - 1 newline corresponds to a simple new line in the layout.
+ * - 2 newlines corresponds to a significant visual distinction since the previous content.
+ */
+export type ElementSeekInfo = {
+    enterable: boolean;
+    newlines: number;
+};
+
+/**
+ * Information about the whitespace.
+ * `preserveNewlines` indicates whether or not newline characters are treated as line breaks.
+ * `preserveWhitespace` indicates whether or not sequences of whitespace characters are collapsed.
+ */
+export type WhitespaceSettings = {
+    preserveNewlines: boolean;
+    preserveWhitespace: boolean;
+};

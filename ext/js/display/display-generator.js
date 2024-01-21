@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {isObject} from '../core.js';
+import {isObject} from '../core/utilities.js';
 import {ExtensionError} from '../core/extension-error.js';
 import {DictionaryDataUtil} from '../dictionary/dictionary-data-util.js';
 import {HtmlTemplateCollection} from '../dom/html-template-collection.js';
@@ -67,13 +67,13 @@ export class DisplayGenerator {
         const node = this._instantiate('term-entry');
 
         const headwordsContainer = this._querySelector(node, '.headword-list');
-        const inflectionsContainer = this._querySelector(node, '.inflection-list');
+        const inflectionRuleChainsContainer = this._querySelector(node, '.inflection-rule-chains');
         const groupedPronunciationsContainer = this._querySelector(node, '.pronunciation-group-list');
         const frequencyGroupListContainer = this._querySelector(node, '.frequency-group-list');
         const definitionsContainer = this._querySelector(node, '.definition-list');
         const headwordTagsContainer = this._querySelector(node, '.headword-list-tag-list');
 
-        const {headwords, type, inflections, definitions, frequencies, pronunciations} = dictionaryEntry;
+        const {headwords, type, inflectionRuleChainCandidates, definitions, frequencies, pronunciations} = dictionaryEntry;
         const groupedPronunciations = DictionaryDataUtil.getGroupedPronunciations(dictionaryEntry);
         const pronunciationCount = groupedPronunciations.reduce((i, v) => i + v.pronunciations.length, 0);
         const groupedFrequencies = DictionaryDataUtil.groupTermFrequencies(dictionaryEntry);
@@ -112,7 +112,7 @@ export class DisplayGenerator {
         }
         headwordsContainer.dataset.count = `${headwords.length}`;
 
-        this._appendMultiple(inflectionsContainer, this._createTermInflection.bind(this), inflections);
+        this._appendMultiple(inflectionRuleChainsContainer, this._createInflectionRuleChain.bind(this), inflectionRuleChainCandidates);
         this._appendMultiple(frequencyGroupListContainer, this._createFrequencyGroup.bind(this), groupedFrequencies, false);
         this._appendMultiple(groupedPronunciationsContainer, this._createGroupedPronunciation.bind(this), groupedPronunciations);
         this._appendMultiple(headwordTagsContainer, this._createTermTag.bind(this), termTags, headwords.length);
@@ -357,6 +357,44 @@ export class DisplayGenerator {
     }
 
     /**
+     * @param {import('dictionary').InflectionRuleChainCandidate} inflectionRuleChain
+     * @returns {?HTMLElement}
+     */
+    _createInflectionRuleChain(inflectionRuleChain) {
+        const {source, inflectionRules} = inflectionRuleChain;
+        if (!Array.isArray(inflectionRules) || inflectionRules.length === 0) { return null; }
+        const fragment = this._instantiate('inflection-rule-chain');
+
+        const sourceIcon = this._getInflectionSourceIcon(source);
+
+        fragment.appendChild(sourceIcon);
+
+        this._appendMultiple(fragment, this._createTermInflection.bind(this), inflectionRules);
+        return fragment;
+    }
+
+    /**
+     * @param {import('dictionary').InflectionSource} source
+     * @returns {HTMLElement}
+     */
+    _getInflectionSourceIcon(source) {
+        const icon = document.createElement('span');
+        icon.classList.add('inflection-source-icon');
+        icon.dataset.inflectionSource = source;
+        switch (source) {
+            case 'dictionary':
+                icon.title = 'Dictionary Deinflection';
+                return icon;
+            case 'algorithm':
+                icon.title = 'Algorithm Deinflection';
+                return icon;
+            case 'both':
+                icon.title = 'Dictionary and Algorithm Deinflection';
+                return icon;
+        }
+    }
+
+    /**
      * @param {string} inflection
      * @returns {DocumentFragment}
      */
@@ -396,7 +434,7 @@ export class DisplayGenerator {
     }
 
     /**
-     * @param {import('dictionary-data').TermGlossary} entry
+     * @param {import('dictionary-data').TermGlossaryContent} entry
      * @param {string} dictionary
      * @returns {?HTMLElement}
      */

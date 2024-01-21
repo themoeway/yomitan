@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,11 +20,11 @@ import {ExtensionError} from '../core/extension-error.js';
 
 export class API {
     /**
-     * @param {import('../yomitan.js').Yomitan} yomitan
+     * @param {import('../extension/web-extension.js').WebExtension} webExtension
      */
-    constructor(yomitan) {
-        /** @type {import('../yomitan.js').Yomitan} */
-        this._yomitan = yomitan;
+    constructor(webExtension) {
+        /** @type {import('../extension/web-extension.js').WebExtension} */
+        this._webExtension = webExtension;
     }
 
     /**
@@ -375,13 +375,15 @@ export class API {
         const data = {action, params};
         return new Promise((resolve, reject) => {
             try {
-                this._yomitan.sendMessage(data, (response) => {
-                    this._checkLastError(chrome.runtime.lastError);
+                this._webExtension.sendMessage(data, (response) => {
+                    this._webExtension.getLastError();
                     if (response !== null && typeof response === 'object') {
-                        if (typeof response.error !== 'undefined') {
-                            reject(ExtensionError.deserialize(response.error));
+                        const {error} = /** @type {import('core').UnknownObject} */ (response);
+                        if (typeof error !== 'undefined') {
+                            reject(ExtensionError.deserialize(/** @type {import('core').SerializedError} */ (error)));
                         } else {
-                            resolve(response.result);
+                            const {result} = /** @type {import('core').UnknownObject} */ (response);
+                            resolve(/** @type {import('api').ApiReturn<TAction>} */ (result));
                         }
                     } else {
                         const message = response === null ? 'Unexpected null response' : `Unexpected response of type ${typeof response}`;
@@ -392,12 +394,5 @@ export class API {
                 reject(e);
             }
         });
-    }
-
-    /**
-     * @param {chrome.runtime.LastError|undefined} _ignore
-     */
-    _checkLastError(_ignore) {
-        // NOP
     }
 }

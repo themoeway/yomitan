@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {EventListenerCollection, log} from '../../core.js';
+import {EventListenerCollection} from '../../core/event-listener-collection.js';
+import {log} from '../../core/logger.js';
 import {DictionaryWorker} from '../../dictionary/dictionary-worker.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {yomitan} from '../../yomitan.js';
@@ -164,7 +165,7 @@ class DictionaryEntry {
 
     /** */
     _showDetails() {
-        const {title, revision, version, prefixWildcardsSupported} = this._dictionaryInfo;
+        const {title, revision, version, counts, prefixWildcardsSupported} = this._dictionaryInfo;
 
         const modal = this._dictionaryController.modalController.getModal('dictionary-details');
         if (modal === null) { return; }
@@ -181,12 +182,26 @@ class DictionaryEntry {
         const wildcardSupportedElement = querySelectorNotNull(modal.node, '.dictionary-prefix-wildcard-searches-supported');
         /** @type {HTMLElement} */
         const detailsTableElement = querySelectorNotNull(modal.node, '.dictionary-details-table');
+        /** @type {HTMLElement} */
+        const partsOfSpeechFilterSetting = querySelectorNotNull(modal.node, '.dictionary-parts-of-speech-filter-setting');
+        /** @type {HTMLElement} */
+        const partsOfSpeechFilterToggle = querySelectorNotNull(partsOfSpeechFilterSetting, '.dictionary-parts-of-speech-filter-toggle');
+        /** @type {HTMLElement} */
+        const useDeinflectionsSetting = querySelectorNotNull(modal.node, '.dictionary-use-deinflections-setting');
+        /** @type {HTMLElement} */
+        const useDeinflectionsToggle = querySelectorNotNull(useDeinflectionsSetting, '.dictionary-use-deinflections-toggle');
 
         titleElement.textContent = title;
         versionElement.textContent = `rev.${revision}`;
         outdateElement.hidden = (version >= 3);
         countsElement.textContent = this._counts !== null ? JSON.stringify(this._counts, null, 4) : '';
         wildcardSupportedElement.checked = prefixWildcardsSupported;
+        partsOfSpeechFilterSetting.hidden = !counts.terms.total;
+        partsOfSpeechFilterToggle.dataset.setting = `dictionaries[${this._index}].partsOfSpeechFilter`;
+
+        useDeinflectionsSetting.hidden = !counts.terms.total;
+        useDeinflectionsToggle.dataset.setting = `dictionaries[${this._index}].useDeinflections`;
+
         this._setupDetails(detailsTableElement);
 
         modal.setVisible(true);
@@ -513,7 +528,9 @@ export class DictionaryController {
             priority: 0,
             enabled,
             allowSecondarySearches: false,
-            definitionsCollapsible: 'not-collapsible'
+            definitionsCollapsible: 'not-collapsible',
+            partsOfSpeechFilter: true,
+            useDeinflections: true
         };
     }
 
@@ -716,9 +733,9 @@ export class DictionaryController {
     /** */
     _onDictionaryMoveButtonClick() {
         const modal = /** @type {import('./modal.js').Modal} */ (this._modalController.getModal('dictionary-move-location'));
-        const {index} = modal.node.dataset;
-        if (typeof index !== 'number') { return; }
+        const index = modal.node.dataset.index ?? '';
         const indexNumber = Number.parseInt(index, 10);
+        if (Number.isNaN(indexNumber)) { return; }
 
         /** @type {HTMLInputElement} */
         const targetStringInput = querySelectorNotNull(document, '#dictionary-move-location');

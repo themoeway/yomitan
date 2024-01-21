@@ -140,6 +140,12 @@
                         </span>
                         <span class="storage-use-finite" hidden>
                             Yomitan is using approximately <span class="storage-usage">?</span> of <span class="storage-quota">?</span>.
+                            <div class="storage-exhaustion-alert warning-text margin-above">
+                                <div>
+                                    <strong>Your system is running low on storage space.</strong><br>
+                                    Importing dictionaries may fail.
+                                </div>
+                            </div>
                         </span>
                         <span class="storage-use-infinite" hidden>
                             Yomitan is permitted unlimited storage.
@@ -2673,6 +2679,42 @@
                 <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
             </div>
         </div>
+        <div class="settings-item dictionary-parts-of-speech-filter-setting" hidden>
+            <div class="settings-item-inner">
+                <div class="settings-item-left">
+                    <div class="settings-item-label">
+                        Part of speech filtering
+                        <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">(?)</a>
+                    </div>
+                </div>
+                <div class="settings-item-right">
+                    <label class="toggle"><input type="checkbox" class="dictionary-parts-of-speech-filter-toggle"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
+                </div>
+            </div>
+            <div class="settings-item-children more" hidden>
+                When deinflecting words, only dictionary entries whose POS matches that expected by the deinflector will be shown.
+                <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
+            </div>
+        </div>
+        <hr>
+        <div class="settings-item dictionary-use-deinflections-setting" hidden>
+            <div class="settings-item-inner">
+                <div class="settings-item-left">
+                    <div class="settings-item-label">
+                        Use deinflections
+                        <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">(?)</a>
+                    </div>
+                </div>
+                <div class="settings-item-right">
+                    <label class="toggle"><input type="checkbox" class="dictionary-use-deinflections-toggle"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
+                </div>
+            </div>
+            <div class="settings-item-children more" hidden>
+                Deinflections from this dictionary will be used.
+                <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
+            </div>
+        </div>
+        <hr>
         <div class="settings-item"><div class="settings-item-children">
             <div class="dictionary-details-table"></div>
             <div class="dictionary-counts"></div>

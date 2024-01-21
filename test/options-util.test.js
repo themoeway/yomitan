@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 import fs from 'fs';
 import {fileURLToPath} from 'node:url';
 import path from 'path';
-import {expect, test, vi} from 'vitest';
+import {expect, test, describe, vi} from 'vitest';
 import {OptionsUtil} from '../ext/js/data/options-util.js';
 import {TemplatePatcher} from '../ext/js/templates/template-patcher.js';
 import {chrome, fetch} from './mocks/common.js';
@@ -425,7 +425,9 @@ function createProfileOptionsUpdatedTestData1() {
                 priority: 0,
                 enabled: true,
                 allowSecondarySearches: false,
-                definitionsCollapsible: 'not-collapsible'
+                definitionsCollapsible: 'not-collapsible',
+                partsOfSpeechFilter: true,
+                useDeinflections: true
             }
         ],
         parsing: {
@@ -602,7 +604,7 @@ function createOptionsUpdatedTestData1() {
             }
         ],
         profileCurrent: 0,
-        version: 22,
+        version: 24,
         global: {
             database: {
                 prefixWildcardsSupported: false
@@ -627,7 +629,7 @@ async function testUpdate() {
 
 /** */
 async function testDefault() {
-    test('Default', async () => {
+    describe('Default', () => {
         /** @type {((options: import('options-util').IntermediateOptions) => void)[]} */
         const data = [
             (options) => options,
@@ -639,27 +641,22 @@ async function testDefault() {
             }
         ];
 
-        const optionsUtil = new OptionsUtil();
-        await optionsUtil.prepare();
+        test.each(data)('default-test-%#', async (modify) => {
+            const optionsUtil = new OptionsUtil();
+            await optionsUtil.prepare();
 
-        for (const modify of data) {
             const options = optionsUtil.getDefault();
-
             const optionsModified = structuredClone(options);
             modify(optionsModified);
-
             const optionsUpdated = await optionsUtil.update(structuredClone(optionsModified));
             expect(structuredClone(optionsUpdated)).toStrictEqual(structuredClone(options));
-        }
+        });
     });
 }
 
 /** */
 async function testFieldTemplatesUpdate() {
-    test('FieldTemplatesUpdate', async () => {
-        const optionsUtil = new OptionsUtil();
-        await optionsUtil.prepare();
-
+    describe('FieldTemplatesUpdate', () => {
         const templatePatcher = new TemplatePatcher();
         /**
          * @param {string} fileName
@@ -1576,7 +1573,11 @@ async function testFieldTemplatesUpdate() {
         ];
 
         const updatesPattern = /<<<UPDATE-ADDITIONS>>>/g;
-        for (const {old, expected, oldVersion, newVersion} of data) {
+
+        test.each(data)('field-templates-update-test-%#', async ({old, expected, oldVersion, newVersion}) => {
+            const optionsUtil = new OptionsUtil();
+            await optionsUtil.prepare();
+
             const options = /** @type {import('core').SafeAny} */ (createOptionsTestData1());
             options.profiles[0].options.anki.fieldTemplates = old;
             options.version = oldVersion;
@@ -1586,7 +1587,7 @@ async function testFieldTemplatesUpdate() {
             const optionsUpdated = structuredClone(await optionsUtil.update(options, newVersion));
             const fieldTemplatesActual = optionsUpdated.profiles[0].options.anki.fieldTemplates;
             expect(fieldTemplatesActual).toStrictEqual(expected2);
-        }
+        });
     });
 }
 

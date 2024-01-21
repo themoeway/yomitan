@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,9 +18,12 @@
 
 import {API} from './comm/api.js';
 import {CrossFrameAPI} from './comm/cross-frame-api.js';
-import {EventDispatcher, deferPromise, log} from './core.js';
 import {createApiMap, invokeApiMapHandler} from './core/api-map.js';
+import {EventDispatcher} from './core/event-dispatcher.js';
 import {ExtensionError} from './core/extension-error.js';
+import {log} from './core/logger.js';
+import {deferPromise} from './core/utilities.js';
+import {WebExtension} from './extension/web-extension.js';
 
 /**
  * @returns {boolean}
@@ -59,6 +62,9 @@ export class Yomitan extends EventDispatcher {
     constructor() {
         super();
 
+        /** @type {WebExtension} */
+        this._webExtension = new WebExtension();
+
         /** @type {string} */
         this._extensionName = 'Yomitan';
         try {
@@ -71,7 +77,7 @@ export class Yomitan extends EventDispatcher {
         /** @type {?string} */
         this._extensionUrlBase = null;
         try {
-            this._extensionUrlBase = chrome.runtime.getURL('/');
+            this._extensionUrlBase = this._webExtension.getUrl('/');
         } catch (e) {
             // NOP
         }
@@ -82,10 +88,6 @@ export class Yomitan extends EventDispatcher {
         this._api = null;
         /** @type {?CrossFrameAPI} */
         this._crossFrame = null;
-        /** @type {boolean} */
-        this._isExtensionUnloaded = false;
-        /** @type {boolean} */
-        this._isTriggeringExtensionUnloaded = false;
         /** @type {boolean} */
         this._isReady = false;
 
@@ -108,6 +110,11 @@ export class Yomitan extends EventDispatcher {
         /* eslint-enable no-multi-spaces */
     }
 
+    /** @type {WebExtension} */
+    get webExtension() {
+        return this._webExtension;
+    }
+
     /**
      * Whether the current frame is the background page/service worker or not.
      * @type {boolean}
@@ -115,14 +122,6 @@ export class Yomitan extends EventDispatcher {
     get isBackground() {
         if (this._isBackground === null) { throw new Error('Not prepared'); }
         return /** @type {boolean} */ (this._isBackground);
-    }
-
-    /**
-     * Whether or not the extension is unloaded.
-     * @type {boolean}
-     */
-    get isExtensionUnloaded() {
-        return this._isExtensionUnloaded;
     }
 
     /**
@@ -154,9 +153,9 @@ export class Yomitan extends EventDispatcher {
         chrome.runtime.onMessage.addListener(this._onMessage.bind(this));
 
         if (!isBackground) {
-            this._api = new API(this);
+            this._api = new API(this._webExtension);
 
-            this.sendMessage({action: 'requestBackendReadySignal'});
+            await this._webExtension.sendMessagePromise({action: 'requestBackendReadySignal'});
             await this._isBackendReadyPromise;
 
             this._crossFrame = new CrossFrameAPI();
@@ -172,7 +171,7 @@ export class Yomitan extends EventDispatcher {
      */
     ready() {
         this._isReady = true;
-        this.sendMessage({action: 'applicationReady'});
+        this._webExtension.sendMessagePromise({action: 'applicationReady'});
     }
 
     /**
@@ -182,36 +181,6 @@ export class Yomitan extends EventDispatcher {
      */
     isExtensionUrl(url) {
         return this._extensionUrlBase !== null && url.startsWith(this._extensionUrlBase);
-    }
-
-    // TODO : this function needs type safety
-    /**
-     * Runs `chrome.runtime.sendMessage()` with additional exception handling events.
-     * @param {import('extension').ChromeRuntimeSendMessageArgs} args The arguments to be passed to `chrome.runtime.sendMessage()`.
-     * @throws {Error} Errors thrown by `chrome.runtime.sendMessage()` are re-thrown.
-     */
-    sendMessage(...args) {
-        try {
-            // @ts-expect-error - issue with type conversion, somewhat difficult to resolve in pure JS
-            chrome.runtime.sendMessage(...args);
-        } catch (e) {
-            this.triggerExtensionUnloaded();
-            throw e;
-        }
-    }
-
-    /**
-     * Triggers the extensionUnloaded event.
-     */
-    triggerExtensionUnloaded() {
-        this._isExtensionUnloaded = true;
-        if (this._isTriggeringExtensionUnloaded) { return; }
-        try {
-            this._isTriggeringExtensionUnloaded = true;
-            this.trigger('extensionUnloaded', {});
-        } finally {
-            this._isTriggeringExtensionUnloaded = false;
-        }
     }
 
     /** */

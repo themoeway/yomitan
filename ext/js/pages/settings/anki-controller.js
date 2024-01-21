@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,10 @@
  */
 
 import {AnkiConnect} from '../../comm/anki-connect.js';
-import {EventListenerCollection, log} from '../../core.js';
+import {EventListenerCollection} from '../../core/event-listener-collection.js';
 import {ExtensionError} from '../../core/extension-error.js';
+import {log} from '../../core/logger.js';
+import {toError} from '../../core/to-error.js';
 import {AnkiUtil} from '../../data/anki-util.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {SelectorObserver} from '../../dom/selector-observer.js';
@@ -409,7 +411,7 @@ export class AnkiController {
             this._sortStringArray(result);
             return [result, null];
         } catch (e) {
-            return [[], e instanceof Error ? e : new Error(`${e}`)];
+            return [[], toError(e)];
         }
     }
 
@@ -422,7 +424,7 @@ export class AnkiController {
             this._sortStringArray(result);
             return [result, null];
         } catch (e) {
-            return [[], e instanceof Error ? e : new Error(`${e}`)];
+            return [[], toError(e)];
         }
     }
 
@@ -487,7 +489,7 @@ export class AnkiController {
         try {
             await this._testAnkiNoteViewer(mode);
         } catch (e) {
-            this._setAnkiNoteViewerStatus(true, e instanceof Error ? e : new Error(`${e}`));
+            this._setAnkiNoteViewerStatus(true, toError(e));
             return;
         }
         this._setAnkiNoteViewerStatus(true, null);

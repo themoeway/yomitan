@@ -261,11 +261,23 @@
 {{/inline}}
 
 {{#*inline "conjugation"}}
-    {{~#if definition.reasons~}}
-        {{~#each definition.reasons~}}
-            {{~#if (op ">" @index 0)}} « {{/if~}}
-            {{.}}
-        {{~/each~}}
+    {{~#if (op ">" definition.inflectionRuleChainCandidates.length 0)~}}
+        {{~set "multiple" false~}}
+        {{~#if (op ">" definition.inflectionRuleChainCandidates.length 1)~}}
+            {{~set "multiple" true~}}
+        {{~/if~}}
+        {{~#if (get "multiple")~}}<ul>{{/if~}}
+            {{~#each definition.inflectionRuleChainCandidates~}}
+                {{~#if (op ">" inflectionRules.length 0)~}}
+                    {{~#if (get "multiple")~}}<li>{{/if~}}
+                    {{~#each inflectionRules~}}
+                        {{~#if (op ">" @index 0)}} « {{/if~}}
+                        {{.}}
+                    {{~/each~}}
+                    {{~#if (get "multiple")~}}</li>{{/if~}}
+                {{~/if~}}
+            {{~/each~}}
+        {{~#if (get "multiple")~}}</ul>{{/if~}}
     {{~/if~}}
 {{/inline}}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,12 +18,12 @@
 
 /* eslint-disable no-multi-spaces */
 
-import {expect, test} from 'vitest';
+import {describe, expect, test} from 'vitest';
 import {ProfileConditionsUtil} from '../ext/js/background/profile-conditions-util.js';
 
 /** */
 function testNormalizeContext() {
-    test('NormalizeContext', () => {
+    describe('NormalizeContext', () => {
         /** @type {{context: import('settings').OptionsContext, expected: import('profile-conditions-util').NormalizedOptionsContext}[]} */
         const data = [
             // Empty
@@ -51,17 +51,17 @@ function testNormalizeContext() {
             }
         ];
 
-        for (const {context, expected} of data) {
+        test.each(data)('normalize-context-test-%#', ({context, expected}) => {
             const profileConditionsUtil = new ProfileConditionsUtil();
             const actual = profileConditionsUtil.normalizeContext(context);
             expect(actual).toStrictEqual(expected);
-        }
+        });
     });
 }
 
 /** */
 function testSchemas() {
-    test('Schemas', () => {
+    describe('Schemas', () => {
         /** @type {{conditionGroups: import('settings').ProfileConditionGroup[], expectedSchema?: import('ext/json-schema').Schema, inputs?: {expected: boolean, context: import('settings').OptionsContext}[]}[]} */
         const data = [
             // Empty
@@ -1100,7 +1100,7 @@ function testSchemas() {
             }
         ];
 
-        for (const {conditionGroups, expectedSchema, inputs} of data) {
+        test.each(data)('schemas-test-%#', ({conditionGroups, expectedSchema, inputs}) => {
             const profileConditionsUtil = new ProfileConditionsUtil();
             const schema = profileConditionsUtil.createSchema(conditionGroups);
             if (typeof expectedSchema !== 'undefined') {
@@ -1113,7 +1113,7 @@ function testSchemas() {
                     expect(actual).toStrictEqual(expected);
                 }
             }
-        }
+        });
     });
 }
 

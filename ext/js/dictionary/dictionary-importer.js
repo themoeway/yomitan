@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,9 +24,10 @@ import {
     ZipReader as ZipReader0,
     configure
 } from '../../lib/zip.js';
-import {stringReverse} from '../core.js';
+import {stringReverse} from '../core/utilities.js';
 import {ExtensionError} from '../core/extension-error.js';
 import {parseJson} from '../core/json.js';
+import {toError} from '../core/to-error.js';
 import {MediaUtil} from '../media/media-util.js';
 
 const ajvSchemas = /** @type {import('dictionary-importer').CompiledSchemaValidators} */ (/** @type {unknown} */ (ajvSchemas0));
@@ -114,13 +115,13 @@ export class DictionaryImporter {
 
         // Files
         /** @type {import('dictionary-importer').QueryDetails} */
-        const queryDetails = new Map([
+        const queryDetails = [
             ['termFiles', /^term_bank_(\d+)\.json$/],
             ['termMetaFiles', /^term_meta_bank_(\d+)\.json$/],
             ['kanjiFiles', /^kanji_bank_(\d+)\.json$/],
             ['kanjiMetaFiles', /^kanji_meta_bank_(\d+)\.json$/],
             ['tagFiles', /^tag_bank_(\d+)\.json$/]
-        ]);
+        ];
         const {termFiles, termMetaFiles, kanjiFiles, kanjiMetaFiles, tagFiles} = Object.fromEntries(this._getArchiveFiles(fileMap, queryDetails));
 
         // Load data
@@ -159,7 +160,7 @@ export class DictionaryImporter {
             const glossaryList = entry.glossary;
             for (let j = 0, jj = glossaryList.length; j < jj; ++j) {
                 const glossary = glossaryList[j];
-                if (typeof glossary !== 'object' || glossary === null) { continue; }
+                if (typeof glossary !== 'object' || glossary === null || Array.isArray(glossary)) { continue; }
                 glossaryList[j] = this._formatDictionaryTermGlossaryObject(glossary, entry, requirements);
             }
             if ((i % formatProgressInterval) === 0) {
@@ -206,7 +207,7 @@ export class DictionaryImporter {
                 try {
                     await dictionaryDatabase.bulkAdd(objectStoreName, entries, i, count);
                 } catch (e) {
-                    errors.push(e instanceof Error ? e : new Error(`${e}`));
+                    errors.push(toError(e));
                 }
 
                 this._progressData.index += count;
@@ -691,16 +692,18 @@ export class DictionaryImporter {
     _getArchiveFiles(fileMap, queryDetails) {
         /** @type {import('dictionary-importer').QueryResult} */
         const results = new Map();
-        for (const [name, value] of fileMap.entries()) {
-            for (const [fileType, fileNameFormat] of queryDetails.entries()) {
-                let entries = results.get(fileType);
-                if (typeof entries === 'undefined') {
-                    entries = [];
-                    results.set(fileType, entries);
-                }
 
-                if (fileNameFormat.test(name)) {
-                    entries.push(value);
+        for (const [fileType] of queryDetails) {
+            results.set(fileType, []);
+        }
+
+        for (const [fileName, fileEntry] of fileMap.entries()) {
+            for (const [fileType, fileNameFormat] of queryDetails) {
+                if (!fileNameFormat.test(fileName)) { continue; }
+                const entries = results.get(fileType);
+
+                if (typeof entries !== 'undefined') {
+                    entries.push(fileEntry);
                     break;
                 }
             }

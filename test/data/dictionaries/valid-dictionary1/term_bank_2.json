@@ -103,6 +103,8 @@
                                                             {
                                                                 "tag": "span",
                                                                 "style": {
+                                                                    "color": "#dd2121",
+                                                                    "textShadow": "0.5px 0.5px 1px gray",
                                                                     "textDecorationLine": "underline",
                                                                     "textDecorationStyle": "wavy",
                                                                     "textDecorationColor": "red"

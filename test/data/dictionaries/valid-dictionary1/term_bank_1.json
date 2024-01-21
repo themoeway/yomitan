@@ -337,5 +337,7 @@
             {"type": "structured-content", "content": "kouzou definition 3 (構造)"}
         ],
         101, "P E1"
-    ]
+    ],
+    ["のたまう", "のたまう", "v5", "v5", 1, ["notamau definition"], 15, ""],
+    ["のたもうた", "のたもうた", "", "", 1, [["のたまう", ["past"]]], 16, ""]
 ]

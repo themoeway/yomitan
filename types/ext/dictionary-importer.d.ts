@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,20 +25,13 @@ export type OnProgressCallback = (data: ProgressData) => void;
 
 /**
  * An enum representing the import step.
- *
- * `-2` `-1` Dictionary import is uninitialized.
- *
- * `0` Load dictionary archive and validate index step.
- *
- * `1` Load schemas and get archive files step.
- *
- * `2` Load and validate dictionary data step.
- *
- * `3` Format dictionary data and extended data support step.
- *
- * `4` Resolve async requirements and import media step.
- *
- * `5` Add dictionary descriptor and import data step.
+ * - `-2` `-1` - Dictionary import is uninitialized.
+ * - `0` - Load dictionary archive and validate index step.
+ * - `1` - Load schemas and get archive files step.
+ * - `2` - Load and validate dictionary data step.
+ * - `3` - Format dictionary data and extended data support step.
+ * - `4` - Resolve async requirements and import media step.
+ * - `5` - Add dictionary descriptor and import data step.
  */
 export type ImportStep = -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -120,9 +113,9 @@ export type ImportRequirementContext = {
 export type ArchiveFileMap = Map<string, ZipJS.Entry>;
 
 /**
- * A map of file types inside a dictionary and its corresponding regular expressions.
+ * An array of tuples of a file type inside a dictionary and its corresponding regular expression.
  */
-export type QueryDetails = Map<string, RegExp>;
+export type QueryDetails = [fileType: string, fileNameFormat: RegExp][];
 
 /**
  * A map of file types inside a dictionary and its matching entries.

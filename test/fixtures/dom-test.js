@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -33,6 +33,20 @@ function prepareWindow(window) {
 
     // Placeholder for feature detection
     document.caretRangeFromPoint = () => null;
+}
+
+/**
+ *
+ * @param {string} [htmlFilePath]
+ * @returns {Promise<{window: import('jsdom').DOMWindow; teardown: (global: unknown) => import('vitest').Awaitable<void>}>}
+ */
+export async function setupDomTest(htmlFilePath) {
+    const html = typeof htmlFilePath === 'string' ? fs.readFileSync(htmlFilePath, {encoding: 'utf8'}) : '<!DOCTYPE html>';
+    const env = builtinEnvironments.jsdom;
+    const {teardown} = await env.setup(global, {jsdom: {html}});
+    const window = /** @type {import('jsdom').DOMWindow} */ (/** @type {unknown} */ (global.window));
+    prepareWindow(window);
+    return {window, teardown};
 }
 
 /**

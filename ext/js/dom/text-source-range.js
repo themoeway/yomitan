@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {toError} from '../core/to-error.js';
 import {DocumentUtil} from './document-util.js';
 import {DOMTextScanner} from './dom-text-scanner.js';
 
@@ -228,7 +229,7 @@ export class TextSourceRange {
             try {
                 return this._range.compareBoundaryPoints(Range.START_TO_START, other.range) === 0;
             } catch (e) {
-                if (e instanceof Error && e.name === 'WrongDocumentError') {
+                if (toError(e).name === 'WrongDocumentError') {
                     // This can happen with shadow DOMs if the ranges are in different documents.
                     return false;
                 }

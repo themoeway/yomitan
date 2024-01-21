@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {escapeRegExp, isObject} from '../core.js';
+import {escapeRegExp, isObject} from '../core/utilities.js';
 import {parseJson, readResponseJson} from '../core/json.js';
 import {TemplatePatcher} from '../templates/template-patcher.js';
 import {JsonSchema} from './json-schema.js';
@@ -555,7 +555,9 @@ export class OptionsUtil {
             this._updateVersion19,
             this._updateVersion20,
             this._updateVersion21,
-            this._updateVersion22
+            this._updateVersion22,
+            this._updateVersion23,
+            this._updateVersion24
         ];
         if (typeof targetVersion === 'number' && targetVersion < result.length) {
             result.splice(targetVersion);
@@ -1140,8 +1142,32 @@ export class OptionsUtil {
         for (const {options: profileOptions} of options.profiles) {
             profileOptions.translation.searchResolution = 'letter';
         }
+    }
 
-        return options;
+    /**
+     * - Added dictionaries[].partsOfSpeechFilter.
+     * @type {import('options-util').UpdateFunction}
+     */
+    _updateVersion23(options) {
+        for (const {options: profileOptions} of options.profiles) {
+            for (const dictionary of profileOptions.dictionaries) {
+                dictionary.partsOfSpeechFilter = true;
+            }
+        }
+    }
+
+    /**
+     * - Added dictionaries[].useDeinflections.
+     * @type {import('options-util').UpdateFunction}
+     */
+    async _updateVersion24(options) {
+        await this._applyAnkiFieldTemplatesPatch(options, '/data/templates/anki-field-templates-upgrade-v24.handlebars');
+
+        for (const {options: profileOptions} of options.profiles) {
+            for (const dictionary of profileOptions.dictionaries) {
+                dictionary.useDeinflections = true;
+            }
+        }
     }
 
     /**

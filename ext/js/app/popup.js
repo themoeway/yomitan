@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,11 @@
  */
 
 import {FrameClient} from '../comm/frame-client.js';
-import {DynamicProperty, EventDispatcher, EventListenerCollection, deepEqual} from '../core.js';
+import {DynamicProperty} from '../core/dynamic-property.js';
+import {EventDispatcher} from '../core/event-dispatcher.js';
+import {EventListenerCollection} from '../core/event-listener-collection.js';
 import {ExtensionError} from '../core/extension-error.js';
+import {deepEqual} from '../core/utilities.js';
 import {DocumentUtil} from '../dom/document-util.js';
 import {loadStyle} from '../dom/style-util.js';
 import {yomitan} from '../yomitan.js';
@@ -711,7 +714,7 @@ export class Popup extends EventDispatcher {
         try {
             return await this._invoke(action, params);
         } catch (e) {
-            if (!yomitan.isExtensionUnloaded) { throw e; }
+            if (!yomitan.webExtension.unloaded) { throw e; }
             return void 0;
         }
     }

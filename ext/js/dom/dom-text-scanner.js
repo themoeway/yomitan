@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -212,10 +212,8 @@ export class DOMTextScanner {
 
     /**
      * Gets information about how whitespace characters are treated.
-     * @param {Text} textNode The text node to check.
-     * @returns {{preserveNewlines: boolean, preserveWhitespace: boolean}} Information about the whitespace.
-     *   The value of `preserveNewlines` indicates whether or not newline characters are treated as line breaks.
-     *   The value of `preserveWhitespace` indicates whether or not sequences of whitespace characters are collapsed.
+     * @param {Text} textNode
+     * @returns {import('dom-text-scanner').WhitespaceSettings}
      */
     _getWhitespaceSettings(textNode) {
         if (this._forcePreserveWhitespace) {
@@ -412,13 +410,8 @@ export class DOMTextScanner {
     }
 
     /**
-     * Gets seek information about an element.
-     * @param {Element} element The element to check.
-     * @returns {{enterable: boolean, newlines: number}} The seek information.
-     *   The `enterable` value indicates whether the content of this node should be entered.
-     *   The `newlines` value corresponds to the number of newline characters that should be added.
-     *   - 1 newline corresponds to a simple new line in the layout.
-     *   - 2 newlines corresponds to a significant visual distinction since the previous content.
+     * @param {Element} element
+     * @returns {import('dom-text-scanner').ElementSeekInfo}
      */
     static getElementSeekInfo(element) {
         let enterable = true;

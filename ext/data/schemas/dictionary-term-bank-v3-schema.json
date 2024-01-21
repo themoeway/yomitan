@@ -320,6 +320,9 @@
                     "enum": ["start", "end", "left", "right", "center", "justify", "justify-all", "match-parent"],
                     "default": "start"
                 },
+                "textShadow": {
+                    "type": "string"
+                },
                 "margin": {
                     "type": "string"
                 },
@@ -397,7 +400,7 @@
             },
             {
                 "type": "string",
-                "description": "String of space-separated rule identifiers for the definition which is used to validate delinflection. Valid rule identifiers are: v1: ichidan verb; v5: godan verb; vs: suru verb; vk: kuru verb; adj-i: i-adjective. An empty string corresponds to words which aren't inflected, such as nouns."
+                "description": "String of space-separated rule identifiers for the definition which is used to validate deinflection. An empty string should be used for words which aren't inflected."
             },
             {
                 "type": "number",
@@ -529,6 +532,24 @@
                                             "description": "Whether or not the image can be collapsed.",
                                             "default": true
                                         }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "description": "Deinflection of the term to an uninflected term.",
+                            "items": [
+                                {
+                                    "type": "string",
+                                    "description": "The uninflected term."
+                                },
+                                {
+                                    "type": "array",
+                                    "description": "A chain of inflection rules that produced the inflected term",
+                                    "items": {
+                                        "type": "string",
+                                        "description": "A single inflection rule."
                                     }
                                 }
                             ]

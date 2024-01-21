@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {EventDispatcher, EventListenerCollection, generateId, isObject} from '../../core.js';
+import {EventDispatcher} from '../../core/event-dispatcher.js';
+import {EventListenerCollection} from '../../core/event-listener-collection.js';
+import {generateId, isObject} from '../../core/utilities.js';
 import {OptionsUtil} from '../../data/options-util.js';
 import {PermissionsUtil} from '../../data/permissions-util.js';
 import {HtmlTemplateCollection} from '../../dom/html-template-collection.js';

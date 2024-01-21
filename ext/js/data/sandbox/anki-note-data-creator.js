@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2021-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -376,7 +376,7 @@ export class AnkiNoteDataCreator {
             case 'merge': type = 'termMerged'; break;
         }
 
-        const {inflections, score, dictionaryIndex, dictionaryPriority, sourceTermExactMatchCount, definitions} = dictionaryEntry;
+        const {inflectionRuleChainCandidates, score, dictionaryIndex, dictionaryPriority, sourceTermExactMatchCount, definitions} = dictionaryEntry;
 
         let {url} = context;
         if (typeof url !== 'string') { url = ''; }
@@ -401,7 +401,7 @@ export class AnkiNoteDataCreator {
             source: (primarySource !== null ? primarySource.transformedText : null),
             rawSource: (primarySource !== null ? primarySource.originalText : null),
             sourceTerm: (type !== 'termMerged' ? (primarySource !== null ? primarySource.deinflectedText : null) : void 0),
-            reasons: inflections,
+            inflectionRuleChainCandidates,
             score,
             isPrimary: (type === 'term' ? dictionaryEntry.isPrimary : void 0),
             get sequence() { return self.getCachedValue(sequence); },

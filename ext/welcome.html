@@ -202,7 +202,7 @@
             </div>
             <div class="settings-item-right">
                 <select data-setting="general.popupTheme" class="short-width">
-                    <option value="default">Light</option>
+                    <option value="light">Light</option>
                     <option value="dark">Dark</option>
                 </select>
             </div>
@@ -366,6 +366,24 @@
                 <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
             </div>
         </div>
+        <div class="settings-item dictionary-parts-of-speech-filter-setting" hidden>
+            <div class="settings-item-inner">
+                <div class="settings-item-left">
+                    <div class="settings-item-label">
+                        Part of speech filtering
+                        <a tabindex="0" class="more-toggle more-only" data-parent-distance="4">(?)</a>
+                    </div>
+                </div>
+                <div class="settings-item-right">
+                    <label class="toggle"><input type="checkbox" class="dictionary-parts-of-speech-filter-toggle"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
+                </div>
+            </div>
+            <div class="settings-item-children more" hidden>
+                When deinflecting words, only dictionary entries whose POS matches that expected by the deinflector will be shown.
+                <p><a tabindex="0" class="more-toggle" data-parent-distance="3">Hide&hellip;</a></p>
+            </div>
+        </div>
+        <hr>
         <div class="settings-item"><div class="settings-item-children">
             <div class="dictionary-details-table"></div>
             <div class="dictionary-counts"></div>

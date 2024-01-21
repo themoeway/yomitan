@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2016-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -825,16 +825,38 @@ button.action-button:active {
 }
 
 /* Inflections */
-.inflection-list {
-    display: inline-block;
+.inflection-rule-chains {
+    padding-inline-start: 0;
+    list-style-type: none;
+}
+.inflection-rule-chain {
     color: var(--reason-text-color);
 }
-.inflection-list:empty {
+.inflection-rule-chain:empty {
     display: none;
 }
-.inflection-list>.inflection+.inflection-separator+.inflection::before {
+.inflection-rule-chain>.inflection+.inflection-separator+.inflection::before {
     content: var(--inflection-separator);
     padding: 0 0.25em;
+}
+.inflection-source-icon {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    width: 1.4em;
+    margin-right: 0.2em;
+}
+.inflection-source-icon[data-inflection-source='dictionary']::after {
+    content: '📖';
+}
+.inflection-source-icon[data-inflection-source='algorithm']::after {
+    content: '🧩';
+}
+.inflection-source-icon[data-inflection-source='both'] {
+    width: 2.8em;
+}
+.inflection-source-icon[data-inflection-source='both']::after {
+    content: '🧩📖';
 }
 
 

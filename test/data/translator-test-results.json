@@ -291,7 +291,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -454,7 +459,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -636,7 +646,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -801,7 +816,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -966,7 +986,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -1131,7 +1156,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -1296,7 +1326,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -1459,7 +1494,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -1641,7 +1681,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -1830,7 +1875,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -2019,7 +2069,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -2208,7 +2263,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -2397,8 +2457,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -2564,8 +2629,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -2731,8 +2801,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -2898,8 +2973,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -3065,7 +3145,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -3228,7 +3313,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -3410,7 +3500,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -3523,7 +3618,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -3692,7 +3792,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -3874,7 +3979,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -4039,7 +4149,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -4210,7 +4325,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -4375,7 +4495,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -4546,7 +4671,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -4735,7 +4865,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -4924,8 +5059,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -5091,8 +5231,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -5264,7 +5409,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -5453,7 +5603,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -5642,8 +5797,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -5809,8 +5969,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -5982,7 +6147,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6105,7 +6275,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6162,7 +6337,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6219,7 +6399,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6276,7 +6461,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6333,8 +6523,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -6392,8 +6587,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -6451,8 +6651,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -6510,8 +6715,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -6569,7 +6779,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6626,7 +6841,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6689,7 +6909,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -6926,7 +7151,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -7163,8 +7393,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -7378,8 +7613,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -7593,7 +7833,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -7756,7 +8001,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -7938,7 +8188,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -8393,8 +8648,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -8803,7 +9063,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -8966,7 +9231,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -9148,10 +9418,15 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "-te",
-          "progressive or perfect",
-          "polite past negative"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "-te",
+              "progressive or perfect",
+              "polite past negative"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -9341,10 +9616,15 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "-te",
-          "progressive or perfect",
-          "polite past negative"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "-te",
+              "progressive or perfect",
+              "polite past negative"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -9534,10 +9814,15 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "-te",
-          "progressive or perfect",
-          "polite past negative"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "-te",
+              "progressive or perfect",
+              "polite past negative"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -9727,10 +10012,15 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "-te",
-          "progressive or perfect",
-          "polite past negative"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "-te",
+              "progressive or perfect",
+              "polite past negative"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -9920,8 +10210,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -10087,8 +10382,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -10254,8 +10554,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -10421,8 +10726,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -10588,7 +10898,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -10751,7 +11066,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -10933,7 +11253,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -11122,7 +11447,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -11311,7 +11641,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -11500,7 +11835,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -11689,8 +12029,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -11856,8 +12201,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -12023,8 +12373,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -12190,8 +12545,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -12357,7 +12717,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -12520,7 +12885,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -12702,7 +13072,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -12891,7 +13266,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -13080,7 +13460,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -13269,7 +13654,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -13458,8 +13848,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -13625,8 +14020,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -13792,8 +14192,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -13959,8 +14364,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 1,
         "frequencyOrder": 0,
@@ -14126,7 +14536,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -14289,7 +14704,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -14471,8 +14891,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 100,
         "frequencyOrder": 0,
@@ -14576,7 +15001,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 90,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -14679,8 +15109,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "polite past"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "polite past"
+            ]
+          }
         ],
         "score": 100,
         "frequencyOrder": 0,
@@ -14784,7 +15219,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 10,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -15239,8 +15679,13 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [
-          "masu stem"
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": [
+              "masu stem"
+            ]
+          }
         ],
         "score": 10,
         "frequencyOrder": 0,
@@ -15655,7 +16100,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -15804,7 +16254,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -15899,7 +16354,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -15994,7 +16454,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -16089,7 +16554,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -16184,7 +16654,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 1,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -16296,7 +16771,12 @@
       {
         "type": "term",
         "isPrimary": true,
-        "inflections": [],
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "algorithm",
+            "inflectionRules": []
+          }
+        ],
         "score": 35,
         "frequencyOrder": 0,
         "dictionaryIndex": 0,
@@ -16392,6 +16872,87 @@
                 "type": "structured-content",
                 "content": "kouzou definition 3 (構造)"
               }
+            ]
+          }
+        ],
+        "pronunciations": [],
+        "frequencies": []
+      }
+    ]
+  },
+  {
+    "name": "Test dictionary deinflection",
+    "originalTextLength": 5,
+    "dictionaryEntries": [
+      {
+        "type": "term",
+        "isPrimary": true,
+        "inflectionRuleChainCandidates": [
+          {
+            "source": "both",
+            "inflectionRules": [
+              "past"
+            ]
+          }
+        ],
+        "score": 1,
+        "frequencyOrder": 0,
+        "dictionaryIndex": 0,
+        "dictionaryPriority": 0,
+        "sourceTermExactMatchCount": 1,
+        "maxTransformedTextLength": 5,
+        "headwords": [
+          {
+            "index": 0,
+            "term": "のたまう",
+            "reading": "のたまう",
+            "sources": [
+              {
+                "originalText": "のたもうた",
+                "transformedText": "のたもうた",
+                "deinflectedText": "のたまう",
+                "matchType": "exact",
+                "matchSource": "term",
+                "isPrimary": true
+              }
+            ],
+            "tags": [],
+            "wordClasses": [
+              "v5"
+            ]
+          }
+        ],
+        "definitions": [
+          {
+            "index": 0,
+            "headwordIndices": [
+              0
+            ],
+            "dictionary": "Test Dictionary 2",
+            "dictionaryIndex": 0,
+            "dictionaryPriority": 0,
+            "id": 23,
+            "score": 1,
+            "frequencyOrder": 0,
+            "sequences": [
+              15
+            ],
+            "isPrimary": true,
+            "tags": [
+              {
+                "name": "v5",
+                "category": "default",
+                "order": 0,
+                "score": 0,
+                "content": [],
+                "dictionaries": [
+                  "Test Dictionary 2"
+                ],
+                "redundant": false
+              }
+            ],
+            "entries": [
+              "notamau definition"
             ]
           }
         ],

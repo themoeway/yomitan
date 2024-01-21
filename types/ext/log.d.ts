@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,12 +25,9 @@ export type LogContext = {
 
 /**
  * An enum representing the log error level.
- *
- * `0` _log_, _info_, _debug_ level.
- *
- * `1` _warn_ level.
- *
- * `2` _error_ level.
+ * - `0` - _log_, _info_, _debug_ level.
+ * - `1` - _warn_ level.
+ * - `2` - _error_ level.
  */
 export type LogErrorLevelValue = 0 | 1 | 2;
 

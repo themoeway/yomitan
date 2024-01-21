@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,28 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {expect, test} from 'vitest';
+import {describe, expect, test} from 'vitest';
 import {TextSourceMap} from '../ext/js/general/text-source-map.js';
 
 /** */
 function testSource() {
-    test('Source', () => {
+    describe('Source', () => {
         const data = [
             ['source1'],
             ['source2'],
             ['source3']
         ];
 
-        for (const [source] of data) {
+        test.each(data)('source-test-%#', (source) => {
             const sourceMap = new TextSourceMap(source);
             expect(source).toStrictEqual(sourceMap.source);
-        }
+        });
     });
 }
 
 /** */
 function testEquals() {
-    test('Equals', () => {
+    describe('Equals', () => {
         /** @type {[args1: [source1: string, mapping1: ?(number[])], args2: [source2: string, mapping2: ?(number[])], expectedEquals: boolean][]} */
         const data = [
             [['source1', null], ['source1', null], true],
@@ -69,19 +69,19 @@ function testEquals() {
             [['source3', [1, 1, 1, 1, 1, 1, 1]], ['source6', [1, 1, 1, 1, 1, 1, 1]], false]
         ];
 
-        for (const [[source1, mapping1], [source2, mapping2], expectedEquals] of data) {
+        test.each(data)('equals-test-%#', ([source1, mapping1], [source2, mapping2], expectedEquals) => {
             const sourceMap1 = new TextSourceMap(source1, mapping1);
             const sourceMap2 = new TextSourceMap(source2, mapping2);
             expect(sourceMap1.equals(sourceMap1)).toBe(true);
             expect(sourceMap2.equals(sourceMap2)).toBe(true);
             expect(sourceMap1.equals(sourceMap2)).toStrictEqual(expectedEquals);
-        }
+        });
     });
 }
 
 /** */
 function testGetSourceLength() {
-    test('GetSourceLength', () => {
+    describe('GetSourceLength', () => {
         /** @type {[args: [source: string, mapping: number[]], finalLength: number, expectedValue: number][]} */
         const data = [
             [['source', [1, 1, 1, 1, 1, 1]], 1, 1],
@@ -101,16 +101,16 @@ function testGetSourceLength() {
             [['source', [6, 6]], 1, 6]
         ];
 
-        for (const [[source, mapping], finalLength, expectedValue] of data) {
+        test.each(data)('get-source-length-test-%#', ([source, mapping], finalLength, expectedValue) => {
             const sourceMap = new TextSourceMap(source, mapping);
             expect(sourceMap.getSourceLength(finalLength)).toStrictEqual(expectedValue);
-        }
+        });
     });
 }
 
 /** */
 function testCombineInsert() {
-    test('CombineInsert', () => {
+    describe('CombineInsert', () => {
         /** @type {[args: [source: string, mapping: ?(number[])], expectedArgs: [expectedSource: string, expectedMapping: ?(number[])], operations: [operation: string, arg1: number, arg2: number][]][]} */
         const data = [
             // No operations
@@ -214,7 +214,7 @@ function testCombineInsert() {
             ]
         ];
 
-        for (const [[source, mapping], [expectedSource, expectedMapping], operations] of data) {
+        test.each(data)('combine-insert-test-%#', ([source, mapping], [expectedSource, expectedMapping], operations) => {
             const sourceMap = new TextSourceMap(source, mapping);
             const expectedSourceMap = new TextSourceMap(expectedSource, expectedMapping);
             for (const [operation, ...args] of operations) {
@@ -228,7 +228,7 @@ function testCombineInsert() {
                 }
             }
             expect(sourceMap.equals(expectedSourceMap)).toBe(true);
-        }
+        });
     });
 }
 

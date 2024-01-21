@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2021-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {generateId} from '../core.js';
+import {generateId} from '../core/utilities.js';
 import {ExtensionError} from '../core/extension-error.js';
+import {toError} from '../core/to-error.js';
 import {yomitan} from '../yomitan.js';
 
 export class OptionToggleHotkeyHandler {
@@ -132,7 +133,7 @@ export class OptionToggleHotkeyHandler {
      * @returns {DocumentFragment}
      */
     _createErrorMessage(path, error) {
-        const message = error instanceof Error ? error.message : `${error}`;
+        const message = toError(error).message;
         const fragment = document.createDocumentFragment();
         const n1 = document.createElement('em');
         n1.textContent = path;

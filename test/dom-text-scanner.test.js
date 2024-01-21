@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,10 +18,10 @@
 
 import {fileURLToPath} from 'node:url';
 import path from 'path';
-import {describe, expect} from 'vitest';
+import {afterAll, describe, expect, test} from 'vitest';
 import {parseJson} from '../dev/json.js';
 import {DOMTextScanner} from '../ext/js/dom/dom-text-scanner.js';
-import {createDomTest} from './fixtures/dom-test.js';
+import {setupDomTest} from './fixtures/dom-test.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -101,11 +101,13 @@ function createAbsoluteGetComputedStyle(window) {
     };
 }
 
-
-const test = createDomTest(path.join(dirname, 'data/html/dom-text-scanner.html'));
+const domTestEnv = await setupDomTest(path.join(dirname, 'data/html/dom-text-scanner.html'));
 
 describe('DOMTextScanner', () => {
-    test('Seek tests', ({window}) => {
+    const {window, teardown} = domTestEnv;
+    afterAll(() => teardown(global));
+
+    test('Seek tests', () => {
         const {document} = window;
         window.getComputedStyle = createAbsoluteGetComputedStyle(window);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -197,14 +197,10 @@ export type PointerEventType = (
 
 /**
  * An enum representing the pen pointer state.
- *
- * `0` Not active.
- *
- * `1` Hovering.
- *
- * `2` Touching.
- *
- * `3` Hovering after touching.
+ * - `0` - Not active.
+ * - `1` - Hovering.
+ * - `2` - Touching.
+ * - `3` - Hovering after touching.
  */
 export type PenPointerState = 0 | 1 | 2 | 3;
 

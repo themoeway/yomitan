@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -39,6 +39,8 @@ export class StorageController {
         /** @type {?NodeListOf<HTMLElement>} */
         this._storageUseFiniteNodes = null;
         /** @type {?NodeListOf<HTMLElement>} */
+        this._storageUseExhaustWarnNodes = null;
+        /** @type {?NodeListOf<HTMLElement>} */
         this._storageUseInfiniteNodes = null;
         /** @type {?NodeListOf<HTMLElement>} */
         this._storageUseValidNodes = null;
@@ -51,6 +53,7 @@ export class StorageController {
         this._storageUsageNodes = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.storage-usage'));
         this._storageQuotaNodes = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.storage-quota'));
         this._storageUseFiniteNodes = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.storage-use-finite'));
+        this._storageUseExhaustWarnNodes = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.storage-exhaustion-alert'));
         this._storageUseInfiniteNodes = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.storage-use-infinite'));
         this._storageUseValidNodes = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.storage-use-valid'));
         this._storageUseInvalidNodes = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('.storage-use-invalid'));
@@ -84,13 +87,19 @@ export class StorageController {
 
             const estimate = await this._storageEstimate();
             const valid = (estimate !== null);
+            let storageIsLow = false;
 
             // Firefox reports usage as 0 when persistent storage is enabled.
             const finite = valid && ((typeof estimate.usage === 'number' && estimate.usage > 0) || !(await this._persistentStorageController.isStoragePeristent()));
             if (finite) {
                 let {usage, quota} = estimate;
+
                 if (typeof usage !== 'number') { usage = 0; }
-                if (typeof quota !== 'number') { quota = 0; }
+                if (typeof quota !== 'number') {
+                    quota = 0;
+                } else {
+                    storageIsLow = quota <= (3 * 1000000000);
+                }
                 const usageString = this._bytesToLabeledString(usage);
                 const quotaString = this._bytesToLabeledString(quota);
                 for (const node of /** @type {NodeListOf<HTMLElement>} */ (this._storageUsageNodes)) {
@@ -105,6 +114,7 @@ export class StorageController {
             this._setElementsVisible(this._storageUseInfiniteNodes, valid && !finite);
             this._setElementsVisible(this._storageUseValidNodes, valid);
             this._setElementsVisible(this._storageUseInvalidNodes, !valid);
+            this._setElementsVisible(this._storageUseExhaustWarnNodes, storageIsLow);
         } finally {
             this._isUpdating = false;
         }

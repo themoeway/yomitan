@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2017-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,9 +18,14 @@
 
 import {ThemeController} from '../app/theme-controller.js';
 import {FrameEndpoint} from '../comm/frame-endpoint.js';
-import {DynamicProperty, EventDispatcher, EventListenerCollection, clone, deepEqual, log, promiseTimeout} from '../core.js';
 import {extendApiMap, invokeApiMapHandler} from '../core/api-map.js';
+import {DynamicProperty} from '../core/dynamic-property.js';
+import {EventDispatcher} from '../core/event-dispatcher.js';
+import {EventListenerCollection} from '../core/event-listener-collection.js';
 import {ExtensionError} from '../core/extension-error.js';
+import {log} from '../core/logger.js';
+import {toError} from '../core/to-error.js';
+import {clone, deepEqual, promiseTimeout} from '../core/utilities.js';
 import {PopupMenu} from '../dom/popup-menu.js';
 import {querySelectorNotNull} from '../dom/query-selector.js';
 import {ScrollElement} from '../dom/scroll-element.js';
@@ -385,7 +390,7 @@ export class Display extends EventDispatcher {
      * @param {Error} error
      */
     onError(error) {
-        if (yomitan.isExtensionUnloaded) { return; }
+        if (yomitan.webExtension.unloaded) { return; }
         log.error(error);
     }
 
@@ -480,7 +485,7 @@ export class Display extends EventDispatcher {
             case 'overwrite':
                 this._history.replaceState(state, content, url);
                 break;
-            default: // 'new'
+            case 'new':
                 this._updateHistoryState();
                 this._history.pushState(state, content, url);
                 break;
@@ -722,8 +727,7 @@ export class Display extends EventDispatcher {
 
     /** @type {import('display').WindowApiHandler<'displayExtensionUnloaded'>} */
     _onMessageExtensionUnloaded() {
-        if (yomitan.isExtensionUnloaded) { return; }
-        yomitan.triggerExtensionUnloaded();
+        yomitan.webExtension.triggerUnloaded();
     }
 
     // Private
@@ -787,7 +791,7 @@ export class Display extends EventDispatcher {
                     break;
             }
         } catch (e) {
-            this.onError(e instanceof Error ? e : new Error(`${e}`));
+            this.onError(toError(e));
         }
     }
 
@@ -922,7 +926,7 @@ export class Display extends EventDispatcher {
             };
             this.setContent(details);
         } catch (error) {
-            this.onError(error instanceof Error ? error : new Error(`${error}`));
+            this.onError(toError(error));
         }
     }
 
@@ -1889,7 +1893,7 @@ export class Display extends EventDispatcher {
      * @param {import('text-scanner').SearchedEventDetails} details
      */
     _onContentTextScannerSearched({type, dictionaryEntries, sentence, textSource, optionsContext, error}) {
-        if (error !== null && !yomitan.isExtensionUnloaded) {
+        if (error !== null && !yomitan.webExtension.unloaded) {
             log.error(error);
         }
 

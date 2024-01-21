@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@ import {performance} from 'perf_hooks';
 import {fileURLToPath} from 'url';
 import {parseJson} from './json.js';
 import {createJsonSchema} from './schema-validate.js';
+import {toError} from './to-error.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -39,35 +40,33 @@ function readSchema(relativeFileName) {
 /**
  * @param {import('dev/schema-validate').ValidateMode} mode
  * @param {import('jszip')} zip
- * @param {string} fileNameFormat
- * @param {import('dev/dictionary-validate').Schema} schema
+ * @param {import('dev/dictionary-validate').SchemasDetails} schemasDetails
  */
-async function validateDictionaryBanks(mode, zip, fileNameFormat, schema) {
-    let jsonSchema;
-    try {
-        jsonSchema = createJsonSchema(mode, schema);
-    } catch (e) {
-        const e2 = e instanceof Error ? e : new Error(`${e}`);
-        e2.message += `\n(in file ${fileNameFormat})}`;
-        throw e2;
-    }
-    let index = 1;
-    while (true) {
-        const fileName = fileNameFormat.replace(/\?/, `${index}`);
+async function validateDictionaryBanks(mode, zip, schemasDetails) {
+    for (const [fileName, file] of Object.entries(zip.files)) {
+        for (const [fileNameFormat, schema] of schemasDetails) {
+            if (!fileNameFormat.test(fileName)) { continue; }
 
-        const file = zip.files[fileName];
-        if (!file) { break; }
+            let jsonSchema;
+            try {
+                jsonSchema = createJsonSchema(mode, schema);
+            } catch (e) {
+                const e2 = toError(e);
+                e2.message += `\n(in file ${fileName})}`;
+                throw e2;
+            }
 
-        const data = parseJson(await file.async('string'));
-        try {
-            jsonSchema.validate(data);
-        } catch (e) {
-            const e2 = e instanceof Error ? e : new Error(`${e}`);
-            e2.message += `\n(in file ${fileName})}`;
-            throw e2;
+            const data = parseJson(await file.async('string'));
+
+            try {
+                jsonSchema.validate(data);
+            } catch (e) {
+                const e2 = toError(e);
+                e2.message += `\n(in file ${fileName})}`;
+                throw e2;
+            }
+            break;
         }
-
-        ++index;
     }
 }
 
@@ -92,16 +91,21 @@ export async function validateDictionary(mode, archive, schemas) {
         const jsonSchema = createJsonSchema(mode, schemas.index);
         jsonSchema.validate(index);
     } catch (e) {
-        const e2 = e instanceof Error ? e : new Error(`${e}`);
+        const e2 = toError(e);
         e2.message += `\n(in file ${indexFileName})}`;
         throw e2;
     }
 
-    await validateDictionaryBanks(mode, archive, 'term_bank_?.json', version === 1 ? schemas.termBankV1 : schemas.termBankV3);
-    await validateDictionaryBanks(mode, archive, 'term_meta_bank_?.json', schemas.termMetaBankV3);
-    await validateDictionaryBanks(mode, archive, 'kanji_bank_?.json', version === 1 ? schemas.kanjiBankV1 : schemas.kanjiBankV3);
-    await validateDictionaryBanks(mode, archive, 'kanji_meta_bank_?.json', schemas.kanjiMetaBankV3);
-    await validateDictionaryBanks(mode, archive, 'tag_bank_?.json', schemas.tagBankV3);
+    /** @type {import('dev/dictionary-validate').SchemasDetails} */
+    const schemasDetails = [
+        [/^term_bank_(\d+)\.json$/, version === 1 ? schemas.termBankV1 : schemas.termBankV3],
+        [/^term_meta_bank_(\d+)\.json$/, schemas.termMetaBankV3],
+        [/^kanji_bank_(\d+)\.json$/, version === 1 ? schemas.kanjiBankV1 : schemas.kanjiBankV3],
+        [/^kanji_meta_bank_(\d+)\.json$/, schemas.kanjiMetaBankV3],
+        [/^tag_bank_(\d+)\.json$/, schemas.tagBankV3]
+    ];
+
+    await validateDictionaryBanks(mode, archive, schemasDetails);
 }
 
 /**

@@ -341,7 +341,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 1,
@@ -647,7 +652,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 2,
@@ -967,7 +977,12 @@
           "source": "打つ",
           "rawSource": "打つ",
           "sourceTerm": "打つ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 3,
@@ -1273,7 +1288,12 @@
           "source": "打つ",
           "rawSource": "打つ",
           "sourceTerm": "打つ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 3,
@@ -1579,7 +1599,12 @@
           "source": "打つ",
           "rawSource": "打つ",
           "sourceTerm": "打つ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 3,
@@ -1885,7 +1910,12 @@
           "source": "打つ",
           "rawSource": "打つ",
           "sourceTerm": "打つ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 3,
@@ -2191,7 +2221,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 1,
@@ -2497,7 +2532,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 2,
@@ -2817,7 +2857,12 @@
           "source": "打ち込む",
           "rawSource": "打ち込む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -3231,7 +3276,12 @@
           "source": "打ち込む",
           "rawSource": "打ち込む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -3645,7 +3695,12 @@
           "source": "打ち込む",
           "rawSource": "打ち込む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -4059,7 +4114,12 @@
           "source": "打ち込む",
           "rawSource": "打ち込む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -4473,8 +4533,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -4781,8 +4846,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -5089,8 +5159,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -5397,8 +5472,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -5705,7 +5785,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 1,
@@ -6011,7 +6096,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 2,
@@ -6331,7 +6421,12 @@
           "source": "画像",
           "rawSource": "画像",
           "sourceTerm": "画像",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 5,
@@ -6485,7 +6580,12 @@
           "source": "だ",
           "rawSource": "だ",
           "sourceTerm": "だ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 1,
@@ -6796,7 +6896,12 @@
           "source": "ダース",
           "rawSource": "ダース",
           "sourceTerm": "ダース",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 2,
@@ -7116,7 +7221,12 @@
           "source": "うつ",
           "rawSource": "うつ",
           "sourceTerm": "うつ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 3,
@@ -7422,7 +7532,12 @@
           "source": "うつ",
           "rawSource": "うつ",
           "sourceTerm": "うつ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 3,
@@ -7733,7 +7848,12 @@
           "source": "ぶつ",
           "rawSource": "ぶつ",
           "sourceTerm": "ぶつ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 3,
@@ -8039,7 +8159,12 @@
           "source": "ぶつ",
           "rawSource": "ぶつ",
           "sourceTerm": "ぶつ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 3,
@@ -8350,7 +8475,12 @@
           "source": "うちこむ",
           "rawSource": "うちこむ",
           "sourceTerm": "うちこむ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -8764,7 +8894,12 @@
           "source": "うちこむ",
           "rawSource": "うちこむ",
           "sourceTerm": "うちこむ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -9178,8 +9313,13 @@
           "source": "うち",
           "rawSource": "うち",
           "sourceTerm": "うつ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -9486,8 +9626,13 @@
           "source": "うち",
           "rawSource": "うち",
           "sourceTerm": "うつ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -9799,7 +9944,12 @@
           "source": "ぶちこむ",
           "rawSource": "ぶちこむ",
           "sourceTerm": "ぶちこむ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -10213,7 +10363,12 @@
           "source": "ぶちこむ",
           "rawSource": "ぶちこむ",
           "sourceTerm": "ぶちこむ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -10627,8 +10782,13 @@
           "source": "ぶち",
           "rawSource": "ぶち",
           "sourceTerm": "ぶつ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -10935,8 +11095,13 @@
           "source": "ぶち",
           "rawSource": "ぶち",
           "sourceTerm": "ぶつ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -11248,7 +11413,12 @@
           "source": "がぞう",
           "rawSource": "がぞう",
           "sourceTerm": "がぞう",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 5,
@@ -11413,7 +11583,12 @@
           "source": "打ち込む",
           "rawSource": "打ち込む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "sequence": 4,
           "dictionary": "Test Dictionary 2",
@@ -11850,7 +12025,12 @@
           "source": "打ち込む",
           "rawSource": "打ち込む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "sequence": 4,
           "dictionary": "Test Dictionary 2",
@@ -12287,8 +12467,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "sequence": 3,
@@ -12626,8 +12811,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "sequence": 3,
@@ -12965,7 +13155,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "sequence": 1,
           "dictionary": "Test Dictionary 2",
@@ -13269,7 +13464,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "sequence": 2,
           "dictionary": "Test Dictionary 2",
@@ -13586,7 +13786,12 @@
           "type": "termMerged",
           "source": "打ち込む",
           "rawSource": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "sequence": 4,
           "dictionary": "Test Dictionary 2",
@@ -14351,8 +14556,13 @@
           "type": "termMerged",
           "source": "打ち",
           "rawSource": "打ち",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "sequence": 3,
@@ -14923,7 +15133,12 @@
           "type": "termMerged",
           "source": "打",
           "rawSource": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "sequence": 1,
           "dictionary": "Test Dictionary 2",
@@ -15220,7 +15435,12 @@
           "type": "termMerged",
           "source": "打",
           "rawSource": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "sequence": 2,
           "dictionary": "Test Dictionary 2",
@@ -15533,10 +15753,15 @@
           "source": "打ち込んでいませんでした",
           "rawSource": "打ち込んでいませんでした",
           "sourceTerm": "打ち込む",
-          "reasons": [
-            "-te",
-            "progressive or perfect",
-            "polite past negative"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "-te",
+                "progressive or perfect",
+                "polite past negative"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -15951,10 +16176,15 @@
           "source": "打ち込んでいませんでした",
           "rawSource": "打ち込んでいませんでした",
           "sourceTerm": "打ち込む",
-          "reasons": [
-            "-te",
-            "progressive or perfect",
-            "polite past negative"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "-te",
+                "progressive or perfect",
+                "polite past negative"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -16369,10 +16599,15 @@
           "source": "打ち込んでいませんでした",
           "rawSource": "打ち込んでいませんでした",
           "sourceTerm": "打ち込む",
-          "reasons": [
-            "-te",
-            "progressive or perfect",
-            "polite past negative"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "-te",
+                "progressive or perfect",
+                "polite past negative"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -16787,10 +17022,15 @@
           "source": "打ち込んでいませんでした",
           "rawSource": "打ち込んでいませんでした",
           "sourceTerm": "打ち込む",
-          "reasons": [
-            "-te",
-            "progressive or perfect",
-            "polite past negative"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "-te",
+                "progressive or perfect",
+                "polite past negative"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -17205,8 +17445,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -17513,8 +17758,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -17821,8 +18071,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -18129,8 +18384,13 @@
           "source": "打ち",
           "rawSource": "打ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -18437,7 +18697,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 1,
@@ -18743,7 +19008,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 2,
@@ -19063,7 +19333,12 @@
           "source": "打ち込む",
           "rawSource": "打(う)ち込(こ)む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -19477,7 +19752,12 @@
           "source": "打ち込む",
           "rawSource": "打(う)ち込(こ)む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -19891,7 +20171,12 @@
           "source": "打ち込む",
           "rawSource": "打(う)ち込(こ)む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -20305,7 +20590,12 @@
           "source": "打ち込む",
           "rawSource": "打(う)ち込(こ)む",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -20719,8 +21009,13 @@
           "source": "打ち",
           "rawSource": "打(う)ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -21027,8 +21322,13 @@
           "source": "打ち",
           "rawSource": "打(う)ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -21335,8 +21635,13 @@
           "source": "打ち",
           "rawSource": "打(う)ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -21643,8 +21948,13 @@
           "source": "打ち",
           "rawSource": "打(う)ち",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -21951,7 +22261,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 1,
@@ -22257,7 +22572,12 @@
           "source": "打",
           "rawSource": "打",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 2,
@@ -22577,7 +22897,12 @@
           "source": "打ち込む",
           "rawSource": "(打)(ち)(込)(む)",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -22991,7 +23316,12 @@
           "source": "打ち込む",
           "rawSource": "(打)(ち)(込)(む)",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "isPrimary": true,
           "sequence": 4,
@@ -23405,7 +23735,12 @@
           "source": "打ち込む",
           "rawSource": "(打)(ち)(込)(む)",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -23819,7 +24154,12 @@
           "source": "打ち込む",
           "rawSource": "(打)(ち)(込)(む)",
           "sourceTerm": "打ち込む",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 4,
@@ -24233,8 +24573,13 @@
           "source": "打ち",
           "rawSource": "(打)(ち)",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -24541,8 +24886,13 @@
           "source": "打ち",
           "rawSource": "(打)(ち)",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "isPrimary": true,
@@ -24849,8 +25199,13 @@
           "source": "打ち",
           "rawSource": "(打)(ち)",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -25157,8 +25512,13 @@
           "source": "打ち",
           "rawSource": "(打)(ち)",
           "sourceTerm": "打つ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 1,
           "isPrimary": true,
@@ -25465,7 +25825,12 @@
           "source": "打",
           "rawSource": "(打)",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 1,
@@ -25771,7 +26136,12 @@
           "source": "打",
           "rawSource": "(打)",
           "sourceTerm": "打",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 2,
@@ -26091,8 +26461,13 @@
           "source": "よみ",
           "rawSource": "test",
           "sourceTerm": "よむ",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 100,
           "isPrimary": true,
@@ -26245,7 +26620,12 @@
           "source": "つよみ",
           "rawSource": "つtest",
           "sourceTerm": "つよみ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 90,
           "isPrimary": true,
           "sequence": 7,
@@ -26397,8 +26777,13 @@
           "source": "よみました",
           "rawSource": "testました",
           "sourceTerm": "よむ",
-          "reasons": [
-            "polite past"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "polite past"
+              ]
+            }
           ],
           "score": 100,
           "isPrimary": true,
@@ -26549,7 +26934,12 @@
           "type": "termMerged",
           "source": "うちこむ",
           "rawSource": "うちこむ",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 10,
           "sequence": 4,
           "dictionary": "Test Dictionary 2",
@@ -27314,8 +27704,13 @@
           "type": "termMerged",
           "source": "うち",
           "rawSource": "うち",
-          "reasons": [
-            "masu stem"
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": [
+                "masu stem"
+              ]
+            }
           ],
           "score": 10,
           "sequence": 3,
@@ -27893,7 +28288,12 @@
           "source": "お手前",
           "rawSource": "お手前",
           "sourceTerm": "お手前",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 9,
@@ -28221,7 +28621,12 @@
           "source": "番号",
           "rawSource": "番号",
           "sourceTerm": "番号",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 10,
@@ -28401,7 +28806,12 @@
           "source": "中腰",
           "rawSource": "中腰",
           "sourceTerm": "中腰",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 11,
@@ -28581,7 +28991,12 @@
           "source": "所業",
           "rawSource": "所業",
           "sourceTerm": "所業",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 12,
@@ -28761,7 +29176,12 @@
           "source": "土木工事",
           "rawSource": "土木工事",
           "sourceTerm": "土木工事",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 13,
@@ -28941,7 +29361,12 @@
           "source": "好き",
           "rawSource": "好き",
           "sourceTerm": "好き",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 1,
           "isPrimary": true,
           "sequence": 14,
@@ -29149,7 +29574,12 @@
           "source": "構造",
           "rawSource": "構造",
           "sourceTerm": "構造",
-          "reasons": [],
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "algorithm",
+              "inflectionRules": []
+            }
+          ],
           "score": 35,
           "isPrimary": true,
           "sequence": 101,
@@ -29275,6 +29705,119 @@
         ],
         "uniqueReadings": [
           "こうぞう"
+        ],
+        "pitches": [],
+        "pitchCount": 0,
+        "phoneticTranscriptions": [],
+        "context": {
+          "query": "query",
+          "fullQuery": "fullQuery",
+          "document": {
+            "title": "title"
+          }
+        },
+        "media": {}
+      }
+    ]
+  },
+  {
+    "name": "Test dictionary deinflection",
+    "noteDataList": [
+      {
+        "marker": "{marker}",
+        "definition": {
+          "type": "term",
+          "id": 23,
+          "source": "のたもうた",
+          "rawSource": "のたもうた",
+          "sourceTerm": "のたまう",
+          "inflectionRuleChainCandidates": [
+            {
+              "source": "both",
+              "inflectionRules": [
+                "past"
+              ]
+            }
+          ],
+          "score": 1,
+          "isPrimary": true,
+          "sequence": 15,
+          "dictionary": "Test Dictionary 2",
+          "dictionaryOrder": {
+            "index": 0,
+            "priority": 0
+          },
+          "dictionaryNames": [
+            "Test Dictionary 2"
+          ],
+          "expression": "のたまう",
+          "reading": "のたまう",
+          "expressions": [
+            {
+              "sourceTerm": "のたまう",
+              "expression": "のたまう",
+              "reading": "のたまう",
+              "termTags": [],
+              "frequencies": [],
+              "pitches": [],
+              "furiganaSegments": [
+                {
+                  "text": "のたまう",
+                  "furigana": ""
+                }
+              ],
+              "termFrequency": "normal",
+              "wordClasses": [
+                "v5"
+              ]
+            }
+          ],
+          "glossary": [
+            "notamau definition"
+          ],
+          "definitionTags": [
+            {
+              "name": "v5",
+              "category": "default",
+              "notes": "",
+              "order": 0,
+              "score": 0,
+              "dictionary": "Test Dictionary 2",
+              "redundant": false
+            }
+          ],
+          "termTags": [],
+          "frequencies": [],
+          "pitches": [],
+          "phoneticTranscriptions": [],
+          "sourceTermExactMatchCount": 1,
+          "url": "url:",
+          "cloze": {
+            "sentence": "",
+            "prefix": "",
+            "body": "",
+            "suffix": ""
+          },
+          "furiganaSegments": [
+            {
+              "text": "のたまう",
+              "furigana": ""
+            }
+          ]
+        },
+        "glossaryLayoutMode": "default",
+        "compactTags": false,
+        "group": false,
+        "merge": false,
+        "modeTermKanji": false,
+        "modeTermKana": false,
+        "modeKanji": false,
+        "compactGlossaries": false,
+        "uniqueExpressions": [
+          "のたまう"
+        ],
+        "uniqueReadings": [
+          "のたまう"
         ],
         "pitches": [],
         "pitchCount": 0,

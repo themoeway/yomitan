@@ -34,7 +34,9 @@
                     {
                         "index": 0,
                         "priority": 0,
-                        "allowSecondarySearches": false
+                        "allowSecondarySearches": false,
+                        "partsOfSpeechFilter": true,
+                        "useDeinflections": true
                     }
                 ]
             ]
@@ -342,6 +344,13 @@
             "func": "findTerms",
             "mode": "split",
             "text": "構造",
+            "options": "default"
+        },
+        {
+            "name": "Test dictionary deinflection",
+            "func": "findTerms",
+            "mode": "split",
+            "text": "のたもうた",
             "options": "default"
         }
     ]

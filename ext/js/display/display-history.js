@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2020-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {EventDispatcher, generateId, isObject} from '../core.js';
+import {EventDispatcher} from '../core/event-dispatcher.js';
+import {generateId, isObject} from '../core/utilities.js';
 
 /**
  * @augments EventDispatcher<import('display-history').Events>

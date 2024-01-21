@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@
  */
 
 import {ExtensionError} from '../../core/extension-error.js';
+import {toError} from '../../core/to-error.js';
 import {AnkiNoteBuilder} from '../../data/anki-note-builder.js';
 import {querySelectorNotNull} from '../../dom/query-selector.js';
 import {JapaneseUtil} from '../../language/sandbox/japanese-util.js';
@@ -266,7 +267,7 @@ export class AnkiTemplatesController {
                 allErrors.push(...errors);
             }
         } catch (e) {
-            allErrors.push(e instanceof Error ? e : new Error(`${e}`));
+            allErrors.push(toError(e));
         }
 
         /**

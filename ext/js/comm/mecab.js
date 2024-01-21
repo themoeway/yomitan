@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  * Copyright (C) 2019-2022  Yomichan Authors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {EventListenerCollection} from '../core.js';
+import {EventListenerCollection} from '../core/event-listener-collection.js';
+import {toError} from '../core/to-error.js';
 
 /**
  * This class is used to connect Yomitan to a native component that is
@@ -235,7 +236,7 @@ export class Mecab {
         try {
             await this._setupPortPromise;
         } catch (e) {
-            throw new Error(e instanceof Error ? e.message : `${e}`);
+            throw toError(e);
         }
     }
 

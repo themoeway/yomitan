@@ -2867,5 +2867,41 @@
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
+  },
+  {
+    "name": "Test dictionary deinflection",
+    "results": [
+      {
+        "audio": "",
+        "clipboard-image": "",
+        "clipboard-text": "",
+        "cloze-body": "のたもうた",
+        "cloze-prefix": "cloze-prefix",
+        "cloze-suffix": "cloze-suffix",
+        "conjugation": "past",
+        "dictionary": "Test Dictionary 2",
+        "document-title": "title",
+        "expression": "のたまう",
+        "frequencies": "",
+        "furigana": "のたまう",
+        "furigana-plain": "のたまう",
+        "glossary": "<div style=\"text-align: left;\"><i>(v5, Test Dictionary 2)</i> notamau definition</div>",
+        "glossary-brief": "<div style=\"text-align: left;\">notamau definition</div>",
+        "glossary-no-dictionary": "<div style=\"text-align: left;\"><i>(v5)</i> notamau definition</div>",
+        "part-of-speech": "Godan verb",
+        "pitch-accents": "No pitch accent data",
+        "pitch-accent-graphs": "No pitch accent data",
+        "pitch-accent-positions": "No pitch accent data",
+        "phonetic-transcriptions": "",
+        "reading": "のたまう",
+        "screenshot": "",
+        "search-query": "fullQuery",
+        "selection-text": "",
+        "sentence": "cloze-prefixのたもうたcloze-suffix",
+        "sentence-furigana": "cloze-prefixのたもうたcloze-suffix",
+        "tags": "v5",
+        "url": "<a href=\"url:\">url:</a>"
+      }
+    ]
   }
 ]

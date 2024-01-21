@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023  Yomitan Authors
+ * Copyright (C) 2023-2024  Yomitan Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,6 +63,7 @@ export type StructuredContentStyle = {
     borderWidth?: string;
     verticalAlign?: VerticalAlign;
     textAlign?: TextAlign;
+    textShadow?: string;
     margin?: string;
     marginTop?: number | string;
     marginLeft?: number | string;
