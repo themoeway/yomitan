@@ -48,18 +48,19 @@ export class Offscreen {
         /* eslint-disable @stylistic/no-multi-spaces */
         /** @type {import('offscreen').ApiMap} */
         this._apiMap = createApiMap([
-            ['clipboardGetTextOffscreen',    this._getTextHandler.bind(this)],
-            ['clipboardGetImageOffscreen',   this._getImageHandler.bind(this)],
-            ['clipboardSetBrowserOffscreen', this._setClipboardBrowser.bind(this)],
-            ['databasePrepareOffscreen',     this._prepareDatabaseHandler.bind(this)],
-            ['getDictionaryInfoOffscreen',   this._getDictionaryInfoHandler.bind(this)],
-            ['databasePurgeOffscreen',       this._purgeDatabaseHandler.bind(this)],
-            ['databaseGetMediaOffscreen',    this._getMediaHandler.bind(this)],
-            ['translatorPrepareOffscreen',   this._prepareTranslatorHandler.bind(this)],
-            ['findKanjiOffscreen',           this._findKanjiHandler.bind(this)],
-            ['findTermsOffscreen',           this._findTermsHandler.bind(this)],
-            ['getTermFrequenciesOffscreen',  this._getTermFrequenciesHandler.bind(this)],
-            ['clearDatabaseCachesOffscreen', this._clearDatabaseCachesHandler.bind(this)]
+            ['clipboardGetTextOffscreen',        this._getTextHandler.bind(this)],
+            ['clipboardGetImageOffscreen',       this._getImageHandler.bind(this)],
+            ['clipboardSetBrowserOffscreen',     this._setClipboardBrowser.bind(this)],
+            ['databasePrepareOffscreen',         this._prepareDatabaseHandler.bind(this)],
+            ['getDictionaryInfoOffscreen',       this._getDictionaryInfoHandler.bind(this)],
+            ['databasePurgeOffscreen',           this._purgeDatabaseHandler.bind(this)],
+            ['databaseGetMediaOffscreen',        this._getMediaHandler.bind(this)],
+            ['databaseGetMediaObjectsOffscreen', this._getMediaObjectsHandler.bind(this)],
+            ['translatorPrepareOffscreen',       this._prepareTranslatorHandler.bind(this)],
+            ['findKanjiOffscreen',               this._findKanjiHandler.bind(this)],
+            ['findTermsOffscreen',               this._findTermsHandler.bind(this)],
+            ['getTermFrequenciesOffscreen',      this._getTermFrequenciesHandler.bind(this)],
+            ['clearDatabaseCachesOffscreen',     this._clearDatabaseCachesHandler.bind(this)]
         ]);
         /* eslint-enable @stylistic/no-multi-spaces */
 
@@ -110,6 +111,11 @@ export class Offscreen {
     async _getMediaHandler({targets}) {
         const media = await this._dictionaryDatabase.getMedia(targets);
         return media.map((m) => ({...m, content: arrayBufferToBase64(m.content)}));
+    }
+
+    /** @type {import('offscreen').ApiHandler<'databaseGetMediaObjectsOffscreen'>} */
+    async _getMediaObjectsHandler({targets}) {
+        return await this._dictionaryDatabase.getMediaObjects(targets);
     }
 
     /** @type {import('offscreen').ApiHandler<'translatorPrepareOffscreen'>} */

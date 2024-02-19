@@ -35,28 +35,28 @@ export class StructuredContentGenerator {
      * @param {import('structured-content').Content} content
      * @param {string} dictionary
      */
-    appendStructuredContent(node, content, dictionary) {
+    async appendStructuredContent(node, content, dictionary) {
         node.classList.add('structured-content');
-        this._appendStructuredContent(node, content, dictionary, null);
+        await this._appendStructuredContent(node, content, dictionary, null);
     }
 
     /**
      * @param {import('structured-content').Content} content
      * @param {string} dictionary
-     * @returns {HTMLElement}
+     * @returns {Promise<HTMLElement>}
      */
-    createStructuredContent(content, dictionary) {
+    async createStructuredContent(content, dictionary) {
         const node = this._createElement('span', 'structured-content');
-        this._appendStructuredContent(node, content, dictionary, null);
+        await this._appendStructuredContent(node, content, dictionary, null);
         return node;
     }
 
     /**
      * @param {import('structured-content').ImageElement|import('dictionary-data').TermGlossaryImage} data
      * @param {string} dictionary
-     * @returns {HTMLAnchorElement}
+     * @returns {Promise<HTMLAnchorElement>}
      */
-    createDefinitionImage(data, dictionary) {
+    async createDefinitionImage(data, dictionary) {
         const {
             path,
             width = 100,
@@ -81,13 +81,13 @@ export class StructuredContentGenerator {
         const hasPreferredHeight = (typeof preferredHeight === 'number');
         const invAspectRatio = (
             hasPreferredWidth && hasPreferredHeight ?
-            preferredHeight / preferredWidth :
-            height / width
+                preferredHeight / preferredWidth :
+                height / width
         );
         const usedWidth = (
             hasPreferredWidth ?
-            preferredWidth :
-            (hasPreferredHeight ? preferredHeight / invAspectRatio : width)
+                preferredWidth :
+                (hasPreferredHeight ? preferredHeight / invAspectRatio : width)
         );
 
         const node = /** @type {HTMLAnchorElement} */ (this._createElement('a', 'gloss-image-link'));
@@ -96,23 +96,6 @@ export class StructuredContentGenerator {
 
         const imageContainer = this._createElement('span', 'gloss-image-container');
         node.appendChild(imageContainer);
-
-        const aspectRatioSizer = this._createElement('span', 'gloss-image-sizer');
-        imageContainer.appendChild(aspectRatioSizer);
-
-        const imageBackground = this._createElement('span', 'gloss-image-background');
-        imageContainer.appendChild(imageBackground);
-
-        const image = /** @type {HTMLImageElement} */ (this._createElement('img', 'gloss-image'));
-        image.alt = typeof alt === 'string' ? alt : '';
-        imageContainer.appendChild(image);
-
-        const overlay = this._createElement('span', 'gloss-image-container-overlay');
-        imageContainer.appendChild(overlay);
-
-        const linkText = this._createElement('span', 'gloss-image-link-text');
-        linkText.textContent = 'Image';
-        node.appendChild(linkText);
 
         node.dataset.path = path;
         node.dataset.dictionary = dictionary;
@@ -137,14 +120,12 @@ export class StructuredContentGenerator {
             imageContainer.title = title;
         }
 
-        aspectRatioSizer.style.paddingTop = `${invAspectRatio * 100}%`;
-
         if (this._contentManager !== null) {
             this._contentManager.loadMedia(
                 path,
                 dictionary,
-                (url) => this._setImageData(node, image, imageBackground, url, false),
-                () => this._setImageData(node, image, imageBackground, null, true)
+                async (url) => await this._setImageData(node, imageContainer, alt, invAspectRatio, url, false),
+                async () => await this._setImageData(node, imageContainer, alt, invAspectRatio, null, true)
             );
         }
 
@@ -159,7 +140,7 @@ export class StructuredContentGenerator {
      * @param {string} dictionary
      * @param {?string} language
      */
-    _appendStructuredContent(container, content, dictionary, language) {
+    async _appendStructuredContent(container, content, dictionary, language) {
         if (typeof content === 'string') {
             if (content.length > 0) {
                 container.appendChild(this._createTextNode(content));
@@ -174,11 +155,11 @@ export class StructuredContentGenerator {
         }
         if (Array.isArray(content)) {
             for (const item of content) {
-                this._appendStructuredContent(container, item, dictionary, language);
+                await this._appendStructuredContent(container, item, dictionary, language);
             }
             return;
         }
-        const node = this._createStructuredContentGenericElement(content, dictionary, language);
+        const node = await this._createStructuredContentGenericElement(content, dictionary, language);
         if (node !== null) {
             container.appendChild(node);
         }
@@ -223,22 +204,38 @@ export class StructuredContentGenerator {
 
     /**
      * @param {HTMLAnchorElement} node
-     * @param {HTMLImageElement} image
-     * @param {HTMLElement} imageBackground
+     * @param {HTMLElement} imageContainer
+     * @param {string|undefined} alt
+     * @param {number} invAspectRatio
      * @param {?string} url
      * @param {boolean} unloaded
      */
-    _setImageData(node, image, imageBackground, url, unloaded) {
+    async _setImageData(node, imageContainer, alt, invAspectRatio, url, unloaded) {
+        const img = /** @type {HTMLImageElement} */ (this._createElement('img', 'gloss-image'));
         if (url !== null) {
-            image.src = url;
-            node.href = url;
-            node.dataset.imageLoadState = 'loaded';
-            imageBackground.style.setProperty('--image', `url("${url}")`);
+            if (typeof alt === 'string') {
+                img.alt = alt;
+            }
+            img.src = url;
+            performance.mark('structured-content-generator:_setImageData:decode:[' + url + ']:start');
+            await img.decode().then(() => {
+                performance.mark('structured-content-generator:_setImageData:decode:[' + url + ']:end');
+                performance.measure('structured-content-generator:_setImageData:decode:[' + url + ']', 'structured-content-generator:_setImageData:decode:[' + url + ']:start', 'structured-content-generator:_setImageData:decode:[' + url + ']:end');
+                node.dataset.imageLoadState = 'loaded';
+                node.href = url;
+                performance.mark('structured-content-generator:_setImageData:appendChild:start');
+                imageContainer.appendChild(img);
+                performance.mark('structured-content-generator:_setImageData:appendChild:end');
+                performance.measure('structured-content-generator:_setImageData:appendChild', 'structured-content-generator:_setImageData:appendChild:start', 'structured-content-generator:_setImageData:appendChild:end');
+            }).catch(() => {
+                node.dataset.imageLoadState = 'load-error';
+            });
         } else {
-            image.removeAttribute('src');
+            if (node.children.length > 0) {
+                node.children[0].remove();
+            }
             node.removeAttribute('href');
             node.dataset.imageLoadState = unloaded ? 'unloaded' : 'load-error';
-            imageBackground.style.removeProperty('--image');
         }
     }
 
@@ -246,9 +243,9 @@ export class StructuredContentGenerator {
      * @param {import('structured-content').Element} content
      * @param {string} dictionary
      * @param {?string} language
-     * @returns {?HTMLElement}
+     * @returns {Promise<?HTMLElement>}
      */
-    _createStructuredContentGenericElement(content, dictionary, language) {
+    async _createStructuredContentGenericElement(content, dictionary, language) {
         const {tag} = content;
         switch (tag) {
             case 'br':
@@ -274,7 +271,7 @@ export class StructuredContentGenerator {
             case 'li':
                 return this._createStructuredContentElement(tag, content, dictionary, language, 'simple', true, true);
             case 'img':
-                return this.createDefinitionImage(content, dictionary);
+                return await this.createDefinitionImage(content, dictionary);
             case 'a':
                 return this._createLinkElement(content, dictionary, language);
         }
@@ -286,11 +283,11 @@ export class StructuredContentGenerator {
      * @param {import('structured-content').UnstyledElement} content
      * @param {string} dictionary
      * @param {?string} language
-     * @returns {HTMLElement}
+     * @returns {Promise<HTMLElement>}
      */
-    _createStructuredContentTableElement(tag, content, dictionary, language) {
+    async _createStructuredContentTableElement(tag, content, dictionary, language) {
         const container = this._createElement('div', 'gloss-sc-table-container');
-        const table = this._createStructuredContentElement(tag, content, dictionary, language, 'table', true, false);
+        const table = await this._createStructuredContentElement(tag, content, dictionary, language, 'table', true, false);
         container.appendChild(table);
         return container;
     }
@@ -303,9 +300,9 @@ export class StructuredContentGenerator {
      * @param {'simple'|'table'|'table-cell'} type
      * @param {boolean} hasChildren
      * @param {boolean} hasStyle
-     * @returns {HTMLElement}
+     * @returns {Promise<HTMLElement>}
      */
-    _createStructuredContentElement(tag, content, dictionary, language, type, hasChildren, hasStyle) {
+    async _createStructuredContentElement(tag, content, dictionary, language, type, hasChildren, hasStyle) {
         const node = this._createElement(tag, `gloss-sc-${tag}`);
         const {data, lang} = content;
         if (typeof data === 'object' && data !== null) { this._setElementDataset(node, data); }
@@ -331,7 +328,7 @@ export class StructuredContentGenerator {
             if (typeof title === 'string') { node.title = title; }
         }
         if (hasChildren) {
-            this._appendStructuredContent(node, content.content, dictionary, language);
+            await this._appendStructuredContent(node, content.content, dictionary, language);
         }
         return node;
     }
@@ -426,9 +423,9 @@ export class StructuredContentGenerator {
      * @param {import('structured-content').LinkElement} content
      * @param {string} dictionary
      * @param {?string} language
-     * @returns {HTMLAnchorElement}
+     * @returns {Promise<HTMLAnchorElement>}
      */
-    _createLinkElement(content, dictionary, language) {
+    async _createLinkElement(content, dictionary, language) {
         let {href} = content;
         const internal = href.startsWith('?');
         if (internal) {
@@ -447,7 +444,7 @@ export class StructuredContentGenerator {
             language = lang;
         }
 
-        this._appendStructuredContent(text, content.content, dictionary, language);
+        await this._appendStructuredContent(text, content.content, dictionary, language);
 
         if (!internal) {
             const icon = this._createElement('span', 'gloss-link-external-icon icon');

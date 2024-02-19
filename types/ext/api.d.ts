@@ -289,6 +289,12 @@ type ApiSurface = {
         };
         return: DictionaryDatabase.MediaDataStringContent[];
     };
+    getMediaObjects: {
+        params: {
+            targets: GetMediaDetailsTarget[];
+        };
+        return: DictionaryDatabase.MediaObject[];
+    };
     log: {
         params: {
             error: Core.SerializedError;

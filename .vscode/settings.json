@@ -3,7 +3,7 @@
     "[javascript][json][jsonc]": {
         "editor.codeActionsOnSave": {
             "source.addMissingImports": "explicit",
-            "source.organizeImports": "explicit",
+            "source.organizeImports": "never",
             "source.fixAll.eslint": "explicit"
         },
     },
@@ -15,8 +15,8 @@
         },
     },
     "eslint.format.enable": true,
-    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+    "javascript.format.enable": false,
+    "typescript.format.enable": false,
     "javascript.preferences.importModuleSpecifierEnding": "js",
     "editor.tabSize": 4,
     "editor.insertSpaces": true,

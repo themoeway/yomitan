@@ -91,7 +91,7 @@ export class AnkiTemplateRenderer {
             ['join',             this._join.bind(this)],
             ['concat',           this._concat.bind(this)],
             ['pitchCategories',  this._pitchCategories.bind(this)],
-            ['formatGlossary',   this._formatGlossary.bind(this)],
+            ['formatGlossary',   this._formatGlossary.bind(this)], // TODO: Does this work when it's async?
             ['hasMedia',         this._hasMedia.bind(this)],
             ['getMedia',         this._getMedia.bind(this)],
             ['pronunciation',    this._pronunciation.bind(this)],
@@ -672,14 +672,14 @@ export class AnkiTemplateRenderer {
     /**
      * @type {import('template-renderer').HelperFunction<string>}
      */
-    _formatGlossary(args, _context, options) {
+    async _formatGlossary(args, _context, options) {
         const [dictionary, content] = /** @type {[dictionary: string, content: import('dictionary-data').TermGlossaryContent]} */ (args);
         const data = options.data.root;
         if (typeof content === 'string') { return this._stringToMultiLineHtml(this._escape(content)); }
         if (!(typeof content === 'object' && content !== null)) { return ''; }
         switch (content.type) {
-            case 'image': return this._formatGlossaryImage(content, dictionary, data);
-            case 'structured-content': return this._formatStructuredContent(content, dictionary, data);
+            case 'image': return await this._formatGlossaryImage(content, dictionary, data);
+            case 'structured-content': return await this._formatStructuredContent(content, dictionary, data);
             case 'text': return this._stringToMultiLineHtml(this._escape(content.text));
         }
         return '';
@@ -689,11 +689,11 @@ export class AnkiTemplateRenderer {
      * @param {import('dictionary-data').TermGlossaryImage} content
      * @param {string} dictionary
      * @param {import('anki-templates').NoteData} data
-     * @returns {string}
+     * @returns {Promise<string>}
      */
-    _formatGlossaryImage(content, dictionary, data) {
+    async _formatGlossaryImage(content, dictionary, data) {
         const structuredContentGenerator = this._createStructuredContentGenerator(data);
-        const node = structuredContentGenerator.createDefinitionImage(content, dictionary);
+        const node = await structuredContentGenerator.createDefinitionImage(content, dictionary);
         return this._getStructuredContentHtml(node);
     }
 
@@ -701,11 +701,11 @@ export class AnkiTemplateRenderer {
      * @param {import('dictionary-data').TermGlossaryStructuredContent} content
      * @param {string} dictionary
      * @param {import('anki-templates').NoteData} data
-     * @returns {string}
+     * @returns {Promise<string>}
      */
-    _formatStructuredContent(content, dictionary, data) {
+    async _formatStructuredContent(content, dictionary, data) {
         const structuredContentGenerator = this._createStructuredContentGenerator(data);
-        const node = structuredContentGenerator.createStructuredContent(content.content, dictionary);
+        const node = await structuredContentGenerator.createStructuredContent(content.content, dictionary);
         return node !== null ? this._getStructuredContentHtml(node) : '';
     }
 

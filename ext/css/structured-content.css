@@ -67,62 +67,32 @@
     text-align: center;
     padding: 0.25em;
 }
-.gloss-image-background {
-    --image: none;
-
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--text-color);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center center;
-    -webkit-mask-mode: alpha;
-    -webkit-mask-size: contain;
-    -webkit-mask-image: var(--image);
-    mask-repeat: no-repeat;
-    mask-position: center center;
-    mask-mode: alpha;
-    mask-size: contain;
-    mask-image: var(--image);
-}
 .gloss-image {
     display: inline-block;
     vertical-align: top;
     object-fit: contain;
     border: none;
     outline: none;
-}
-.gloss-image-link[data-has-aspect-ratio=true] .gloss-image {
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
 }
 .gloss-image:not([src]) {
     display: none;
 }
-.gloss-image-link[data-image-rendering=pixelated] .gloss-image,
-.gloss-image-link[data-image-rendering=pixelated] .gloss-image-background {
+.gloss-image-link[data-image-rendering=pixelated] .gloss-image {
     image-rendering: auto;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
-.gloss-image-link[data-image-rendering=crisp-edges] .gloss-image,
-.gloss-image-link[data-image-rendering=crisp-edges] .gloss-image-background {
+.gloss-image-link[data-image-rendering=crisp-edges] .gloss-image {
     image-rendering: auto;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
 }
 :root[data-browser=firefox] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image,
-:root[data-browser=firefox] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image-background,
-:root[data-browser=firefox-mobile] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image,
-:root[data-browser=firefox-mobile] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image-background {
+:root[data-browser=firefox-mobile] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image {
     image-rendering: auto;
 }
 .gloss-image-link[data-has-aspect-ratio=true] .gloss-image-sizer {
@@ -131,26 +101,9 @@
     vertical-align: top;
     font-size: 0;
 }
-.gloss-image-link-text {
-    display: none;
-    line-height: var(--line-height);
-}
-.gloss-image-link-text::before {
-    content: '[';
-}
-.gloss-image-link-text::after {
-    content: ']';
-}
-.gloss-image-description {
-    display: block;
-    white-space: pre-line;
-}
 
 .gloss-image-link[data-appearance=monochrome] .gloss-image {
-    opacity: 0;
-}
-.gloss-image-link:not([data-appearance=monochrome]) .gloss-image-background {
-    display: none;
+    filter: grayscale(1);
 }
 
 .gloss-image-link[data-size-units=em] .gloss-image-container {
@@ -188,14 +141,6 @@
 :root[data-glossary-layout-mode=compact] .gloss-image-link[data-collapsible=true]:hover .gloss-image-container,
 :root[data-glossary-layout-mode=compact] .gloss-image-link[data-collapsible=true]:focus .gloss-image-container {
     display: block;
-}
-.gloss-image-link[data-collapsed=true] .gloss-image-link-text,
-:root[data-glossary-layout-mode=compact] .gloss-image-link[data-collapsible=true] .gloss-image-link-text {
-    display: inline;
-}
-.gloss-image-link[data-collapsed=true]~.gloss-image-description,
-:root[data-glossary-layout-mode=compact] .gloss-image-description {
-    display: inline;
 }
 
 

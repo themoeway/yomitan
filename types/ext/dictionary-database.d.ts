@@ -36,9 +36,12 @@ export type MediaDataArrayBufferContent = MediaDataBase<ArrayBuffer>;
 
 export type MediaDataStringContent = MediaDataBase<string>;
 
-type MediaType = ArrayBuffer | string;
+type MediaType = ArrayBuffer | string | null;
 
 export type Media<T extends MediaType = ArrayBuffer> = {index: number} & MediaDataBase<T>;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type MediaObject<_T extends MediaType = ArrayBuffer> = {index: number} & MediaDataBase<null> & {url: string};
 
 export type DatabaseTermEntry = {
     expression: string;

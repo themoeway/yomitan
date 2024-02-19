@@ -28,6 +28,9 @@ import {base64ToArrayBuffer} from '../data/sandbox/array-buffer-util.js';
  *   The background service workers doesn't have access a webpage to read the clipboard from,
  *   so it must be done in the offscreen page.
  *
+ * - Provide access to `URL.createObjectURL` so that we can load media as blobs directly on the
+ *   backend, which performs better than sending the media as base64 strings to the frontend.
+ *
  * - Provide a longer lifetime for the dictionary database. The background service worker can be
  *   terminated by the web browser, which means that when it restarts, it has to go through its
  *   initialization process again. This initialization process can take a non-trivial amount of
@@ -171,6 +174,15 @@ export class DictionaryDatabaseProxy {
     async getMedia(targets) {
         const serializedMedia = /** @type {import('dictionary-database').Media<string>[]} */ (await this._offscreen.sendMessagePromise({action: 'databaseGetMediaOffscreen', params: {targets}}));
         return serializedMedia.map((m) => ({...m, content: base64ToArrayBuffer(m.content)}));
+    }
+
+    /**
+     * @param {import('dictionary-database').MediaRequest[]} targets
+     * @returns {Promise<import('dictionary-database').MediaObject[]>}
+     */
+    async getMediaObjects(targets) {
+        console.log('offscreen getMediaObjects', targets);
+        return await this._offscreen.sendMessagePromise({action: 'databaseGetMediaObjectsOffscreen', params: {targets}});
     }
 }
 

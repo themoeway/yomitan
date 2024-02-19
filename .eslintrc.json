@@ -3,7 +3,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:jsonc/recommended-with-json",
-        "plugin:eslint-comments/recommended"
+        "plugin:eslint-comments/recommended",
+        "plugin:import/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -66,7 +67,7 @@
         "no-const-assign": "error",
         "no-constant-condition": ["error", {"checkLoops": false}],
         "no-constructor-return": "error",
-        "no-duplicate-imports": "error",
+        "no-duplicate-imports": "off",
         "no-eval": "error",
         "no-extend-native": "error",
         "no-global-assign": "error",
@@ -394,7 +395,7 @@
                 "plugin:@typescript-eslint/recommended-type-checked"
             ],
             "rules": {
-                "@typescript-eslint/no-floating-promises": "off",
+                "@typescript-eslint/no-floating-promises": "error",
                 "@typescript-eslint/no-misused-promises": "off",
                 "@typescript-eslint/no-redundant-type-constituents": "off",
                 "@typescript-eslint/no-unsafe-argument": "off",

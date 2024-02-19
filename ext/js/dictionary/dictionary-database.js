@@ -347,6 +347,21 @@ export class DictionaryDatabase {
     }
 
     /**
+     * This requires the ability to call URL.createObjectURL, which is not available in a service worker. Therefore Chrome must go through the Offscreen API as opposed to directly calling this.
+     * @param {import('dictionary-database').MediaRequest[]} items
+     * @returns {Promise<import('dictionary-database').MediaObject[]>}
+     */
+    async getMediaObjects(items) {
+        /** @type {import('dictionary-database').FindPredicate<import('dictionary-database').MediaRequest, import('dictionary-database').MediaDataArrayBufferContent>} */
+        const predicate = (row, item) => (row.dictionary === item.dictionary);
+        return (await this._findMultiBulk('media', ['path'], items, this._createOnlyQuery4, predicate, this._createMediaBind)).map((m) => {
+            const blob = new Blob([m.content], {type: m.mediaType});
+            const url = URL.createObjectURL(blob);
+            return {...m, content: null, url};
+        });
+    }
+
+    /**
      * @returns {Promise<import('dictionary-importer').Summary[]>}
      */
     getDictionaryInfo() {

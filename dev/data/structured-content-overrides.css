@@ -33,13 +33,8 @@
     line-height: initial;
     color: initial;
 }
-.gloss-image-background {
-    background-color: currentColor;
-}
 :root[data-browser=firefox] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image,
-:root[data-browser=firefox] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image-background,
-:root[data-browser=firefox-mobile] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image,
-:root[data-browser=firefox-mobile] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image-background {
+:root[data-browser=firefox-mobile] .gloss-image-link[data-image-rendering=crisp-edges] .gloss-image {
     /* remove-rule */
 }
 .gloss-image-link-text {

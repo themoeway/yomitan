@@ -50,6 +50,12 @@ type ApiSurface = {
         };
         return: DictionaryDatabase.Media<string>[];
     };
+    databaseGetMediaObjectsOffscreen: {
+        params: {
+            targets: DictionaryDatabase.MediaRequest[];
+        };
+        return: DictionaryDatabase.MediaObject<string>[];
+    };
     translatorPrepareOffscreen: {
         params: {
             descriptor: LanguageTransformDescriptor;
