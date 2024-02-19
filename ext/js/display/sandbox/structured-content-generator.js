@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {DisplayContentManager} from '../../display/display-content-manager.js';
 import {isStringPartiallyJapanese} from '../../language/ja/japanese.js';
 
 export class StructuredContentGenerator {
@@ -119,14 +120,19 @@ export class StructuredContentGenerator {
         if (typeof title === 'string') {
             imageContainer.title = title;
         }
+        const canvas = /** @type {HTMLCanvasElement} */ (this._createElement('canvas', 'gloss-image'));
+        imageContainer.appendChild(canvas);
 
         if (this._contentManager !== null) {
-            this._contentManager.loadMedia(
-                path,
-                dictionary,
-                async (url) => await this._setImageData(node, imageContainer, alt, invAspectRatio, url, false),
-                async () => await this._setImageData(node, imageContainer, alt, invAspectRatio, null, true)
-            );
+            if (this._contentManager instanceof DisplayContentManager) {
+                this._contentManager.loadMedia(
+                    path,
+                    dictionary,
+                    canvas.transferControlToOffscreen()
+                );
+            } else {
+                // TODO: figure out anki
+            }
         }
 
         return node;
@@ -154,9 +160,7 @@ export class StructuredContentGenerator {
             return;
         }
         if (Array.isArray(content)) {
-            for (const item of content) {
-                await this._appendStructuredContent(container, item, dictionary, language);
-            }
+            await Promise.all(content.map((item) => this._appendStructuredContent(container, item, dictionary, language)));
             return;
         }
         const node = await this._createStructuredContentGenericElement(content, dictionary, language);
@@ -199,43 +203,6 @@ export class StructuredContentGenerator {
             } catch (e) {
                 // DOMException if key is malformed
             }
-        }
-    }
-
-    /**
-     * @param {HTMLAnchorElement} node
-     * @param {HTMLElement} imageContainer
-     * @param {string|undefined} alt
-     * @param {number} invAspectRatio
-     * @param {?string} url
-     * @param {boolean} unloaded
-     */
-    async _setImageData(node, imageContainer, alt, invAspectRatio, url, unloaded) {
-        const img = /** @type {HTMLImageElement} */ (this._createElement('img', 'gloss-image'));
-        if (url !== null) {
-            if (typeof alt === 'string') {
-                img.alt = alt;
-            }
-            img.src = url;
-            performance.mark('structured-content-generator:_setImageData:decode:[' + url + ']:start');
-            await img.decode().then(() => {
-                performance.mark('structured-content-generator:_setImageData:decode:[' + url + ']:end');
-                performance.measure('structured-content-generator:_setImageData:decode:[' + url + ']', 'structured-content-generator:_setImageData:decode:[' + url + ']:start', 'structured-content-generator:_setImageData:decode:[' + url + ']:end');
-                node.dataset.imageLoadState = 'loaded';
-                node.href = url;
-                performance.mark('structured-content-generator:_setImageData:appendChild:start');
-                imageContainer.appendChild(img);
-                performance.mark('structured-content-generator:_setImageData:appendChild:end');
-                performance.measure('structured-content-generator:_setImageData:appendChild', 'structured-content-generator:_setImageData:appendChild:start', 'structured-content-generator:_setImageData:appendChild:end');
-            }).catch(() => {
-                node.dataset.imageLoadState = 'load-error';
-            });
-        } else {
-            if (node.children.length > 0) {
-                node.children[0].remove();
-            }
-            node.removeAttribute('href');
-            node.dataset.imageLoadState = unloaded ? 'unloaded' : 'load-error';
         }
     }
 

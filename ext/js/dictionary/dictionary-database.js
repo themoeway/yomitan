@@ -34,6 +34,8 @@ export class DictionaryDatabase {
         this._createOnlyQuery3 = (item) => IDBKeyRange.only(item.term);
         /** @type {import('dictionary-database').CreateQuery<import('dictionary-database').MediaRequest>} */
         this._createOnlyQuery4 = (item) => IDBKeyRange.only(item.path);
+        /** @type {import('dictionary-database').CreateQuery<import('dictionary-database').DrawMediaRequest>} */
+        this._createOnlyQuery5 = (item) => IDBKeyRange.only(item.path);
         /** @type {import('dictionary-database').CreateQuery<string>} */
         this._createBoundQuery1 = (item) => IDBKeyRange.bound(item, `${item}\uffff`, false, false);
         /** @type {import('dictionary-database').CreateQuery<string>} */
@@ -53,6 +55,8 @@ export class DictionaryDatabase {
         this._createKanjiMetaBind = this._createKanjiMeta.bind(this);
         /** @type {import('dictionary-database').CreateResult<import('dictionary-database').MediaRequest, import('dictionary-database').MediaDataArrayBufferContent, import('dictionary-database').Media>} */
         this._createMediaBind = this._createMedia.bind(this);
+        /** @type {import('dictionary-database').CreateResult<import('dictionary-database').DrawMediaRequest, import('dictionary-database').MediaDataArrayBufferContent, import('dictionary-database').DrawMedia>} */
+        this._createDrawMediaBind = this._createDrawMedia.bind(this);
     }
 
     /** */
@@ -347,18 +351,25 @@ export class DictionaryDatabase {
     }
 
     /**
-     * This requires the ability to call URL.createObjectURL, which is not available in a service worker. Therefore Chrome must go through the Offscreen API as opposed to directly calling this.
-     * @param {import('dictionary-database').MediaRequest[]} items
-     * @returns {Promise<import('dictionary-database').MediaObject[]>}
+     * @param {import('dictionary-database').DrawMediaRequest[]} items
      */
-    async getMediaObjects(items) {
+    async drawMedia(items) {
         /** @type {import('dictionary-database').FindPredicate<import('dictionary-database').MediaRequest, import('dictionary-database').MediaDataArrayBufferContent>} */
         const predicate = (row, item) => (row.dictionary === item.dictionary);
-        return (await this._findMultiBulk('media', ['path'], items, this._createOnlyQuery4, predicate, this._createMediaBind)).map((m) => {
+        for (const m of await this._findMultiBulk('media', ['path'], items, this._createOnlyQuery5, predicate, this._createDrawMediaBind)) {
             const blob = new Blob([m.content], {type: m.mediaType});
             const url = URL.createObjectURL(blob);
-            return {...m, content: null, url};
-        });
+            const image = new Image();
+            image.src = url;
+            await image.decode().then(() => {
+                console.log('m', m);
+                const ctx = m.canvas.getContext('2d');
+                if (ctx !== null) {
+                    ctx.drawImage(image, 0, 0);
+                }
+                URL.revokeObjectURL(url);
+            });
+        }
     }
 
     /**
@@ -670,6 +681,16 @@ export class DictionaryDatabase {
     _createMedia(row, {itemIndex: index}) {
         const {dictionary, path, mediaType, width, height, content} = row;
         return {index, dictionary, path, mediaType, width, height, content};
+    }
+
+    /**
+     * @param {import('dictionary-database').MediaDataArrayBufferContent} row
+     * @param {import('dictionary-database').FindMultiBulkData<import('dictionary-database').DrawMediaRequest>} data
+     * @returns {import('dictionary-database').DrawMedia}
+     */
+    _createDrawMedia(row, {itemIndex: index, item: {canvas}}) {
+        const {dictionary, path, mediaType, width, height, content} = row;
+        return {index, dictionary, path, mediaType, width, height, content, canvas: canvas};
     }
 
     /**

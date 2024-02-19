@@ -289,11 +289,11 @@ type ApiSurface = {
         };
         return: DictionaryDatabase.MediaDataStringContent[];
     };
-    getMediaObjects: {
+    drawMedia: {
         params: {
-            targets: GetMediaDetailsTarget[];
+            targets: DictionaryDatabase.DrawMediaRequest[];
         };
-        return: DictionaryDatabase.MediaObject[];
+        return: void;
     };
     log: {
         params: {

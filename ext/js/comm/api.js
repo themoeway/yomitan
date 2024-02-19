@@ -253,12 +253,12 @@ export class API {
     }
 
     /**
-     * @param {import('api').ApiParam<'getMediaObjects', 'targets'>} targets
-     * @returns {Promise<import('api').ApiReturn<'getMediaObjects'>>}
+     * @param {import('api').ApiParam<'drawMedia', 'targets'>} targets
+     * @returns {Promise<import('api').ApiReturn<'drawMedia'>>}
      */
-    getMediaObjects(targets) {
-        console.log('getMediaObjects', targets);
-        return this._invoke('getMediaObjects', {targets});
+    drawMedia(targets) {
+        console.log('drawMedia', targets, typeof targets[0].canvas);
+        return this._invoke('drawMedia', {targets});
     }
 
     /**

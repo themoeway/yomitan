@@ -39,8 +39,6 @@ export type LoadMediaRequest = {
     path: string;
     /** The name of the dictionary. */
     dictionary: string;
-    /** The callback that is executed if the media was loaded successfully. */
-    onLoad: OnLoadCallback;
-    /** The callback that is executed when the media should be unloaded. */
-    onUnload: OnUnloadCallback;
+    /** The canvas to draw the image onto. */
+    canvas: OffscreenCanvas;
 };

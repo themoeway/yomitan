@@ -172,7 +172,7 @@ export class Backend {
             ['getDictionaryInfo',            this._onApiGetDictionaryInfo.bind(this)],
             ['purgeDatabase',                this._onApiPurgeDatabase.bind(this)],
             ['getMedia',                     this._onApiGetMedia.bind(this)],
-            ['getMediaObjects',              this._onApiGetMediaObjects.bind(this)],
+            ['drawMedia',                    this._onApiDrawMedia.bind(this)],
             ['log',                          this._onApiLog.bind(this)],
             ['logIndicatorClear',            this._onApiLogIndicatorClear.bind(this)],
             ['modifySettings',               this._onApiModifySettings.bind(this)],
@@ -739,9 +739,10 @@ export class Backend {
         return await this._getNormalizedDictionaryDatabaseMedia(targets);
     }
 
-    /** @type {import('api').ApiHandler<'getMediaObjects'>} */
-    async _onApiGetMediaObjects({targets}) {
-        return await this._dictionaryDatabase.getMediaObjects(targets);
+    /** @type {import('api').ApiHandler<'drawMedia'>} */
+    async _onApiDrawMedia({targets}) {
+        console.log('_onApiDrawMedia', targets);
+        await this._dictionaryDatabase.drawMedia(targets);
     }
 
     /** @type {import('api').ApiHandler<'log'>} */

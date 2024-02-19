@@ -177,12 +177,11 @@ export class DictionaryDatabaseProxy {
     }
 
     /**
-     * @param {import('dictionary-database').MediaRequest[]} targets
-     * @returns {Promise<import('dictionary-database').MediaObject[]>}
+     * @param {import('dictionary-database').DrawMediaRequest[]} targets
+     * @returns {Promise<void>}
      */
-    async getMediaObjects(targets) {
-        console.log('offscreen getMediaObjects', targets);
-        return await this._offscreen.sendMessagePromise({action: 'databaseGetMediaObjectsOffscreen', params: {targets}});
+    async drawMedia(targets) {
+        await this._offscreen.sendMessagePromise({action: 'databaseDrawMediaOffscreen', params: {targets}});
     }
 }
 

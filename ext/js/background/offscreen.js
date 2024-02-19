@@ -55,7 +55,7 @@ export class Offscreen {
             ['getDictionaryInfoOffscreen',       this._getDictionaryInfoHandler.bind(this)],
             ['databasePurgeOffscreen',           this._purgeDatabaseHandler.bind(this)],
             ['databaseGetMediaOffscreen',        this._getMediaHandler.bind(this)],
-            ['databaseGetMediaObjectsOffscreen', this._getMediaObjectsHandler.bind(this)],
+            ['databaseDrawMediaOffscreen',       this._drawMediaHandler.bind(this)],
             ['translatorPrepareOffscreen',       this._prepareTranslatorHandler.bind(this)],
             ['findKanjiOffscreen',               this._findKanjiHandler.bind(this)],
             ['findTermsOffscreen',               this._findTermsHandler.bind(this)],
@@ -113,9 +113,9 @@ export class Offscreen {
         return media.map((m) => ({...m, content: arrayBufferToBase64(m.content)}));
     }
 
-    /** @type {import('offscreen').ApiHandler<'databaseGetMediaObjectsOffscreen'>} */
-    async _getMediaObjectsHandler({targets}) {
-        return await this._dictionaryDatabase.getMediaObjects(targets);
+    /** @type {import('offscreen').ApiHandler<'databaseDrawMediaOffscreen'>} */
+    async _drawMediaHandler({targets}) {
+        await this._dictionaryDatabase.drawMedia(targets);
     }
 
     /** @type {import('offscreen').ApiHandler<'translatorPrepareOffscreen'>} */
