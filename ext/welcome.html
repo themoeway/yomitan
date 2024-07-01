@@ -70,6 +70,30 @@
     </div>
 
     <!-- Content -->
+    <h2><strong>Import Dictionaries &#40;Important&#41;</strong></h2>
+    <div class="settings-group">
+        <div class="settings-item">
+            <div class="settings-item settings-item-button" data-modal-action="show,recommended-dictionaries"><div class="settings-item-inner">
+                <div class="settings-item-left">
+                    <div class="settings-item-label">Get recommended dictionaries&hellip;</div>
+                </div>
+                <div class="settings-item-right open-panel-button-container">
+                    <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
+                </div>
+            </div></div>
+        </div>
+        <div class="settings-item">
+            <div class="settings-item settings-item-button" data-modal-action="show,dictionaries"><div class="settings-item-inner">
+                <div class="settings-item-left">
+                    <div class="settings-item-label">Configure Installed and enabled dictionaries&hellip;</div>
+                </div>
+                <div class="settings-item-right open-panel-button-container">
+                    <button type="button" class="icon-button"><span class="icon-button-inner"><span class="icon" data-icon="material-right-arrow"></span></span></button>
+                </div>
+            </div></div>
+        </div>
+    </div>
+
     <h2>Here are some basics to get started</h2>
     <div class="settings-group">
         <a href="/quick-start-guide.html" rel="noopener" class="settings-item settings-item-button"><div class="settings-item-inner">
@@ -224,7 +248,9 @@
             <div class="dictionary-item-top"></div>
             <label class="dictionary-item-top toggle dictionary-item-enabled-toggle-container"><input type="checkbox" id="all-dictionaries-enabled"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
             <div class="dictionary-item-top dictionary-item-title-container">All</div>
-            <div class="dictionary-item-top">Priority</div>
+            <div class="dictionary-item-top advanced-only">Priority</div>
+            <div class="dictionary-item-top dictionary-item-button-height"></div>
+            <div class="dictionary-item-top dictionary-item-button-height"></div>
             <div class="dictionary-item-top dictionary-item-button-height"></div>
         </div>
 
@@ -240,7 +266,32 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="low-emphasis danger dictionary-database-mutating-input" id="dictionary-delete-all-button">Delete All</button>
-        <button type="button" class="low-emphasis dictionary-database-mutating-input" id="dictionary-import-file-button">Import</button>
+        <button type="button" class="low-emphasis dictionary-database-mutating-input" id="dictionary-check-integrity" hidden>Check Integrity</button>
+        <button type="button" class="low-emphasis dictionary-database-mutating-input" id="dictionary-import-button">Import</button>
+        <button type="button" data-modal-action="hide">Close</button>
+    </div>
+</div></div>
+
+<div id="dictionary-import-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-medium">
+    <div class="modal-header"><div class="modal-title">Import Dictionaries</div></div>
+    <div class="modal-body">
+        <div id="dictionary-drop-file-zone">
+            <div id="dictionary-drag-drop-text">
+                <span class="icon" data-icon="book"></span>
+                <h1>Drag and drop dictionaries (.zip)</h1>
+                <h5>or click here to upload</h5>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-modal-action="hide" class="basic-only">Close</button>
+    </div>
+    <div class="modal-body advanced-only">
+        <p>Import dictionaries from URLs:</p>
+        <textarea type="text" id="dictionary-import-url-text"></textarea>
+    </div>
+    <div class="modal-footer advanced-only">
+        <button type="button" data-modal-action="hide" class="low-emphasis dictionary-database-mutating-input" id="dictionary-import-url-button">Import from URLs</button>
         <button type="button" data-modal-action="hide">Close</button>
     </div>
 </div></div>
@@ -267,6 +318,28 @@
     <div class="modal-footer">
         <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
         <button type="button" class="danger" data-modal-action="hide" id="dictionary-confirm-delete-all-button">Delete</button>
+    </div>
+</div></div>
+
+<div id="secondary-search-dictionaries-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title">Secondary Search Dictionaries</div>
+        <div class="modal-header-button-container">
+            <div class="modal-header-button-group">
+                <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
+                <button type="button" class="icon-button modal-header-button" data-modal-action="collapse"><span class="icon-button-inner"><span class="icon" data-icon="collapse"></span></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <p>
+            These dictionaries will be used to search for definitions of the related terms when the grouping mode is
+            <em>Group related terms</em>.
+        </p>
+        <div id="secondary-search-dictionary-list" class="secondary-search-dictionary-list"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-modal-action="hide">Close</button>
     </div>
 </div></div>
 
@@ -343,6 +416,24 @@
     </div>
 </div></div>
 
+<div id="dictionary-extra-data-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title">
+            <strong class="dictionary-title">Unassociated Data</strong> <span class="light dictionary-total-count"></span>
+        </div>
+    </div>
+    <div class="modal-body">
+        <p class="warning-text">
+            The database contains extra data which is not associated with any installed dictionary.
+            Purging the database can fix this issue.
+        </p>
+        <div class="dictionary-counts"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-modal-action="hide">Close</button>
+    </div>
+</div></div>
+
 <div id="dictionary-move-location-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content modal-content-small">
     <div class="modal-header"><div class="modal-title">Move Dictionary Options</div></div>
     <div class="modal-body">
@@ -354,6 +445,47 @@
     <div class="modal-footer">
         <button type="button" class="low-emphasis" data-modal-action="hide">Cancel</button>
         <button type="button" data-modal-action="hide" id="dictionary-move-button">Move</button>
+    </div>
+</div></div>
+
+<div id="recommended-dictionaries-modal" class="modal" tabindex="-1" role="dialog" hidden><div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title">Recommended Dictionaries</div>
+        <div class="modal-header-button-container">
+            <div class="modal-header-button-group">
+                <button type="button" class="icon-button modal-header-button" data-modal-action="expand"><span class="icon-button-inner"><span class="icon" data-icon="expand"></span></span></button>
+                <button type="button" class="icon-button modal-header-button" data-modal-action="collapse"><span class="icon-button-inner"><span class="icon" data-icon="collapse"></span></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div id="recommended-term-dictionaries" hidden>
+            <h1 class="modal-title">Term Dictionaries</h1>
+            <div class="recommended-dictionary-list"></div>
+        </div>
+        <div id="recommended-kanji-dictionaries" hidden>
+            <h1 class="modal-title">Kanji Dictionaries</h1>
+            <div class="recommended-dictionary-list"></div>
+        </div>
+        <div id="recommended-frequency-dictionaries" hidden>
+            <h1 class="modal-title">Frequency Dictionaries</h1>
+            <div class="recommended-dictionary-list"></div>
+        </div>
+        <div id="recommended-grammar-dictionaries" hidden>
+            <h1 class="modal-title">Grammar Dictionaries</h1>
+            <div class="recommended-dictionary-list"></div>
+        </div>
+    </div>
+    <div class="modal-body-addon dictionary-delete-progress" hidden>
+        <div class="progress-labels"><div class="progress-info"></div><div class="progress-status"></div></div>
+        <div class="progress-bar-track"><div class="progress-bar danger"></div></div>
+    </div>
+    <div class="modal-body-addon dictionary-import-progress" hidden>
+        <div class="progress-labels"><div class="progress-info"></div><div class="progress-status"></div></div>
+        <div class="progress-bar-track"><div class="progress-bar"></div></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-modal-action="hide">Close</button>
     </div>
 </div></div>
 

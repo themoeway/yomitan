@@ -17,6 +17,7 @@
  */
 
 import {ExtensionError} from '../../core/extension-error.js';
+import {readResponseJson} from '../../core/json.js';
 import {log} from '../../core/log.js';
 import {toError} from '../../core/to-error.js';
 import {DictionaryWorker} from '../../dictionary/dictionary-worker.js';
@@ -69,6 +70,10 @@ export class DictionaryImportController {
                 'Unable to access IndexedDB due to a possibly corrupt user profile. Try using the "Refresh Firefox" feature to reset your user profile.',
             ],
         ];
+        /** @type {string[]} */
+        this._recommendedDictionaryQueue = [];
+        /** @type {boolean} */
+        this._recommendedDictionaryActiveImport = false;
     }
 
     /** */
@@ -87,9 +92,101 @@ export class DictionaryImportController {
         this._importFileDrop.addEventListener('dragover', this._onFileDropOver.bind(this), false);
         this._importFileDrop.addEventListener('dragleave', this._onFileDropLeave.bind(this), false);
         this._importFileDrop.addEventListener('drop', this._onFileDrop.bind(this), false);
+
+        // Welcome page
+        void this._renderRecommendedDictionaries('../../data/recommended-dictionaries.json');
     }
 
     // Private
+
+    /**
+     * @param {MouseEvent} e
+     */
+    async _onRecommendedImportClick(e) {
+        if (!(e instanceof PointerEvent)) { return; }
+        if (!e.target || !(e.target instanceof HTMLButtonElement)) { return; }
+
+        const import_url = e.target.attributes.getNamedItem('data-import-url');
+        if (!import_url) { return; }
+        this._recommendedDictionaryQueue.push(import_url.value);
+
+        e.target.disabled = true;
+
+        if (this._recommendedDictionaryActiveImport) { return; }
+
+        while (this._recommendedDictionaryQueue.length > 0) {
+            this._recommendedDictionaryActiveImport = true;
+            try {
+                const url = this._recommendedDictionaryQueue.shift();
+                if (!url) { continue; }
+                const file = await fetch(url.trim())
+                    .then((res) => res.blob())
+                    .then((blob) => {
+                        return new File([blob], 'fileFromURL');
+                    });
+                await this._importDictionaries([file]);
+            } catch (error) {
+                log.error(error);
+            }
+        }
+        this._recommendedDictionaryActiveImport = false;
+    }
+
+    /**
+     * @param {string} url
+     */
+    async _renderRecommendedDictionaries(url) {
+        const response = await fetch(url, {
+            method: 'GET',
+            mode: 'no-cors',
+            cache: 'default',
+            credentials: 'omit',
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+        });
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${url}: ${response.status}`);
+        }
+
+        const language = (await this._settingsController.getOptions()).general.language;
+        /** @type {import('dictionary-recommended.js').RecommendedDictionaries} */
+        const recommendedDictionaries = (await readResponseJson(response));
+
+        this._renderRecommendedDictionaryGroup(recommendedDictionaries[language].terms, document.querySelector('#recommended-term-dictionaries'));
+        this._renderRecommendedDictionaryGroup(recommendedDictionaries[language].kanji, document.querySelector('#recommended-kanji-dictionaries'));
+        this._renderRecommendedDictionaryGroup(recommendedDictionaries[language].frequency, document.querySelector('#recommended-frequency-dictionaries'));
+        this._renderRecommendedDictionaryGroup(recommendedDictionaries[language].grammar, document.querySelector('#recommended-grammar-dictionaries'));
+
+        /** @type {NodeListOf<HTMLElement>} */
+        const buttons = document.querySelectorAll('.action-button[data-action=import-recommended-dictionary]');
+        for (const button of buttons) {
+            button.addEventListener('click', this._onRecommendedImportClick.bind(this), false);
+        }
+    }
+
+    /**
+     *
+     * @param {import('dictionary-recommended.js').Dictionary[]} recommendedDictionaries
+     * @param {HTMLElement | null} dictionariesList
+     */
+    _renderRecommendedDictionaryGroup(recommendedDictionaries, dictionariesList) {
+        for (const dictionary of recommendedDictionaries) {
+            if (dictionariesList) {
+                dictionariesList.hidden = false;
+                const template = this._settingsController.instantiateTemplate('recommended-dictionaries-list-item');
+                const label = querySelectorNotNull(template, '.settings-item-label');
+                const button = querySelectorNotNull(template, '.action-button[data-action=import-recommended-dictionary]');
+
+                const urlAttribute = document.createAttribute('data-import-url');
+                urlAttribute.value = dictionary.url;
+                button.attributes.setNamedItem(urlAttribute);
+
+                label.textContent = dictionary.name;
+
+                dictionariesList.append(template);
+            }
+        }
+    }
 
     /** */
     _onImportFileButtonClick() {
@@ -303,6 +400,7 @@ export class DictionaryImportController {
         const statusFooter = this._statusFooter;
         const progressSelector = '.dictionary-import-progress';
         const progressContainers = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll(`#dictionaries-modal ${progressSelector}`));
+        const recommendedProgressContainers = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll(`#recommended-dictionaries-modal ${progressSelector}`));
         const progressBars = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll(`${progressSelector} .progress-bar`));
         const infoLabels = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll(`${progressSelector} .progress-info`));
         const statusLabels = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll(`${progressSelector} .progress-status`));
@@ -315,7 +413,7 @@ export class DictionaryImportController {
             this._setModifying(true);
             this._hideErrors();
 
-            for (const progress of progressContainers) { progress.hidden = false; }
+            for (const progress of [...progressContainers, ...recommendedProgressContainers]) { progress.hidden = false; }
 
             const optionsFull = await this._settingsController.getOptionsFull();
             const importDetails = {
@@ -365,7 +463,7 @@ export class DictionaryImportController {
         } finally {
             this._showErrors(errors);
             prevention.end();
-            for (const progress of progressContainers) { progress.hidden = true; }
+            for (const progress of [...progressContainers, ...recommendedProgressContainers]) { progress.hidden = true; }
             if (statusFooter !== null) { statusFooter.setTaskActive(progressSelector, false); }
             this._setModifying(false);
             this._triggerStorageChanged();

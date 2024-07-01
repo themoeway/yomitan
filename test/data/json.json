@@ -94,6 +94,11 @@
             "type": "AjvSchema"
         },
         {
+            "path": "ext/data/schemas/recommended-dictionaries-schema.json",
+            "typeFile": "types/test/json.d.ts",
+            "type": "AjvSchema"
+        },
+        {
             "path": "test/data/translator-test-inputs.json",
             "typeFile": "types/test/translator.d.ts",
             "type": "TranslatorTestInputs",
@@ -181,6 +186,12 @@
             "typeFile": "types/ext/dictionary-data.d.ts",
             "type": "TermMetaArray",
             "schema": "ext/data/schemas/dictionary-term-meta-bank-v3-schema.json"
+        },
+        {
+            "path": "ext/data/recommended-dictionaries.json",
+            "typeFile": "types/ext/dictionary-recommended.d.ts",
+            "type": "RecommendedDictionaries",
+            "schema": "ext/data/schemas/recommended-dictionaries-schema.json"
         }
     ]
 }

@@ -1,0 +1,100 @@
+{
+    "$id": "recommendedDictionaries",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Contains data for recommended dictionaries on welcome page.",
+    "type": "object",
+    "patternProperties": {
+        "^.{2,}$": {
+            "type": "object",
+            "properties": {
+                "terms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "url"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "minLength": 2
+                            },
+                            "url": {
+                                "type": "string",
+                                "minLength": 2
+                            }
+                        }
+                    }
+                },
+                "kanji": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "url"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "minLength": 2
+                            },
+                            "url": {
+                                "type": "string",
+                                "minLength": 2
+                            }
+                        }
+                    }
+                },
+                "frequency": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "url"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "minLength": 2
+                            },
+                            "url": {
+                                "type": "string",
+                                "minLength": 2
+                            }
+                        }
+                    }
+                },
+                "grammar": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "url"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "minLength": 2
+                            },
+                            "url": {
+                                "type": "string",
+                                "minLength": 2
+                            }
+                        }
+                    }
+                }
+            },
+            "required": [
+                "terms",
+                "kanji",
+                "frequency",
+                "grammar"
+            ],
+            "additionalProperties": false
+        }
+    }
+}
