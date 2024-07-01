@@ -65,7 +65,7 @@ jobs:
       # Schedule a next attempt if store refused to accept new version because it
       # still has a previous one in review
       - name: Start the next attempt with the delay
-        uses: aurelien-baudet/workflow-dispatch@93e95b157d791ae7f42aef8f8a0d3d723eba1c31 # pin@v2
+        uses: aurelien-baudet/workflow-dispatch@3133c5d135c7dbe4be4f9793872b6ef331b53bc7 # pin@v2
         if: |
           steps.getNextAttemptNumber.outputs.result &&
           steps.webStoreUpload.outputs.inReviewError == 'true'
