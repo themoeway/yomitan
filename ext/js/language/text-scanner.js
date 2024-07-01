@@ -481,7 +481,6 @@ export class TextScanner extends EventDispatcher {
 
                 /** @type {ThemeController} */
                 this._themeController = new ThemeController(document.documentElement);
-                this._themeController.prepare();
                 const pageTheme = this._themeController.computeSiteTheme();
 
                 this.trigger('searchSuccess', {
