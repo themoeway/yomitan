@@ -4,21 +4,14 @@
 
 After looking up a term, you can click on the <img src="../ext/images/play-audio.svg" alt="" width="16" height="16"> _speaker_ button to hear the term's pronunciation. When searching for audio, multiple audio sources are checked until the first source with audio for the term is found. If no audio is found, you will hear a short click instead. Right-clicking the <img src="../ext/images/play-audio.svg" alt="" width="16" height="16"> button allows choosing the source manually.
 
-#### Japanese
+The default audio sources are:
 
-The default audio sources for Japanese are:
-
-- JapanesePod101
-- Jisho.org
-
-#### Other languages
-
-The default audio sources for other languages are from Wikimedia Commons:
-
+- LanguagePod101
+- Jisho.org (japanese only)
 - Lingua Libre
 - Wiktionary
 
-While Commons has audio for many languages, some of them have limited coverage, and you may want to add additional sources, as described below.
+Depending on language, you may want to increase coverage by adding additional sources, as described below.
 
 ## Configuration
 

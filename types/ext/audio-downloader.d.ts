@@ -21,8 +21,8 @@ import type * as Language from './language';
 export type GetInfoHandler = (
     term: string,
     reading: string,
-    details?: Audio.AudioSourceInfo,
-    languageSummary?: Language.LanguageSummary,
+    details: Audio.AudioSourceInfo,
+    languageSummary: Language.LanguageSummary,
 ) => Promise<Info[]>;
 
 export type Info = Info1 | Info2;

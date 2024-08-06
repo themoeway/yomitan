@@ -73,7 +73,7 @@ function createProfileOptionsTestData1() {
         },
         audio: {
             enabled: true,
-            sources: ['jpod101', 'text-to-speech', 'custom'],
+            sources: ['jpod101', 'text-to-speech', 'custom', 'jpod101-alternate'],
             volume: 100,
             autoPlay: false,
             customSourceUrl: 'http://localhost/audio.mp3?term={expression}&reading={reading}',
@@ -317,6 +317,11 @@ function createProfileOptionsUpdatedTestData1() {
                 {
                     type: 'custom',
                     url: 'http://localhost/audio.mp3?term={term}&reading={reading}',
+                    voice: '',
+                },
+                {
+                    type: 'language-pod-101',
+                    url: '',
                     voice: '',
                 },
             ],
@@ -638,7 +643,7 @@ function createOptionsUpdatedTestData1() {
             },
         ],
         profileCurrent: 0,
-        version: 48,
+        version: 49,
         global: {
             database: {
                 prefixWildcardsSupported: false,

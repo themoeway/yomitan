@@ -423,7 +423,7 @@
                                                     "type": "string",
                                                     "enum": [
                                                         "jpod101",
-                                                        "jpod101-alternate",
+                                                        "language-pod-101",
                                                         "jisho",
                                                         "lingua-libre",
                                                         "wiktionary",

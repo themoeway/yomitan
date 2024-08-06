@@ -55,7 +55,7 @@ export class DisplayAudio {
         /** @type {Map<import('settings').AudioSourceType, string>} */
         this._audioSourceTypeNames = new Map([
             ['jpod101', 'JapanesePod101'],
-            ['jpod101-alternate', 'JapanesePod101 (Alternate)'],
+            ['language-pod-101', 'LanguagePod101'],
             ['jisho', 'Jisho.org'],
             ['lingua-libre', 'Lingua Libre'],
             ['wiktionary', 'Wiktionary'],
@@ -200,11 +200,12 @@ export class DisplayAudio {
         return language === 'ja' ?
             new Set([
                 'jpod101',
-                'jpod101-alternate',
+                'language-pod-101',
                 'jisho',
             ]) :
             new Set([
                 'lingua-libre',
+                'language-pod-101',
                 'wiktionary',
             ]);
     }
