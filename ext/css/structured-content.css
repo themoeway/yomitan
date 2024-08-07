@@ -215,6 +215,9 @@
 
 
 /* Structured content glossary styles */
+.gloss-sc-div {
+    margin-bottom: 0.4em;
+}
 .gloss-sc-table-container {
     display: block;
 }

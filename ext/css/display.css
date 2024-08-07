@@ -259,6 +259,13 @@
 }
 body {
     overflow: hidden;
+    overflow-y: scroll;
+    padding: 1em 1em 200px 1em;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+body::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
 }
 ol, ul {
     margin-top: 0;
@@ -378,8 +385,6 @@ a:has(rt) {
     bottom: 0;
     display: flex;
     flex-flow: column nowrap;
-    overflow-x: hidden;
-    overflow-y: scroll;
     align-items: stretch;
     justify-content: flex-start;
 }
@@ -427,7 +432,6 @@ a:has(rt) {
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
-    overflow: hidden;
     align-items: stretch;
     align-content: stretch;
     justify-content: center;
@@ -749,6 +753,7 @@ button.action-button:active {
     padding: calc(2.5em / var(--font-size-no-units)) 0.375em calc(2.5em / var(--font-size-no-units)) 0.375em;
     color: var(--tag-text-color);
     cursor: pointer;
+    width: 100%;
 }
 .tag-label-content {
     display: block;
@@ -808,6 +813,7 @@ button.action-button:active {
 }
 .tag[data-category=dictionary] {
     --tag-color: var(--tag-dictionary-background-color);
+    flex-grow: 1;
 }
 .tag[data-category=frequency] {
     --tag-color: var(--tag-frequency-background-color);
@@ -825,21 +831,31 @@ button.action-button:active {
 
 /* Entries */
 .entry {
-    padding: var(--entry-vertical-padding) var(--entry-horizontal-padding);
+    padding: 0;
     position: relative;
+    background-color: color-mix(in oklab, var(--background-color), transparent 2%);
+    border-radius: 10px;
+    border: 1px solid color-mix(in oklab, var(--text-color), transparent 60%);
+    box-shadow: 0.1em 0.1em 1em color-mix(in oklab, var(--text-color), transparent 60%);
+    overflow: hidden;
 }
 .entry+.entry {
-    border-top: var(--thin-border-size) solid var(--light-border-color);
+    margin-top: 1em;
 }
 .entry-body {
     clear: both;
+}
+.entry-body-section {
+    padding: 0 10px;
 }
 .entry[data-definition-count='0'] .entry-body-section[data-section-type=definitions],
 .entry[data-frequency-count='0'] .entry-body-section[data-section-type=frequencies],
 .entry[data-pronunciation-count='0'] .entry-body-section[data-section-type=pronunciations] {
     display: none;
 }
-
+.entry-header {
+    padding: 0.75em 1em 0.25em 10px;
+}
 
 /* Inflections */
 .inflection-rule-chains {
@@ -1133,19 +1149,20 @@ button.action-button:active {
 
 /* Definitions */
 .definition-list {
-    margin: 0;
-    padding: 0 0 0 var(--list-padding1);
-    list-style-type: decimal;
+    margin: 0 -10px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 .definition-list[data-count='0'],
 .definition-list[data-count='1'] {
     padding-left: 0;
-    list-style-type: none;
 }
 .gloss-list {
     margin: 0;
     padding: 0 0 0 var(--list-padding2);
     list-style-type: circle;
+    line-height: 1;
 }
 .gloss-list[data-count='0'],
 .gloss-list[data-count='1'] {
@@ -1159,6 +1176,12 @@ button.action-button:active {
 .gloss-content {
     display: block;
     white-space: pre-line;
+    line-height: 1.1;
+}
+.gloss-content br {
+    content: "";
+    display: block;
+    padding-top: 0.4em;
 }
 .definition-disambiguation-list {
     color: var(--text-color-light3);
@@ -1181,8 +1204,13 @@ button.action-button:active {
     display: none;
 }
 .definition-item {
-    display: list-item;
+    display: block;
     position: relative;
+    flex-basis: calc(100% / 4 - 2px);
+    margin: 1px;
+}
+.definition-list[data-count='1'] .definition-item, .definition-list[data-count='2'] .definition-item{
+    flex-grow: 1;
 }
 .definition-item-inner.collapsible.collapsed {
     max-height: calc(1em * var(--collapsible-definition-line-count) * var(--line-height));
@@ -1195,6 +1223,7 @@ button.action-button:active {
 .definition-item-inner {
     display: flex;
     flex-flow: row nowrap;
+    padding: 0 10px;
 }
 .definition-item-content {
     width: 100%;
@@ -1249,7 +1278,9 @@ button.definition-item-expansion-button:focus:focus-visible+.definition-item-con
 .definition-item-inner.collapsible:not(.collapsed)>button.definition-item-expansion-button>.definition-item-expansion-button-icon {
     transform: rotate(180deg);
 }
-
+.definition-tag-list {
+    display: flex;
+}
 
 /* Frequencies */
 .frequency-group-item {
