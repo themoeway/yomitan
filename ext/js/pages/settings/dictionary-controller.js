@@ -26,6 +26,24 @@ import {querySelectorNotNull} from '../../dom/query-selector.js';
 
 const ajvSchemas = /** @type {import('dictionary-importer').CompiledSchemaValidators} */ (/** @type {unknown} */ (ajvSchemas0));
 
+/**
+ * Throttles a function to be called at most once per `wait` milliseconds.
+ * @param {Function} func The function to be throttled.
+ * @param {number} wait The minimum time (in milliseconds) to wait between function calls.
+ * @param {unknown} self The value to be passed as the `this` parameter to the throttled function.
+ * @returns {(this: unknown, ...args: any[]) => void} The throttled function.
+ */
+function throttle(func, wait, self) {
+    let lastCall = 0;
+    return (...args) => {
+        const now = Date.now();
+        if (now - lastCall >= wait) {
+            lastCall = now;
+            return func.apply(self, args);
+        }
+    };
+}
+
 class DictionaryEntry {
     /**
      * @param {DictionaryController} dictionaryController
@@ -46,14 +64,10 @@ class DictionaryEntry {
         this._counts = null;
         /** @type {ChildNode[]} */
         this._nodes = [...fragment.childNodes];
+        /** @type {HTMLElement} */
+        this._dictionaryItem = querySelectorNotNull(fragment, '.dictionary-item');
         /** @type {HTMLInputElement} */
         this._enabledCheckbox = querySelectorNotNull(fragment, '.dictionary-enabled');
-        /** @type {HTMLInputElement} */
-        this._priorityInput = querySelectorNotNull(fragment, '.dictionary-priority');
-        /** @type {HTMLButtonElement} */
-        this._upButton = querySelectorNotNull(fragment, '#dictionary-move-up');
-        /** @type {HTMLButtonElement} */
-        this._downButton = querySelectorNotNull(fragment, '#dictionary-move-down');
         /** @type {HTMLButtonElement} */
         this._menuButton = querySelectorNotNull(fragment, '.dictionary-menu-button');
         /** @type {HTMLButtonElement} */
@@ -75,6 +89,11 @@ class DictionaryEntry {
         return this._dictionaryInfo.title;
     }
 
+    /** @type {HTMLElement} */
+    get dictionaryItem() {
+        return this._dictionaryItem;
+    }
+
     /** */
     prepare() {
         //
@@ -84,16 +103,15 @@ class DictionaryEntry {
         this._aliasNode.dataset.setting = `dictionaries[${index}].alias`;
         this._versionNode.textContent = `rev.${revision}`;
         this._outdatedButton.hidden = (version >= 3);
-        this._priorityInput.dataset.setting = `dictionaries[${index}].priority`;
         this._enabledCheckbox.dataset.setting = `dictionaries[${index}].enabled`;
         this._eventListeners.addEventListener(this._enabledCheckbox, 'settingChanged', this._onEnabledChanged.bind(this), false);
         this._eventListeners.addEventListener(this._menuButton, 'menuOpen', this._onMenuOpen.bind(this), false);
         this._eventListeners.addEventListener(this._menuButton, 'menuClose', this._onMenuClose.bind(this), false);
-        this._eventListeners.addEventListener(this._upButton, 'click', (() => { this._move(-1); }).bind(this), false);
-        this._eventListeners.addEventListener(this._downButton, 'click', (() => { this._move(1); }).bind(this), false);
         this._eventListeners.addEventListener(this._outdatedButton, 'click', this._onOutdatedButtonClick.bind(this), false);
         this._eventListeners.addEventListener(this._integrityButton, 'click', this._onIntegrityButtonClick.bind(this), false);
         this._eventListeners.addEventListener(this._updatesAvailable, 'click', this._onUpdateButtonClick.bind(this), false);
+        this._eventListeners.addEventListener(this._dictionaryItem, 'dragstart', this._onDragStart.bind(this), false);
+        this._eventListeners.addEventListener(this._dictionaryItem, 'dragend', this._onDragEnd.bind(this), false);
     }
 
     /** */
@@ -209,6 +227,16 @@ class DictionaryEntry {
     _onUpdateButtonClick() {
         const downloadUrl = this._updatesAvailable.dataset.downloadUrl;
         this._dictionaryController.updateDictionary(this.dictionaryTitle, downloadUrl);
+    }
+
+    /** */
+    _onDragStart() {
+        this._dictionaryItem.classList.add('dragging');
+    }
+
+    /** */
+    _onDragEnd() {
+        this._dictionaryItem.classList.remove('dragging');
     }
 
     /** */
@@ -546,6 +574,10 @@ export class DictionaryController {
 
         dictionarySetAliasButton.addEventListener('click', this._onDictionarySetAliasButtonClick.bind(this), false);
         dictiontaryResetAliasButton.addEventListener('click', this._onDictionaryResetAliasButtonClick.bind(this), false);
+
+        this._onDragOverThrottled = throttle(this._onDragOver.bind(this), 100, this);
+
+        this._dictionaryEntryContainer.addEventListener('dragover', this._onDragOver.bind(this), false);
 
         if (this._checkUpdatesButton !== null) {
             this._checkUpdatesButton.addEventListener('click', this._onCheckUpdatesButtonClick.bind(this), false);
@@ -900,6 +932,46 @@ export class DictionaryController {
         if (!Number.isFinite(target) || !Number.isFinite(indexNumber) || indexNumber === target) { return; }
 
         void this.moveDictionaryOptions(indexNumber, target);
+    }
+
+    /**
+     * @param {DragEvent} e
+     */
+    _onDragOver(e) {
+        const draggingIndex = this._dictionaryEntries.findIndex((entry) => entry.dictionaryItem.classList.contains('dragging'));
+        if (draggingIndex === -1) { return; }
+        const draggingItem = this._dictionaryEntries[draggingIndex].dictionaryItem;
+        const nextDictionaryIndex = this._getDragOverDictionaryItem(draggingIndex, e.clientY);
+        if (nextDictionaryIndex === draggingIndex) { return; }
+        if (nextDictionaryIndex === null) {
+            this._dictionaryEntryContainer.appendChild(draggingItem);
+            return;
+        }
+        const nextDictionaryItem = this._dictionaryEntries[nextDictionaryIndex].dictionaryItem;
+        this._dictionaryEntryContainer.insertBefore(draggingItem, nextDictionaryItem);
+    }
+
+    /**
+     * @param {number} draggingIndex
+     * @param {number} y
+     * @returns {number|null}
+     */
+    _getDragOverDictionaryItem(draggingIndex, y) {
+        const neighbors = [draggingIndex - 1, draggingIndex + 1]
+            .filter((index) => index >= 0 && index < this._dictionaryEntries.length);
+
+        /** @type {{index: number|null, offset: number}} */
+        const currentBest = {index: null, offset: Number.NEGATIVE_INFINITY};
+        for (const index of neighbors) {
+            const item = this._dictionaryEntries[index].dictionaryItem;
+            const {top, height} = item.getBoundingClientRect();
+            const offset = y - (top + height / 2);
+            if (offset < 0 && offset > currentBest.offset) {
+                currentBest.index = index;
+                currentBest.offset = offset;
+            }
+        }
+        return currentBest.index;
     }
 
     /** */

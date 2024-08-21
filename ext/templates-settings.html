@@ -48,26 +48,25 @@
 
 <!-- Dictionary -->
 <template id="dictionary-template">
-    <div class="dictionary-list-index generic-list-index-prefix"></div>
-    <label class="toggle dictionary-item-enabled-toggle-container"><input type="checkbox" class="dictionary-enabled"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
-    <div class="dictionary-item-title-container">
-        <span>
-            <strong class="dictionary-title dictionary-alias"></strong> <span class="light dictionary-revision"></span>
-        </span>
-        <button type="button" class="dictionary-outdated-button" hidden>
-            <div class="badge warning-badge"><span class="icon" data-icon="exclamation-point-short"></span></div>
-        </button>
-        <button type="button" class="dictionary-integrity-button" hidden>
-            <div class="badge info-badge badge-small-icon"><span class="icon" data-icon="checkmark"></span></div>
-        </button>
-        <button type="button" class="dictionary-update-available" hidden>
-            <div class="badge info-badge badge-small-icon"><span class="icon" data-icon="exclamation-point-short" title="Update available"></span></div>
-        </button>
+    <div class="dictionary-item" draggable="true">
+        <div class="dictionary-list-index generic-list-index-prefix"></div>
+        <label class="toggle dictionary-item-enabled-toggle-container"><input type="checkbox" class="dictionary-enabled"><span class="toggle-body"><span class="toggle-track"></span><span class="toggle-knob"></span></span></label>
+        <div class="dictionary-item-title-container">
+            <span>
+                <strong class="dictionary-title dictionary-alias"></strong> <span class="light dictionary-revision"></span>
+            </span>
+            <button type="button" class="dictionary-outdated-button" hidden>
+                <div class="badge warning-badge"><span class="icon" data-icon="exclamation-point-short"></span></div>
+            </button>
+            <button type="button" class="dictionary-integrity-button" hidden>
+                <div class="badge info-badge badge-small-icon"><span class="icon" data-icon="checkmark"></span></div>
+            </button>
+            <button type="button" class="dictionary-update-available" hidden>
+                <div class="badge info-badge badge-small-icon"><span class="icon" data-icon="exclamation-point-short" title="Update available"></span></div>
+            </button>
+        </div>
+        <button type="button" class="icon-button dictionary-menu-button" data-menu="dictionary-menu" data-menu-position="below left"><span class="icon-button-inner"><span class="icon" data-icon="kebab-menu"></span></span></button>
     </div>
-    <input type="number" step="1" class="short-height dictionary-priority advanced-only">
-    <button type="button" class="icon-button" id="dictionary-move-up" data-menu-action="moveUp"><span class="icon-button-inner"><span class="icon" data-icon="up-chevron"></span></span></button>
-    <button type="button" class="icon-button" id="dictionary-move-down" data-menu-action="moveDown"><span class="icon-button-inner"><span class="icon" data-icon="down-chevron"></span></span></button>
-    <button type="button" class="icon-button dictionary-menu-button" data-menu="dictionary-menu" data-menu-position="below left"><span class="icon-button-inner"><span class="icon" data-icon="kebab-menu"></span></span></button>
 </template>
 <template id="dictionary-details-entry-template"><div class="dictionary-details-entry">
     <span class="dictionary-details-entry-label"></span>
