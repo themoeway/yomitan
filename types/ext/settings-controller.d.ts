@@ -57,3 +57,12 @@ export type SettingsModification<THasScope extends boolean> = THasScope extends 
 export type SettingsExtraFields<THasScope extends boolean> = THasScope extends true ? null : SettingsModifications.OptionsScope;
 
 export type ModifyResult = Core.Response<SettingsModifications.ModificationResult>;
+
+export type LanguageSettingOverrides = {
+    [key: string]: SettingOverride[];
+};
+
+export type SettingOverride = {
+    path: string;
+    value: string;
+};

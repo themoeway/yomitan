@@ -25,17 +25,25 @@ export class LanguagesController {
     constructor(settingsController) {
         /** @type {import('./settings-controller.js').SettingsController} */
         this._settingsController = settingsController;
+        /** @type {string} */
+        this._lastSelectedLanguage = '';
     }
 
     /** */
     async prepare() {
         const languages = await this._settingsController.application.api.getLanguageSummaries();
         languages.sort((a, b) => a.name.localeCompare(b.name, 'en'));
-        this._fillSelect(languages);
+        const languageSelect = this._fillSelect(languages);
+        languageSelect.addEventListener(
+            /** @type {string} */ ('settingChanged'),
+            /** @type {EventListener} */ (this._onLanguageSelectChanged.bind(this)),
+            false,
+        );
     }
 
     /**
      * @param {import('language').LanguageSummary[]} languages
+     * @returns {Element}
      */
     _fillSelect(languages) {
         const selectElement = querySelectorNotNull(document, '#language-select');
@@ -44,6 +52,26 @@ export class LanguagesController {
             option.value = iso;
             option.text = `${name} (${iso})`;
             selectElement.appendChild(option);
+        }
+        return selectElement;
+    }
+
+    /**
+     * @param {import('dom-data-binder').SettingChangedEvent} settingChangedEvent
+     */
+    async _onLanguageSelectChanged(settingChangedEvent) {
+        const existingSettings = await this._settingsController.getProfileSettings([{path: 'general.language'}]);
+        const existingLanguage = existingSettings[0].result;
+        const setLanguage = settingChangedEvent.detail.value;
+        if (typeof existingLanguage !== 'string' || typeof setLanguage !== 'string') { return; }
+        if (this._lastSelectedLanguage === '') {
+            this._lastSelectedLanguage = setLanguage;
+        } else if (this._lastSelectedLanguage !== setLanguage) {
+            this._lastSelectedLanguage = setLanguage;
+            const yes = confirm('Changing language to: ' + setLanguage + '. Continue?');
+            if (yes) {
+                await this._settingsController.applyLanguageSettingOverrides(setLanguage);
+            }
         }
     }
 }

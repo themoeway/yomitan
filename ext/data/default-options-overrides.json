@@ -1,0 +1,6 @@
+{
+    "es": [{
+        "path": "scanning.scanResolution",
+        "value": "word"
+    }]
+}

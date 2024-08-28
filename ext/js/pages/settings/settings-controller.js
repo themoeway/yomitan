@@ -18,6 +18,7 @@
 
 import {EventDispatcher} from '../../core/event-dispatcher.js';
 import {EventListenerCollection} from '../../core/event-listener-collection.js';
+import {fetchJson} from '../../core/fetch-utilities.js';
 import {isObjectNotArray} from '../../core/object-utilities.js';
 import {generateId} from '../../core/utilities.js';
 import {OptionsUtil} from '../../data/options-util.js';
@@ -45,6 +46,8 @@ export class SettingsController extends EventDispatcher {
         this._pageExitPreventionEventListeners = new EventListenerCollection();
         /** @type {HtmlTemplateCollection} */
         this._templates = new HtmlTemplateCollection();
+        /** @type {import('settings-controller').LanguageSettingOverrides} */
+        this._languageSettingOverrides = {};
     }
 
     /** @type {import('../../application.js').Application} */
@@ -75,6 +78,7 @@ export class SettingsController extends EventDispatcher {
     /** */
     async prepare() {
         await this._templates.loadFromFiles(['/templates-settings.html']);
+        this._languageSettingOverrides = await fetchJson('/data/default-options-overrides.json');
         this._application.on('optionsUpdated', this._onOptionsUpdated.bind(this));
         if (this._canObservePermissionsChanges()) {
             chrome.permissions.onAdded.addListener(this._onPermissionsChanged.bind(this));
@@ -180,6 +184,17 @@ export class SettingsController extends EventDispatcher {
      */
     async setProfileSetting(path, value) {
         return await this.modifyProfileSettings([{action: 'set', path, value}]);
+    }
+
+    /**
+     * @param {string} language
+     */
+    async applyLanguageSettingOverrides(language) {
+        const settingOverrides = this._languageSettingOverrides[language];
+        if (typeof settingOverrides === 'undefined') { return; }
+        /** @type {import('settings-modifications').Modification[]} */
+        const modifications = settingOverrides.map(({path, value}) => ({action: 'set', path, value}));
+        await this.modifyProfileSettings(modifications);
     }
 
     /**
