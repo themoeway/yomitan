@@ -61,12 +61,10 @@ export class LanguagesController {
     /**
      * @param {import('dom-data-binder').SettingChangedEvent} settingChangedEvent
      */
-    async _onLanguageSelectChanged(settingChangedEvent) {
+    _onLanguageSelectChanged(settingChangedEvent) {
         // Check if there are language setting overrides and ask the user if they want to apply them
-        const existingSettings = await this._settingsController.getProfileSettings([{path: 'general.language'}]);
-        const existingLanguage = existingSettings[0].result;
         const setLanguage = settingChangedEvent.detail.value;
-        if (typeof existingLanguage !== 'string' || typeof setLanguage !== 'string') { return; }
+        if (typeof setLanguage !== 'string') { return; }
 
         const languageSettingOverrides = this._settingsController.getLanguageSettingOverrides(setLanguage);
         if (this._lastSelectedLanguage !== '' && this._lastSelectedLanguage !== setLanguage && typeof languageSettingOverrides !== 'undefined') {
@@ -78,7 +76,7 @@ export class LanguagesController {
                 'Apply the default settings?',
             );
             if (yes) {
-                await this._settingsController.applyLanguageSettingOverrides(setLanguage);
+                void this._settingsController.applyLanguageSettingOverrides(setLanguage);
             }
         }
         this._lastSelectedLanguage = setLanguage;
