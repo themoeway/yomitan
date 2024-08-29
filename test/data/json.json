@@ -99,6 +99,11 @@
             "type": "AjvSchema"
         },
         {
+            "path": "ext/data/schemas/default-options-overrides-schema.json",
+            "typeFile": "types/test/json.d.ts",
+            "type": "AjvSchema"
+        },
+        {
             "path": "test/data/translator-test-inputs.json",
             "typeFile": "types/test/translator.d.ts",
             "type": "TranslatorTestInputs",
@@ -192,6 +197,12 @@
             "typeFile": "types/ext/dictionary-recommended.d.ts",
             "type": "RecommendedDictionaries",
             "schema": "ext/data/schemas/recommended-dictionaries-schema.json"
+        },
+        {
+            "path": "ext/data/default-options-overrides.json",
+            "typeFile": "types/ext/settings-controller.d.ts",
+            "type": "LanguageSettingOverrides",
+            "schema": "ext/data/schemas/default-options-overrides-schema.json"
         }
     ]
 }
