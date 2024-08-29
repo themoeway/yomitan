@@ -201,10 +201,10 @@ export class SettingsController extends EventDispatcher {
 
     /**
      * @param {string} language
-     * @returns {boolean}
+     * @returns {import('settings-controller').SettingOverride[]}
      */
-    hasLanguageSettingOverrides(language) {
-        return typeof this._languageSettingOverrides[language] !== 'undefined';
+    getLanguageSettingOverrides(language) {
+        return this._languageSettingOverrides[language];
     }
 
     /**
