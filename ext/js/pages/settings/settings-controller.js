@@ -190,11 +190,21 @@ export class SettingsController extends EventDispatcher {
      * @param {string} language
      */
     async applyLanguageSettingOverrides(language) {
+        /** @type {import('settings-controller').SettingOverride[]} */
         const settingOverrides = this._languageSettingOverrides[language];
         if (typeof settingOverrides === 'undefined') { return; }
         /** @type {import('settings-modifications').Modification[]} */
         const modifications = settingOverrides.map(({path, value}) => ({action: 'set', path, value}));
         await this.modifyProfileSettings(modifications);
+        await this._onOptionsUpdatedInternal(true);
+    }
+
+    /**
+     * @param {string} language
+     * @returns {boolean}
+     */
+    hasLanguageSettingOverrides(language) {
+        return typeof this._languageSettingOverrides[language] !== 'undefined';
     }
 
     /**

@@ -64,14 +64,14 @@ export class LanguagesController {
         const existingLanguage = existingSettings[0].result;
         const setLanguage = settingChangedEvent.detail.value;
         if (typeof existingLanguage !== 'string' || typeof setLanguage !== 'string') { return; }
-        if (this._lastSelectedLanguage === '') {
-            this._lastSelectedLanguage = setLanguage;
-        } else if (this._lastSelectedLanguage !== setLanguage) {
-            this._lastSelectedLanguage = setLanguage;
+
+        const hasLanguageSettingOverrides = this._settingsController.hasLanguageSettingOverrides(setLanguage);
+        if (this._lastSelectedLanguage !== '' && this._lastSelectedLanguage !== setLanguage && hasLanguageSettingOverrides) {
             const yes = confirm('Changing language to: ' + setLanguage + '. Continue?');
             if (yes) {
                 await this._settingsController.applyLanguageSettingOverrides(setLanguage);
             }
         }
+        this._lastSelectedLanguage = setLanguage;
     }
 }
