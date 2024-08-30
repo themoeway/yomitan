@@ -1,6 +1,12 @@
 {
-    "es": [{
-        "path": "scanning.scanResolution",
-        "value": "word"
-    }]
+    "es": [
+        {
+            "path": "scanning.scanResolution",
+            "value": "word"
+        },
+        {
+            "path": "foo.bar",
+            "value": "baz"
+        }
+    ]
 }
