@@ -1,0 +1,30 @@
+{
+    "en": [
+        {
+            "action": "set",
+            "path": "scanning.scanResolution",
+            "value": "word",
+            "description": "English uses spaces to separate words so scanning by word (instead of character) is recommended."
+        },
+        {
+            "action": "set",
+            "path": "translation.searchResolution",
+            "value": "word",
+            "description": "English uses spaces to separate words so looking up whole words in the dictionary is recommended."
+        }
+    ],
+    "es": [
+        {
+            "action": "set",
+            "path": "scanning.scanResolution",
+            "value": "word",
+            "description": "Spanish uses spaces to separate words so scanning by word (instead of character) is recommended."
+        },
+        {
+            "action": "set",
+            "path": "translation.searchResolution",
+            "value": "word",
+            "description": "Spanish uses spaces to separate words so looking up whole words in the dictionary is recommended."
+        }
+    ]
+}

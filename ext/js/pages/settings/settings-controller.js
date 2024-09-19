@@ -46,8 +46,8 @@ export class SettingsController extends EventDispatcher {
         this._pageExitPreventionEventListeners = new EventListenerCollection();
         /** @type {HtmlTemplateCollection} */
         this._templates = new HtmlTemplateCollection();
-        /** @type {import('settings-controller').LanguageSettingOverrides} */
-        this._languageSettingOverrides = {};
+        /** @type {import('settings-controller').RecommendedSettingsByLanguage} */
+        this._recommendedSettingsByLanguage = {};
     }
 
     /** @type {import('../../application.js').Application} */
@@ -78,7 +78,7 @@ export class SettingsController extends EventDispatcher {
     /** */
     async prepare() {
         await this._templates.loadFromFiles(['/templates-settings.html']);
-        this._languageSettingOverrides = await fetchJson('/data/default-options-overrides.json');
+        this._recommendedSettingsByLanguage = await fetchJson('/data/recommended-settings.json');
         this._application.on('optionsUpdated', this._onOptionsUpdated.bind(this));
         if (this._canObservePermissionsChanges()) {
             chrome.permissions.onAdded.addListener(this._onPermissionsChanged.bind(this));
@@ -190,8 +190,8 @@ export class SettingsController extends EventDispatcher {
      * @param {string} language
      */
     async applyLanguageSettingOverrides(language) {
-        /** @type {import('settings-controller').SettingOverride[]} */
-        const settingOverrides = this._languageSettingOverrides[language];
+        /** @type {import('settings-controller').RecommendedSetting[]} */
+        const settingOverrides = this._recommendedSettingsByLanguage[language];
         if (typeof settingOverrides === 'undefined') { return; }
         /** @type {import('settings-modifications').Modification[]} */
         const modifications = settingOverrides.map(({path, value}) => ({action: 'set', path, value}));
@@ -201,10 +201,10 @@ export class SettingsController extends EventDispatcher {
 
     /**
      * @param {string} language
-     * @returns {import('settings-controller').SettingOverride[]}
+     * @returns {import('settings-controller').RecommendedSetting[]}
      */
-    getLanguageSettingOverrides(language) {
-        return this._languageSettingOverrides[language];
+    getRecommendedSettings(language) {
+        return this._recommendedSettingsByLanguage[language];
     }
 
     /**

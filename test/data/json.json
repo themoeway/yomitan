@@ -99,7 +99,7 @@
             "type": "AjvSchema"
         },
         {
-            "path": "ext/data/schemas/default-options-overrides-schema.json",
+            "path": "ext/data/schemas/recommended-settings-schema.json",
             "typeFile": "types/test/json.d.ts",
             "type": "AjvSchema"
         },
@@ -199,10 +199,10 @@
             "schema": "ext/data/schemas/recommended-dictionaries-schema.json"
         },
         {
-            "path": "ext/data/default-options-overrides.json",
+            "path": "ext/data/recommended-settings.json",
             "typeFile": "types/ext/settings-controller.d.ts",
             "type": "LanguageSettingOverrides",
-            "schema": "ext/data/schemas/default-options-overrides-schema.json"
+            "schema": "ext/data/schemas/recommended-settings-schema.json"
         }
     ]
 }

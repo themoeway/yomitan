@@ -35,17 +35,11 @@ export class LanguagesController {
     async prepare() {
         this._languages = await this._settingsController.application.api.getLanguageSummaries();
         this._languages.sort((a, b) => a.name.localeCompare(b.name, 'en'));
-        const languageSelect = this._fillSelect(this._languages);
-        languageSelect.addEventListener(
-            /** @type {string} */ ('settingChanged'),
-            /** @type {EventListener} */ (this._onLanguageSelectChanged.bind(this)),
-            false,
-        );
+        this._fillSelect(this._languages);
     }
 
     /**
      * @param {import('language').LanguageSummary[]} languages
-     * @returns {Element}
      */
     _fillSelect(languages) {
         const selectElement = querySelectorNotNull(document, '#language-select');
@@ -55,30 +49,5 @@ export class LanguagesController {
             option.text = `${name} (${iso})`;
             selectElement.appendChild(option);
         }
-        return selectElement;
-    }
-
-    /**
-     * @param {import('dom-data-binder').SettingChangedEvent} settingChangedEvent
-     */
-    _onLanguageSelectChanged(settingChangedEvent) {
-        // Check if there are language setting overrides and ask the user if they want to apply them
-        const setLanguage = settingChangedEvent.detail.value;
-        if (typeof setLanguage !== 'string') { return; }
-
-        const languageSettingOverrides = this._settingsController.getLanguageSettingOverrides(setLanguage);
-        if (this._lastSelectedLanguage !== '' && this._lastSelectedLanguage !== setLanguage && typeof languageSettingOverrides !== 'undefined') {
-            const userFriendlyLanguageName = this._languages.find((language) => language.iso === setLanguage)?.name;
-            // eslint-disable-next-line no-alert
-            const yes = confirm(
-                'We found default settings that work best for ' + userFriendlyLanguageName + ':\n\n' +
-                languageSettingOverrides.map(({path, value}) => `${path} = "${value}"`).join('\n') + '\n\n' +
-                'Apply the default settings?',
-            );
-            if (yes) {
-                void this._settingsController.applyLanguageSettingOverrides(setLanguage);
-            }
-        }
-        this._lastSelectedLanguage = setLanguage;
     }
 }

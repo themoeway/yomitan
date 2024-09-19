@@ -58,11 +58,13 @@ export type SettingsExtraFields<THasScope extends boolean> = THasScope extends t
 
 export type ModifyResult = Core.Response<SettingsModifications.ModificationResult>;
 
-export type LanguageSettingOverrides = {
-    [key: string]: SettingOverride[];
+export type RecommendedSettingsByLanguage = {
+    [key: string]: RecommendedSetting[];
 };
 
-export type SettingOverride = {
+export type RecommendedSetting = {
+    action: string;
     path: string;
     value: string;
+    description: string;
 };
