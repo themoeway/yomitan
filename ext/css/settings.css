@@ -754,6 +754,12 @@ select.short-height {
     color: #8b0000;
 }
 
+/* Recommended settings modal */
+/* #recommended-settings-body {
+    display: grid;
+    grid-template-columns: auto 1fr;
+} */
+
 
 /* Advanced settings */
 .settings-group.advanced-only>.settings-item::after,

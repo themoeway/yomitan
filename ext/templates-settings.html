@@ -130,7 +130,7 @@
                 </div>
             </div>
             <div class="settings-item-right">
-                <button type="button" class="action-button" data-action="import-recommended-dictionary" data-import-url="">Download</button>
+
             </div>
         </div>
     </div>
@@ -476,5 +476,24 @@
 <template id="permissions-origin-menu-template"><div class="popup-menu-container" tabindex="-1" role="dialog"><div class="popup-menu"><div class="popup-menu-body">
     <button type="button" class="popup-menu-item" data-menu-action="remove">Remove</button>
 </div></div></div></template>
+
+<!-- Recommended Settings -->
+<template id="recommended-settings-list-item-template">
+    <div class="settings-item">
+        <div class="settings-item-inner">
+            <div class="settings-item-left">
+                <div class="settings-item-label"></div>
+                <div class="settings-item-description"></div>
+            </div>
+            <div class="settings-item-right">
+                <label class="recommended-settings-checkbox-item flex-row-nowrap flex-label">
+                    <label class="checkbox">
+                        <input type="checkbox" class="recommended-settings-checkbox" checked><span class="checkbox-body"><span class="checkbox-fill"></span><span class="checkbox-border"></span><span class="checkbox-check"></span></span>
+                    </label>
+                </label>
+            </div>
+        </div>
+    </div>
+</template>
 
 </body></html>

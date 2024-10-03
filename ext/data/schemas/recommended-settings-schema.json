@@ -1,0 +1,44 @@
+{
+    "$id": "defaultOptionsOverride",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Contains data for recommended default options overrides by language.",
+    "type": "object",
+    "patternProperties": {
+        "^.{2,}$": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "path",
+                    "value"
+                ],
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "minLength": 2
+                    },
+                    "value": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "minLength": 1
+                            },
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "array"
+                            },
+                            {
+                                "type": "object"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

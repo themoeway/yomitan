@@ -25,13 +25,17 @@ export class LanguagesController {
     constructor(settingsController) {
         /** @type {import('./settings-controller.js').SettingsController} */
         this._settingsController = settingsController;
+        /** @type {string} */
+        this._lastSelectedLanguage = '';
+        /** @type {import('language').LanguageSummary[]} */
+        this._languages = [];
     }
 
     /** */
     async prepare() {
-        const languages = await this._settingsController.application.api.getLanguageSummaries();
-        languages.sort((a, b) => a.name.localeCompare(b.name, 'en'));
-        this._fillSelect(languages);
+        this._languages = await this._settingsController.application.api.getLanguageSummaries();
+        this._languages.sort((a, b) => a.name.localeCompare(b.name, 'en'));
+        this._fillSelect(this._languages);
     }
 
     /**

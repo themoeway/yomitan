@@ -40,6 +40,7 @@ import {PersistentStorageController} from './persistent-storage-controller.js';
 import {PopupPreviewController} from './popup-preview-controller.js';
 import {PopupWindowController} from './popup-window-controller.js';
 import {ProfileController} from './profile-controller.js';
+import {RecommendedSettingsController} from './recommended-settings-controller.js';
 import {ScanInputsController} from './scan-inputs-controller.js';
 import {ScanInputsSimpleController} from './scan-inputs-simple-controller.js';
 import {SecondarySearchDictionaryController} from './secondary-search-dictionary-controller.js';
@@ -174,6 +175,8 @@ await Application.main(true, async (application) => {
     const sortFrequencyDictionaryController = new SortFrequencyDictionaryController(settingsController);
     preparePromises.push(sortFrequencyDictionaryController.prepare());
 
+    const recommendedSettingsController = new RecommendedSettingsController(settingsController);
+    preparePromises.push(recommendedSettingsController.prepare());
 
     await Promise.all(preparePromises);
 

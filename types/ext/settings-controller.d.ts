@@ -57,3 +57,14 @@ export type SettingsModification<THasScope extends boolean> = THasScope extends 
 export type SettingsExtraFields<THasScope extends boolean> = THasScope extends true ? null : SettingsModifications.OptionsScope;
 
 export type ModifyResult = Core.Response<SettingsModifications.ModificationResult>;
+
+export type RecommendedSettingsByLanguage = {
+    [key: string]: RecommendedSetting[];
+};
+
+export type RecommendedSetting = {
+    action: string;
+    path: string;
+    value: string;
+    description: string;
+};
