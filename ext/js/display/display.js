@@ -784,11 +784,14 @@ export class Display extends EventDispatcher {
     async _onStateChanged() {
         if (this._historyChangeIgnore) { return; }
 
+        performance.mark('display:onStateChanged:start');
+
         /** @type {?import('core').TokenObject} */
         const token = {}; // Unique identifier token
         this._setContentToken = token;
         try {
             // Clear
+            performance.mark('display:clear:start');
             this._closePopups();
             this._closeAllPopupMenus();
             this._eventListeners.removeAllEventListeners();
@@ -799,8 +802,11 @@ export class Display extends EventDispatcher {
             this._dictionaryEntries = [];
             this._dictionaryEntryNodes = [];
             this._elementOverflowController.clearElements();
+            performance.mark('display:clear:end');
+            performance.measure('display:clear', 'display:clear:start', 'display:clear:end');
 
             // Prepare
+            performance.mark('display:prepare:start');
             const urlSearchParams = new URLSearchParams(location.search);
             let type = urlSearchParams.get('type');
             if (type === null && urlSearchParams.get('query') !== null) { type = 'terms'; }
@@ -809,7 +815,10 @@ export class Display extends EventDispatcher {
             this._queryParserVisibleOverride = (fullVisible === null ? null : (fullVisible !== 'false'));
 
             this._historyHasChanged = true;
+            performance.mark('display:prepare:end');
+            performance.measure('display:prepare', 'display:prepare:start', 'display:prepare:end');
 
+            performance.mark('display:setContent:start');
             // Set content
             switch (type) {
                 case 'terms':
@@ -826,9 +835,13 @@ export class Display extends EventDispatcher {
                     this._clearContent();
                     break;
             }
+            performance.mark('display:setContent:end');
+            performance.measure('display:setContent', 'display:setContent:start', 'display:setContent:end');
         } catch (e) {
             this.onError(toError(e));
         }
+        performance.mark('display:onStateChanged:end');
+        performance.measure('display:onStateChanged', 'display:onStateChanged:start', 'display:onStateChanged:end');
     }
 
     /**
@@ -1309,6 +1322,7 @@ export class Display extends EventDispatcher {
         const hasEnabledDictionaries = this._options ? this._options.dictionaries.some(({enabled}) => enabled) : false;
 
         // Set query
+        performance.mark('display:setQuery:start');
         let query = urlSearchParams.get('query');
         if (query === null) { query = ''; }
         let queryFull = urlSearchParams.get('full');
@@ -1320,6 +1334,8 @@ export class Display extends EventDispatcher {
             queryOffset = Number.isFinite(queryOffset) ? Math.max(0, Math.min(queryFull.length - query.length, queryOffset)) : 0;
         }
         this._setQuery(query, queryFull, queryOffset);
+        performance.mark('display:setQuery:end');
+        performance.measure('display:setQuery', 'display:setQuery:start', 'display:setQuery:end');
 
         let {state, content} = this._history;
         let changeHistory = false;
@@ -1384,9 +1400,12 @@ export class Display extends EventDispatcher {
         const container = this._container;
         container.textContent = '';
 
+        performance.mark('display:contentUpdate:start');
         this._triggerContentUpdateStart();
 
         for (let i = 0, ii = dictionaryEntries.length; i < ii; ++i) {
+            performance.mark('display:createEntry:start');
+
             if (i > 0) {
                 await promiseTimeout(1);
                 if (this._setContentToken !== token) { return; }
@@ -1408,6 +1427,9 @@ export class Display extends EventDispatcher {
             }
 
             this._elementOverflowController.addElements(entry);
+
+            performance.mark('display:createEntry:end');
+            performance.measure('display:createEntry', 'display:createEntry:start', 'display:createEntry:end');
         }
 
         if (typeof scrollX === 'number' || typeof scrollY === 'number') {
@@ -1419,6 +1441,8 @@ export class Display extends EventDispatcher {
         }
 
         this._triggerContentUpdateComplete();
+        performance.mark('display:contentUpdate:end');
+        performance.measure('display:contentUpdate', 'display:contentUpdate:start', 'display:contentUpdate:end');
     }
 
     /** */
