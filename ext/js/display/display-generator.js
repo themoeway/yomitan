@@ -119,6 +119,7 @@ export class DisplayGenerator {
 
         this._appendMultiple(inflectionRuleChainsContainer, this._createInflectionRuleChain.bind(this), inflectionRuleChainCandidates);
         this._appendMultiple(frequencyGroupListContainer, this._createFrequencyGroup.bind(this), groupedFrequencies, false);
+        this._createMeanFrequency(frequencyGroupListContainer, groupedFrequencies);
         this._appendMultiple(groupedPronunciationsContainer, this._createGroupedPronunciation.bind(this), groupedPronunciations);
         this._appendMultiple(headwordTagsContainer, this._createTermTag.bind(this), termTags, headwords.length);
 
@@ -999,6 +1000,33 @@ export class DisplayGenerator {
                 addText(container, text);
             }
         }
+    }
+
+    _createMeanFrequency(container, groupedFrequencies) {
+        let partialSum = 0;
+        for (let i = 0, ii = groupedFrequencies.length; i < ii; ++i) {
+            let {dictionary, frequencies} = groupedFrequencies[i];
+            if(frequencies[0]['values'][0]['frequency'] == null) {continue;}
+            partialSum += 1/(frequencies[0]['values'][0]['frequency']);
+        }
+        partialSum = Math.floor(groupedFrequencies.length/partialSum);
+        const itemNode = this._instantiate('term-frequency-item');
+
+
+        itemNode.dataset.displayValue = String(partialSum);
+        itemNode.dataset.frequency = String(partialSum);
+
+        itemNode.dataset.dictionary = 'Average';
+
+        const groupNode = this._instantiate('frequency-group-item');
+        const body = this._querySelector(groupNode, '.tag-body-content');
+
+        const tagLabel = this._querySelector(groupNode, '.tag-label-content');
+        this._setTextContent(tagLabel, 'Average');
+        this._setTextContent(itemNode, String(partialSum), this._language);
+        groupNode.dataset.details = 'Average';
+        body.appendChild(itemNode);
+        container.appendChild(groupNode);
     }
 
     /**
