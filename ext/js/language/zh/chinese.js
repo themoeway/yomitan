@@ -71,5 +71,5 @@ export function isCodePointChinese(codePoint) {
 
 /** @type {import('language').ReadingNormalizer} */
 export function normalizePinyin(str) {
-    return str.normalize('NFC').toLowerCase().replace(/[\s・:]|\/\//g, '');
+    return str.normalize('NFC').toLowerCase().replace(/[\s・:'’-]|\/\//g, '');
 }
