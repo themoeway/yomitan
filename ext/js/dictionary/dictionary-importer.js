@@ -373,10 +373,9 @@ export class DictionaryImporter {
      * @returns {ExtensionError}
      */
     _formatAjvSchemaError(schema, fileName) {
-        const e2 = new ExtensionError(`Dictionary has invalid data in '${fileName}'`);
-        e2.data = schema.errors;
-
-        return e2;
+        const e = new ExtensionError(`Dictionary has invalid data in '${fileName}' '${JSON.stringify(schema.errors)}'`);
+        e.data = schema.errors;
+        return e;
     }
 
     /**
