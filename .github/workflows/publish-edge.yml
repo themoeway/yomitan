@@ -15,7 +15,7 @@ jobs:
           fileName: "*"
 
       - name: Publish on Microsoft Edge Addons
-        uses: wdzeng/edge-addon@v1
+        uses: wdzeng/edge-addon@v2
         id: webStorePublish
         with:
           product-id: 18e6c4cd-6383-4f38-95e9-92a629f60817
