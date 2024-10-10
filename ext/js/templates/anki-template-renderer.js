@@ -285,7 +285,11 @@ export class AnkiTemplateRenderer {
      */
     _mergeTags(args) {
         const [object, isGroupMode, isMergeMode] = /** @type {[object: import('anki-templates').TermDictionaryEntry, isGroupMode: boolean, isMergeMode: boolean]} */ (args);
+        /** @type {import('anki-templates').Tag[][]} */
         const tagSources = [];
+        if (Array.isArray(object.termTags)) {
+            tagSources.push(object.termTags);
+        }
         if (isGroupMode || isMergeMode) {
             const {definitions} = object;
             if (Array.isArray(definitions)) {
@@ -294,12 +298,13 @@ export class AnkiTemplateRenderer {
                 }
             }
         } else {
-            tagSources.push(object.definitionTags);
+            if (Array.isArray(object.definitionTags)) {
+                tagSources.push(object.definitionTags);
+            }
         }
 
         const tags = new Set();
         for (const tagSource of tagSources) {
-            if (!Array.isArray(tagSource)) { continue; }
             for (const tag of tagSource) {
                 tags.add(tag.name);
             }

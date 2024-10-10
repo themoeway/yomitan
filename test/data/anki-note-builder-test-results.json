@@ -111,7 +111,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -153,7 +153,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -200,7 +200,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打つcloze-suffix",
         "sentence-furigana": "cloze-prefix打つcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -242,7 +242,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打つcloze-suffix",
         "sentence-furigana": "cloze-prefix打つcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -284,7 +284,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打つcloze-suffix",
         "sentence-furigana": "cloze-prefix打つcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -326,7 +326,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打つcloze-suffix",
         "sentence-furigana": "cloze-prefix打つcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -368,7 +368,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -410,7 +410,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -457,7 +457,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込むcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込むcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -499,7 +499,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込むcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込むcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -541,7 +541,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込むcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込むcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -583,7 +583,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込むcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込むcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -625,7 +625,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -667,7 +667,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -709,7 +709,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -751,7 +751,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -793,7 +793,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -835,7 +835,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -882,7 +882,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix画像cloze-suffix",
         "sentence-furigana": "cloze-prefix画像cloze-suffix",
-        "tags": "n",
+        "tags": "E1, P, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -929,7 +929,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixだcloze-suffix",
         "sentence-furigana": "cloze-prefixだcloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -976,7 +976,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixダースcloze-suffix",
         "sentence-furigana": "cloze-prefixダースcloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1018,7 +1018,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixダcloze-suffix",
         "sentence-furigana": "cloze-prefixダcloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -1065,7 +1065,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixうつcloze-suffix",
         "sentence-furigana": "cloze-prefixうつcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1107,7 +1107,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixうつcloze-suffix",
         "sentence-furigana": "cloze-prefixうつcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -1154,7 +1154,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixぶつcloze-suffix",
         "sentence-furigana": "cloze-prefixぶつcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1196,7 +1196,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixぶつcloze-suffix",
         "sentence-furigana": "cloze-prefixぶつcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -1243,7 +1243,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixうちこむcloze-suffix",
         "sentence-furigana": "cloze-prefixうちこむcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1285,7 +1285,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixうちこむcloze-suffix",
         "sentence-furigana": "cloze-prefixうちこむcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1327,7 +1327,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixうちcloze-suffix",
         "sentence-furigana": "cloze-prefixうちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1369,7 +1369,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixうちcloze-suffix",
         "sentence-furigana": "cloze-prefixうちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -1416,7 +1416,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixぶちこむcloze-suffix",
         "sentence-furigana": "cloze-prefixぶちこむcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1458,7 +1458,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixぶちこむcloze-suffix",
         "sentence-furigana": "cloze-prefixぶちこむcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1500,7 +1500,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixぶちcloze-suffix",
         "sentence-furigana": "cloze-prefixぶちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1542,7 +1542,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixぶちcloze-suffix",
         "sentence-furigana": "cloze-prefixぶちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -1589,7 +1589,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixがぞうcloze-suffix",
         "sentence-furigana": "cloze-prefixがぞうcloze-suffix",
-        "tags": "n",
+        "tags": "E1, P, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -1648,7 +1648,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込むcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込むcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1690,7 +1690,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込むcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込むcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1732,7 +1732,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1774,7 +1774,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1816,7 +1816,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -1858,7 +1858,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -2078,7 +2078,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2120,7 +2120,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2162,7 +2162,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2204,7 +2204,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
         "sentence-furigana": "cloze-prefix打ち込んでいませんでしたcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2246,7 +2246,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2288,7 +2288,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2330,7 +2330,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2372,7 +2372,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2414,7 +2414,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2456,7 +2456,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打cloze-suffix",
         "sentence-furigana": "cloze-prefix打cloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -2503,7 +2503,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2545,7 +2545,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2587,7 +2587,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2629,7 +2629,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ち込(こ)むcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2671,7 +2671,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2713,7 +2713,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2755,7 +2755,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2797,7 +2797,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)ちcloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)ちcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2839,7 +2839,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)cloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)cloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2881,7 +2881,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix打(う)cloze-suffix",
         "sentence-furigana": "cloze-prefix打(う)cloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -2928,7 +2928,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -2970,7 +2970,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3012,7 +3012,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3054,7 +3054,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)(込)(む)cloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3096,7 +3096,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)cloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3138,7 +3138,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)cloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3180,7 +3180,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)cloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3222,7 +3222,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)(ち)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)(ち)cloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3264,7 +3264,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)cloze-suffix",
-        "tags": "n",
+        "tags": "E1, n",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -3306,7 +3306,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix(打)cloze-suffix",
         "sentence-furigana": "cloze-prefix(打)cloze-suffix",
-        "tags": "abbr, n",
+        "tags": "E1, abbr, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -3353,7 +3353,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixtestcloze-suffix",
         "sentence-furigana": "cloze-prefixtestcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -3400,7 +3400,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixつtestcloze-suffix",
         "sentence-furigana": "cloze-prefixつtestcloze-suffix",
-        "tags": "n",
+        "tags": "E1, P, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -3447,7 +3447,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixtestましたcloze-suffix",
         "sentence-furigana": "cloze-prefixtestましたcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -3865,7 +3865,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefix構造cloze-suffix",
         "sentence-furigana": "cloze-prefix構造cloze-suffix",
-        "tags": "n",
+        "tags": "E1, P, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -4100,7 +4100,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixutsucloze-suffix",
         "sentence-furigana": "cloze-prefixutsucloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -4142,7 +4142,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixutsucloze-suffix",
         "sentence-furigana": "cloze-prefixutsucloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -4189,7 +4189,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixウツcloze-suffix",
         "sentence-furigana": "cloze-prefixウツcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -4231,7 +4231,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixウツcloze-suffix",
         "sentence-furigana": "cloze-prefixウツcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -4278,7 +4278,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixてきすとcloze-suffix",
         "sentence-furigana": "cloze-prefixてきすとcloze-suffix",
-        "tags": "n",
+        "tags": "E1, P, n",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
@@ -4325,7 +4325,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixｳﾂcloze-suffix",
         "sentence-furigana": "cloze-prefixｳﾂcloze-suffix",
-        "tags": "vt",
+        "tags": "E1, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       },
       {
@@ -4367,7 +4367,7 @@
         "popup-selection-text": "",
         "sentence": "cloze-prefixｳﾂcloze-suffix",
         "sentence-furigana": "cloze-prefixｳﾂcloze-suffix",
-        "tags": "vt",
+        "tags": "E2, P, vt",
         "url": "<a href=\"url:\">url:</a>"
       }
     ]
