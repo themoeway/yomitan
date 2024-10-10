@@ -26,6 +26,7 @@ import {
     convertKatakanaToHiragana as convertKatakanaToHiraganaFunction,
     normalizeCombiningCharacters as normalizeCombiningCharactersFunction,
 } from './japanese.js';
+import {convertShinjitai as convertShinjitaiFunction} from './shinjitai-converter.js';
 
 /** @type {import('language').TextProcessor<boolean>} */
 export const convertHalfWidthCharacters = {
@@ -98,4 +99,12 @@ export const normalizeCombiningCharacters = {
     description: 'ド → ド (U+30C8 U+3099 → U+30C9)',
     options: basicTextProcessorOptions,
     process: (str, setting) => (setting ? normalizeCombiningCharactersFunction(str) : str),
+};
+
+/** @type {import('language').TextProcessor<boolean>} */
+export const convertShinjitai = {
+    name: 'Convert Kyujitai to Shinjitai',
+    description: '萬 → 万',
+    options: basicTextProcessorOptions,
+    process: (str, setting) => (setting ? convertShinjitaiFunction(str) : str),
 };
