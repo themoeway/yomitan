@@ -69,6 +69,43 @@ describe('grammar wildcard dictionary lookup', () => {
         expect(terms(await translator.findTerms('simple', text, options()))).toContain(pattern);
     });
 
+    test.each([
+        {
+            // No matter how many hours I read difficult books after work, I cannot remember the content right away.
+            matchedText: 'いくら毎晩仕事が終わってから図書館で難しい専門書を何時間も読んでも',
+            continuation: '、内容をすぐには覚えられない。',
+            pattern: 'いくら～でも',
+        },
+        {
+            // No matter how carefully I explain my study plans and dreams to my parents and ask, they will not give permission.
+            matchedText: 'いくら両親に留学先で学びたいことや将来の夢を詳しく説明して頼んでも',
+            continuation: '、許可してもらえなかった。',
+            pattern: 'いくら～でも',
+        },
+        {
+            // Even after reading the entire textbook repeatedly and looking up every unfamiliar word, I forget it by morning.
+            matchedText: 'いくら仕事から帰って夕食の片付けを済ませた後で机に向かい分からない言葉を一つずつ辞書で調べながら先生に勧められた分厚い参考書を最初のページから最後のページまで繰り返し読んでも',
+            continuation: '、翌朝になると大事な内容を忘れてしまう。',
+            pattern: 'いくら～でも',
+        },
+        {
+            // Even when I get up early and run to the station, the long wait at the crossing makes me miss the first train.
+            matchedText: 'どんなに毎朝早く起きて駅まで続く長い坂道を全力で走っても途中の踏切で長く待たされるので始発電車には間に合わない',
+            continuation: '。',
+            pattern: 'どんなに～ても～ない',
+        },
+    ])('matches long phrases in $matchedText', async ({matchedText, continuation, pattern}) => {
+        const text = matchedText + continuation;
+        const result = await translator.findTerms('simple', text, options());
+        const matches = result.dictionaryEntries.filter(({headwords}) => headwords.some(({term}) => term === pattern));
+        expect(matches).toHaveLength(1);
+        expect(matches[0].headwords[0].sources[0]).toMatchObject({originalText: matchedText, deinflectedText: pattern});
+        expect(result.originalTextLength).toBe(matchedText.length);
+        expect(terms(await translator.findTerms('simple', text, options({enableGrammarWildcards: false})))).not.toContain(pattern);
+        // A long gap must not turn a missing closing literal into a match.
+        expect(terms(await translator.findTerms('simple', matchedText.slice(0, -1), options({deinflect: false})))).not.toContain(pattern);
+    });
+
     test('uses normalized text and maps replacement length back to the scan', async () => {
         const result = await translator.findTerms('simple', 'X騒いでも', options({
             textReplacements: [[{pattern: /X/g, replacement: 'いくら'}]],

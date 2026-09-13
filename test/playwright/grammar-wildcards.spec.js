@@ -77,20 +77,36 @@ test('grammar wildcards are optional and apply to all enabled dictionaries', asy
     await search(page, id, 'どんなに走っても間に合わない');
     await expect(page.getByText('Two gaps', {exact: true})).toHaveCount(2);
 
-    await page.goto(pathToFileURL(path.join(root, 'test/data/html/popup-tests.html')).toString());
-    const scanTarget = page.locator('.hovertarget .container-inner > div').first();
-    await scanTarget.evaluate((element) => { element.textContent = 'いくら大声で騒いでも後続'; });
-    await scanTarget.scrollIntoViewIfNeeded();
-    const box = await scanTarget.boundingBox();
-    expect(box).not.toBeNull();
-    if (box === null) { throw new Error('Scan target has no bounding box'); }
-    const popupPromise = page.waitForEvent('frameattached');
-    await page.keyboard.down('Shift');
-    await page.mouse.move(box.x + 5, box.y + box.height / 2);
-    const popup = await popupPromise;
-    await expect(popup.getByText('Grammar pattern', {exact: true})).toHaveCount(2);
-    await expect.poll(() => page.evaluate(() => window.getSelection()?.toString())).toBe('いくら大声で騒いでも');
-    await page.keyboard.up('Shift');
+    // Long grammar clauses exceed the default 16-character scan length.
+    await page.goto(settingsUrl);
+    await expect(page.locator('html')).toHaveAttribute('data-loaded', 'true');
+    await page.locator('[data-setting="scanning.length"]').fill('96');
+    await page.locator('[data-setting="scanning.length"]').press('Tab');
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-loaded', 'true');
+    await expect(page.locator('[data-setting="scanning.length"]')).toHaveValue('96');
+
+    for (const matchedText of [
+        'いくら大声で騒いでも',
+        'いくら毎晩仕事が終わってから図書館で難しい専門書を何時間も読んでも',
+        'いくら仕事から帰って夕食の片付けを済ませた後で机に向かい分からない言葉を一つずつ辞書で調べながら先生に勧められた分厚い参考書を最初のページから最後のページまで繰り返し読んでも',
+    ]) {
+        await page.goto(pathToFileURL(path.join(root, 'test/data/html/popup-tests.html')).toString());
+        const scanTarget = page.locator('.hovertarget .container-inner > div').first();
+        await scanTarget.evaluate((element, text) => { element.textContent = text; }, `${matchedText}、内容をすぐには覚えられない。`);
+        await scanTarget.scrollIntoViewIfNeeded();
+        const box = await scanTarget.boundingBox();
+        expect(box).not.toBeNull();
+        if (box === null) { throw new Error('Scan target has no bounding box'); }
+        const popupPromise = page.waitForEvent('frameattached', {timeout: 10000});
+        await page.mouse.move(0, 0);
+        await page.keyboard.down('Shift');
+        await page.mouse.move(box.x + 5, box.y + 8);
+        const popup = await popupPromise;
+        await expect(popup.getByText('Grammar pattern', {exact: true})).toHaveCount(2);
+        await expect.poll(() => page.evaluate(() => window.getSelection()?.toString())).toBe(matchedText);
+        await page.keyboard.up('Shift');
+    }
 
     await page.goto(settingsUrl);
     await expect(page.locator('html')).toHaveAttribute('data-loaded', 'true');
