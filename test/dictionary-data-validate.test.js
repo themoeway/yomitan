@@ -37,6 +37,7 @@ async function createTestDictionaryArchiveData(dictionary, dictionaryName) {
 describe('Dictionary validation', () => {
     const testCases = [
         {name: 'valid-dictionary1', valid: true},
+        {name: 'grammar-wildcards', valid: true},
         {name: 'invalid-dictionary1', valid: false},
         {name: 'invalid-dictionary2', valid: false},
         {name: 'invalid-dictionary3', valid: false},

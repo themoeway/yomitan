@@ -7,6 +7,7 @@ This document provides an overview on how to create your own Yomitan dictionary.
 - [Packaging A Dictionary](#packaging-a-dictionary)
 - [Examples](#examples)
 - [Schema Validation](#schema-validation)
+- [Grammar wildcards](#grammar-wildcards)
 - [Conjugation](#conjugation)
 - [Tag Categories](#tag-categories)
 
@@ -77,6 +78,20 @@ For VSCode validation, add the following to your User or Workspace `settings.jso
     }
 ]
 ```
+
+## Grammar wildcards
+
+DICT-1: Japanese dictionaries can place the fullwidth tilde `～` (U+FF5E) inside an ordinary term or reading, for example `いくら～でも`. Users must turn on **Advanced → Translation → Japanese grammar wildcards** to match this entry when they scan `いくら騒いでも`. The switch is off by default and applies to all enabled dictionaries in the active profile. Existing dictionaries need no new fields, schema version, or reimport.
+
+DICT-2: Each `～` matches one or more characters. A pattern must contain literal text before and after every gap. Multiple gaps work, for example `どんなに～ても～ない`. Leading, trailing, or adjacent markers remain literal, as do ASCII `~` and wave dash `〜`. Other characters are literal; patterns do not use regular expression syntax. Normal text processing, conjugation rules, scan length, and search resolution still apply.
+
+DICT-3: Keep the pattern in the existing term or reading field and write definitions as usual. For example, this version 3 term entry matches `いくら騒いでも`:
+
+```json
+["いくら～でも", "", "", "", 0, ["no matter how much"], -1, ""]
+```
+
+DICT-4: With the switch off, Yomitan searches these entries as literal text. Existing explicit prefix and suffix searches keep their usual behavior. Grammar matching applies to Japanese term lookups and may add lookup time when enabled.
 
 ## Conjugation
 

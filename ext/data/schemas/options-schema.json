@@ -855,9 +855,14 @@
                                 "type": "object",
                                 "required": [
                                     "textReplacements",
-                                    "searchResolution"
+                                    "searchResolution",
+                                    "enableGrammarWildcards"
                                 ],
                                 "properties": {
+                                    "enableGrammarWildcards": {
+                                        "type": "boolean",
+                                        "default": false
+                                    },
                                     "searchResolution": {
                                         "type": "string",
                                         "enum": [

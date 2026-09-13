@@ -65,6 +65,11 @@ export type FindTermsOptions = {
      */
     deinflect: boolean;
     /**
+     * Whether to match interior ～ gaps in Japanese dictionary terms and readings.
+     * Omitted values preserve literal lookup for existing callers.
+     */
+    enableGrammarWildcards?: boolean;
+    /**
      * The reading which will be sorted to the top of the results, if provided as a query parameter.
      */
     primaryReading: string;
