@@ -114,6 +114,50 @@ describe('grammar wildcard dictionary lookup', () => {
         expect(result.originalTextLength).toBe('X騒いでも'.length);
     });
 
+    test.each([
+        '費用が高い。準備にも時間がかかる。',
+        '費用が高い！準備にも時間がかかる。',
+        '費用が高い\n準備にも時間がかかる。',
+        '費用が高い\r\n準備にも時間がかかる。',
+        '費用が高い」と聞いた。「時間もかかる。',
+    ])('does not join statements in %s', async (text) => {
+        expect(terms(await translator.findTerms('simple', text, options()))).not.toContain('費用が～かかる');
+    });
+
+    test.each([
+        ['費用が思ったよりかかる。', '費用が思ったよりかかる', '費用が～かかる'],
+        ['費用が思ったよりかかる。後でもかかる。', '費用が思ったよりかかる', '費用が～かかる'],
+        ['費用が高く、予定より多くかかる。', '費用が高く、予定より多くかかる', '費用が～かかる'],
+        ['決して「無理だ。諦めろ」とは言わない。', '決して「無理だ。諦めろ」とは言わない', '決して～ない'],
+    ])('preserves the sentence source in %s', async (text, matchedText, pattern) => {
+        const result = await translator.findTerms('simple', text, options());
+        const entry = result.dictionaryEntries.find(({headwords}) => headwords.some(({term}) => term === pattern));
+        expect(entry?.headwords[0].sources[0].originalText).toBe(matchedText);
+        expect(result.originalTextLength).toBe(matchedText.length);
+    });
+
+    test('checks both reading patterns and multiple gaps', async () => {
+        const result = terms(await translator.findTerms('simple', 'いくら騒いだ。これでも', options()));
+        expect(result).not.toContain('いくら～でも');
+        expect(result).not.toContain('幾ら～でも');
+        expect(terms(await translator.findTerms('simple', 'どんなに走っても。電車が来ない', options()))).not.toContain('どんなに～ても～ない');
+    });
+
+    test.each(['。', '\n'])('does not let replacements erase a boundary %j', async (boundary) => {
+        expect(terms(await translator.findTerms('simple', `費用が高い${boundary}準備にも時間がかかる`, options({
+            textReplacements: [[{pattern: /[。\n]/g, replacement: ''}]],
+        })))).not.toContain('費用が～かかる');
+    });
+
+    test.each([
+        ['せっかく来たのに、予約した店が閉まっていたのに気づいた。', 'せっかく来たのに、予約した店が閉まっていたのに'],
+        ['せっかく買ったものには名前を書こう。', 'せっかく買ったものに'],
+    ])('documents the remaining string-matching limit in %s', async (text, matchedText) => {
+        const result = await translator.findTerms('simple', text, options());
+        const entry = result.dictionaryEntries.find(({headwords}) => headwords.some(({term}) => term === 'せっかく～のに'));
+        expect(entry?.headwords[0].sources[0].originalText).toBe(matchedText);
+    });
+
     test('keeps the disabled database path and results unchanged', async () => {
         findTermsBulk.mockClear();
         const literal = await translator.findTerms('simple', 'いくら騒いでも', options({enableGrammarWildcards: void 0}));

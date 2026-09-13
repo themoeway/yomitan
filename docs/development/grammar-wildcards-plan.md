@@ -14,6 +14,8 @@ PLAN-6: Follow the existing Playwright extension fixture and real settings impor
 
 PLAN-7: Run JavaScript lint, all TypeScript projects, HTML validation, JSON checks, Markdown formatting, unit tests, options tests, build checks, Playwright tests, and translator benchmarks. Record commands, results, and any environment limits below. Commit messages must explain why the change exists and its impact.
 
+PLAN-8: Before accepting a wildcard gap, reject sentence-ending punctuation outside balanced quotes and explicit line breaks. Preserve commas, decimal points, quoted punctuation, and visual wrapping. Compute boundary positions once per candidate and reuse them across records. Check the original source when text processing changes it, so replacements cannot remove a boundary and join statements. Keep normal literal lookup and the disabled path unchanged. Cover direct matching, translator source lengths, reading/multiple-gap patterns, and browser search/hover. Keep repeated endings and accidental suffix matches documented as separate string-matching limits.
+
 ## Prior attempt
 
 REF-1: [PR #2363](https://github.com/yomidevs/yomitan/pull/2363) adds a Japanese preprocessor that generates up to 51 variants. Its CodSpeed report shows 123.5 ms versus 329.6 ms for term lookup, or a 62.53% efficiency regression. The new implementation avoids expanding the language processor pipeline.
@@ -35,6 +37,8 @@ RESULT-5: All 19 existing visual tests and the clipboard integration test passed
 RESULT-6: The existing `anki add` integration test fails at `integration.spec.js:103` because the save button stays invisible. It fails the same way on untouched upstream. It remains unchanged and enabled in the repository. The final broad diagnostic run excluded this known failure; this is not a claim that the entire upstream Playwright suite is green.
 
 RESULT-7: Performance measurements are recorded below. Local wall-clock runs use the existing benchmark inputs with CodSpeed instrumentation removed only in a temporary config. The checked-in benchmarks still use the repository's CodSpeed plugin. Controlled CodSpeed CI and Linux screenshot validation remain upstream checks.
+
+RESULT-8: Added the sentence-boundary guard from PLAN-8. The updated full unit suite passed 4,943 tests with 46 skipped. All 102 focused matcher/translator tests passed, with 100% statement, branch, function, and line coverage for `grammar-wildcard.js`. The extension feature test passed after adding search-page and Shift-hover checks for quoted punctuation, cross-sentence rejection, and an explicit line break; the existing long wrapped-text cases still pass. Changed-file lint, main/test TypeScript checks, all 144 schema tests, and the dry-run build passed. The performance figures below and in the separate report predate this guard and do not measure its added cost.
 
 PERF-1: Median of three alternating upstream/feature wall-clock runs on this Mac, with no browser tests running. Values are the mean time for a whole benchmark batch, then the median across runs.
 

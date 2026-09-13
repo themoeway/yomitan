@@ -77,6 +77,17 @@ test('grammar wildcards are optional and apply to all enabled dictionaries', asy
     await search(page, id, 'どんなに走っても間に合わない');
     await expect(page.getByText('Two gaps', {exact: true})).toHaveCount(2);
 
+    for (const text of ['費用が高い。準備にも時間がかかる。', '費用が高い\n準備にも時間がかかる。']) {
+        await search(page, id, text);
+        // A positive result confirms that the new search has finished.
+        await expect(page.getByText('Cost noun', {exact: true})).toHaveCount(2);
+        await expect(page.getByText('Cost grammar pattern', {exact: true})).toHaveCount(0);
+    }
+    await search(page, id, '費用が思ったよりかかる。');
+    await expect(page.getByText('Cost grammar pattern', {exact: true})).toHaveCount(2);
+    await search(page, id, '決して「無理だ。諦めろ」とは言わない。');
+    await expect(page.getByText('Quoted grammar pattern', {exact: true})).toHaveCount(2);
+
     // Long grammar clauses exceed the default 16-character scan length.
     await page.goto(settingsUrl);
     await expect(page.locator('html')).toHaveAttribute('data-loaded', 'true');
@@ -86,14 +97,20 @@ test('grammar wildcards are optional and apply to all enabled dictionaries', asy
     await expect(page.locator('html')).toHaveAttribute('data-loaded', 'true');
     await expect(page.locator('[data-setting="scanning.length"]')).toHaveValue('96');
 
-    for (const matchedText of [
-        'いくら大声で騒いでも',
-        'いくら毎晩仕事が終わってから図書館で難しい専門書を何時間も読んでも',
-        'いくら仕事から帰って夕食の片付けを済ませた後で机に向かい分からない言葉を一つずつ辞書で調べながら先生に勧められた分厚い参考書を最初のページから最後のページまで繰り返し読んでも',
+    for (const [matchedText, continuation, definition] of [
+        ['いくら大声で騒いでも', '、内容をすぐには覚えられない。', 'Grammar pattern'],
+        ['いくら毎晩仕事が終わってから図書館で難しい専門書を何時間も読んでも', '、内容をすぐには覚えられない。', 'Grammar pattern'],
+        ['いくら仕事から帰って夕食の片付けを済ませた後で机に向かい分からない言葉を一つずつ辞書で調べながら先生に勧められた分厚い参考書を最初のページから最後のページまで繰り返し読んでも', '、翌朝になると大事な内容を忘れてしまう。', 'Grammar pattern'],
+        ['決して「無理だ。諦めろ」とは言わない', '。', 'Quoted grammar pattern'],
+        ['費用', 'が高い。準備にも時間がかかる。', 'Cost noun'],
+        ['費用', 'が高い\n準備にも時間がかかる。', 'Cost noun'],
     ]) {
         await page.goto(pathToFileURL(path.join(root, 'test/data/html/popup-tests.html')).toString());
         const scanTarget = page.locator('.hovertarget .container-inner > div').first();
-        await scanTarget.evaluate((element, text) => { element.textContent = text; }, `${matchedText}、内容をすぐには覚えられない。`);
+        await scanTarget.evaluate((element, text) => {
+            element.textContent = text;
+            if (text.includes('\n')) { element.style.whiteSpace = 'pre-wrap'; }
+        }, matchedText + continuation);
         await scanTarget.scrollIntoViewIfNeeded();
         const box = await scanTarget.boundingBox();
         expect(box).not.toBeNull();
@@ -103,7 +120,10 @@ test('grammar wildcards are optional and apply to all enabled dictionaries', asy
         await page.keyboard.down('Shift');
         await page.mouse.move(box.x + 5, box.y + 8);
         const popup = await popupPromise;
-        await expect(popup.getByText('Grammar pattern', {exact: true})).toHaveCount(2);
+        await expect(popup.getByText(definition, {exact: true})).toHaveCount(2);
+        if (definition === 'Cost noun') {
+            await expect(popup.getByText('Cost grammar pattern', {exact: true})).toHaveCount(0);
+        }
         await expect.poll(() => page.evaluate(() => window.getSelection()?.toString())).toBe(matchedText);
         await page.keyboard.up('Shift');
     }

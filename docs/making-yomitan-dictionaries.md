@@ -93,6 +93,10 @@ DICT-3: Keep the pattern in the existing term or reading field and write definit
 
 DICT-4: With the switch off, Yomitan searches these entries as literal text. Existing explicit prefix and suffix searches keep their usual behavior. Grammar matching applies to Japanese term lookups and may add lookup time when enabled.
 
+DICT-5: A wildcard gap cannot cross a sentence-ending mark outside balanced quotes, or an explicit line break in the scanned text. For example, `費用が～かかる` does not join `費用が高い。準備にも時間がかかる。`. Balanced `「」`, `『』`, `｢｣`, `“”`, `‘’`, and double quotes protect punctuation inside them, so `決して「無理だ。諦めろ」とは言わない` can match `決して～ない`. An unmatched closing quote also stops a gap. Commas, ellipses (`…`), decimal points between digits, and visual line wrapping remain allowed. This matching rule is separate from the sentence-extraction settings.
+
+DICT-6: The boundary check treats `.`, `!`, `?`, their fullwidth forms, `。`, `｡`, and vertical `︒︕︖` as sentence endings. It is a punctuation heuristic, not a grammar parser; periods in abbreviations can stop a gap. Explicit line breaks stop gaps even inside quotes. Text replacement rules cannot erase an original boundary to join statements; when an original boundary remains, a transformed match must also pass literal matching against the original source. This is conservative for transformations of patterns that contain literal sentence-ending marks. The closing literal must still fit within the scan length. Repeated endings can select a longer match, and `せっかく～のに` can still match through `ものに`; the boundary check does not resolve these separate limits of string matching.
+
 ## Conjugation
 
 For Yomitan to conjugate Japanese terms, they need the appropriate part of speech tag. The part of speech labels are documented on the [official JMDict page](http://www.edrdg.org/jmdictdb/cgi-bin/edhelp.py?svc=jmdict&sid=#kw_pos). For other languages, find the part of speech tags in `ext/js/language/{language}/{language}-transforms.js` under the `conditions` label, for labels that aren't prefixed with "Intermediate".
