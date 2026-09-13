@@ -467,6 +467,7 @@ function createProfileOptionsUpdatedTestData1() {
         },
         translation: {
             searchResolution: 'letter',
+            enableGrammarWildcards: false,
             textReplacements: {
                 searchOriginal: true,
                 groups: [],
@@ -2112,4 +2113,18 @@ describe('OptionsUtil', () => {
             expect(fieldTemplatesActual).toStrictEqual(expected2);
         });
     });
+});
+
+
+test('grammar wildcard defaults and saved choices survive options updates', async () => {
+    const util = new OptionsUtil();
+    await util.prepare();
+    const defaults = await util.update({});
+    expect(defaults.profiles[0].options.translation.enableGrammarWildcards).toBe(false);
+    defaults.profiles[0].options.translation.enableGrammarWildcards = true;
+    const saved = await util.update(structuredClone(defaults));
+    expect(saved.profiles[0].options.translation.enableGrammarWildcards).toBe(true);
+    const legacy = structuredClone(defaults);
+    Reflect.deleteProperty(legacy.profiles[0].options.translation, 'enableGrammarWildcards');
+    expect((await util.update(legacy)).profiles[0].options.translation.enableGrammarWildcards).toBe(false);
 });

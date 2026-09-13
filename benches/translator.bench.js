@@ -46,6 +46,14 @@ describe('Translator', () => {
         }
     });
 
+    bench(`Translator.prototype.findTerms - grammar wildcards enabled, no patterns (n=${findTermTests.length})`, async () => {
+        for (const data of /** @type {import('test/translator').TestInputFindTerm[]} */ (findTermTests)) {
+            const options = createFindTermsOptions(dictionaryName, optionsPresets, data.options);
+            options.enableGrammarWildcards = true;
+            await translator.findTerms(data.mode, data.text, options);
+        }
+    });
+
     bench(`Translator.prototype.findKanji - (n=${findKanjiTests.length})`, async () => {
         for (const data of /** @type {import('test/translator').TestInputFindKanji[]} */ (findKanjiTests)) {
             const {text} = data;
@@ -54,3 +62,23 @@ describe('Translator', () => {
         }
     });
 });
+
+
+const grammarDictionaryName = 'Grammar Wildcards';
+const {translator: grammarTranslator} = await createTranslatorContext(path.join(dirname, '..', 'test/data/dictionaries/grammar-wildcards'), grammarDictionaryName);
+const grammarOptions = createFindTermsOptions(grammarDictionaryName, {}, [{type: 'terms'}]);
+grammarOptions.enabledDictionaryMap.set(grammarDictionaryName, {
+    index: 0,
+    alias: grammarDictionaryName,
+    allowSecondarySearches: false,
+    partsOfSpeechFilter: true,
+    useDeinflections: true,
+});
+const grammarInputs = ['いくら騒いでも', 'どんなに走っても間に合わない', '長い接頭辞の文法の例終わり', '前𠮷後', 'しか野菜を食べた', '前あ中い後', '何も見つからない'];
+for (const enabled of [false, true]) {
+    bench(`Translator.prototype.findTerms - grammar dictionary, enabled=${enabled} (n=${grammarInputs.length})`, async () => {
+        for (const text of grammarInputs) {
+            await grammarTranslator.findTerms('group', text, {...grammarOptions, enableGrammarWildcards: enabled});
+        }
+    });
+}

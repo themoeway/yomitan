@@ -18,6 +18,7 @@
 
 import {safePerformance} from '../core/safe-performance.js';
 import {applyTextReplacement} from '../general/regex-util.js';
+import {getGrammarWildcardBoundaryPositions, matchesGrammarWildcard} from './grammar-wildcard.js';
 import {isCodePointJapanese} from './ja/japanese.js';
 import {isCodePointKorean} from './ko/korean.js';
 import {LanguageTransformer} from './language-transformer.js';
@@ -401,6 +402,10 @@ export class Translator {
 
         await this._addEntriesToDeinflections(language, deinflections, enabledDictionaryMap, matchType);
 
+        if (options.enableGrammarWildcards && language === 'ja' && matchType === 'exact') {
+            deinflections.push(...await this._getGrammarWildcardDeinflections(deinflections, options));
+        }
+
         const dictionaryDeinflections = await this._getDictionaryDeinflections(language, deinflections, enabledDictionaryMap, matchType);
         deinflections.push(...dictionaryDeinflections);
 
@@ -415,6 +420,77 @@ export class Translator {
         safePerformance.mark('translator:getDeinflections:end');
         safePerformance.measure('translator:getDeinflections', 'translator:getDeinflections:start', 'translator:getDeinflections:end');
         return deinflections;
+    }
+
+    /**
+     * Searches existing dictionary patterns without generating deinflection variants.
+     * @param {import('translation-internal').DatabaseDeinflection[]} deinflections
+     * @param {import('translation').FindTermsOptions} options
+     * @returns {Promise<import('translation-internal').DatabaseDeinflection[]>}
+     */
+    async _getGrammarWildcardDeinflections(deinflections, {language, enabledDictionaryMap}) {
+        if (enabledDictionaryMap.size === 0) { return []; }
+        const groups = this._groupDeinflectionsByTerm(deinflections);
+        /** @type {Set<string>} */
+        const prefixes = new Set();
+        for (const text of groups.keys()) {
+            let prefix = '';
+            for (const character of text) {
+                prefix += character;
+                // A pattern needs at least one gap character and a literal suffix.
+                if (text.length - prefix.length < 2) { break; }
+                prefixes.add(`${prefix}～`);
+            }
+        }
+        if (prefixes.size === 0) { return []; }
+        const entries = await this._database.findTermsBulk([...prefixes], enabledDictionaryMap, 'prefix');
+        /** @type {Map<string, number[]>} */
+        const boundaryPositions = new Map();
+        /**
+         * @param {string} text
+         * @returns {number[]}
+         */
+        const getBoundaries = (text) => {
+            let positions = boundaryPositions.get(text);
+            if (typeof positions === 'undefined') {
+                positions = getGrammarWildcardBoundaryPositions(text);
+                boundaryPositions.set(text, positions);
+            }
+            return positions;
+        };
+        /** @type {import('translation-internal').DatabaseDeinflection[]} */
+        const results = [];
+        for (const entry of entries) {
+            const {partsOfSpeechFilter} = /** @type {import('translation').FindTermDictionary} */ (enabledDictionaryMap.get(entry.dictionary));
+            const definitionConditions = this._multiLanguageTransformer.getConditionFlagsFromPartsOfSpeech(language, entry.rules);
+            const termParts = entry.term.split('～');
+            const readingParts = entry.reading.split('～');
+            for (const [text, sources] of groups) {
+                const positions = getBoundaries(text);
+                const termMatches = matchesGrammarWildcard(text, termParts, positions);
+                if (!termMatches && !matchesGrammarWildcard(text, readingParts, positions)) { continue; }
+                const pattern = termMatches ? entry.term : entry.reading;
+                for (const source of sources) {
+                    if (partsOfSpeechFilter && !LanguageTransformer.conditionsMatch(source.conditions, definitionConditions)) { continue; }
+                    // Replacements must not erase a boundary and join unrelated statements.
+                    if (source.originalText !== text) {
+                        const originalPositions = getBoundaries(source.originalText);
+                        if (originalPositions.length > 0 && !matchesGrammarWildcard(source.originalText, termMatches ? termParts : readingParts, originalPositions)) { continue; }
+                    }
+                    const result = this._createDeinflection(
+                        source.originalText,
+                        source.transformedText,
+                        pattern,
+                        source.conditions,
+                        source.textProcessorRuleChainCandidates,
+                        source.inflectionRuleChainCandidates,
+                    );
+                    result.databaseEntries.push({...entry, matchType: 'exact', matchSource: termMatches ? 'term' : 'reading'});
+                    results.push(result);
+                }
+            }
+        }
+        return results;
     }
 
     /**

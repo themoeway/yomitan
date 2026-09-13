@@ -7,6 +7,7 @@ This document provides an overview on how to create your own Yomitan dictionary.
 - [Packaging A Dictionary](#packaging-a-dictionary)
 - [Examples](#examples)
 - [Schema Validation](#schema-validation)
+- [Grammar wildcards](#grammar-wildcards)
 - [Conjugation](#conjugation)
 - [Tag Categories](#tag-categories)
 
@@ -77,6 +78,24 @@ For VSCode validation, add the following to your User or Workspace `settings.jso
     }
 ]
 ```
+
+## Grammar wildcards
+
+DICT-1: Japanese dictionaries can place the fullwidth tilde `～` (U+FF5E) inside an ordinary term or reading, for example `いくら～でも`. Users must turn on **Advanced → Translation → Japanese grammar wildcards** to match this entry when they scan `いくら騒いでも`. The switch is off by default and applies to all enabled dictionaries in the active profile. Existing dictionaries need no new fields, schema version, or reimport.
+
+DICT-2: Each `～` matches one or more characters. A pattern must contain literal text before and after every gap. Multiple gaps work, for example `どんなに～ても～ない`. Leading, trailing, or adjacent markers remain literal, as do ASCII `~` and wave dash `〜`. Other characters are literal; patterns do not use regular expression syntax. Normal text processing, conjugation rules, scan length, and search resolution still apply.
+
+DICT-3: Keep the pattern in the existing term or reading field and write definitions as usual. For example, this version 3 term entry matches `いくら騒いでも`:
+
+```json
+["いくら～でも", "", "", "", 0, ["no matter how much"], -1, ""]
+```
+
+DICT-4: With the switch off, Yomitan searches these entries as literal text. Existing explicit prefix and suffix searches keep their usual behavior. Grammar matching applies to Japanese term lookups and may add lookup time when enabled.
+
+DICT-5: A wildcard gap cannot cross a sentence-ending mark outside balanced quotes, or an explicit line break in the scanned text. For example, `費用が～かかる` does not join `費用が高い。準備にも時間がかかる。`. Balanced `「」`, `『』`, `｢｣`, `“”`, `‘’`, and double quotes protect punctuation inside them, so `決して「無理だ。諦めろ」とは言わない` can match `決して～ない`. An unmatched closing quote also stops a gap. Commas, ellipses (`…`), decimal points between digits, and visual line wrapping remain allowed. This matching rule is separate from the sentence-extraction settings.
+
+DICT-6: The boundary check treats `.`, `!`, `?`, their fullwidth forms, `。`, `｡`, and vertical `︒︕︖` as sentence endings. It is a punctuation heuristic, not a grammar parser; periods in abbreviations can stop a gap. Explicit line breaks stop gaps even inside quotes. Text replacement rules cannot erase an original boundary to join statements; when an original boundary remains, a transformed match must also pass literal matching against the original source. This is conservative for transformations of patterns that contain literal sentence-ending marks. The closing literal must still fit within the scan length. Repeated endings can select a longer match, and `せっかく～のに` can still match through `ものに`; the boundary check does not resolve these separate limits of string matching.
 
 ## Conjugation
 

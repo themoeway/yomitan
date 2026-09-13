@@ -141,6 +141,18 @@
             "type": "JsonInfo"
         },
         {
+            "path": "test/data/dictionaries/grammar-wildcards/index.json",
+            "typeFile": "types/ext/dictionary-data.d.ts",
+            "type": "Index",
+            "schema": "ext/data/schemas/dictionary-index-schema.json"
+        },
+        {
+            "path": "test/data/dictionaries/grammar-wildcards/term_bank_1.json",
+            "typeFile": "types/ext/dictionary-data.d.ts",
+            "type": "TermV3Array",
+            "schema": "ext/data/schemas/dictionary-term-bank-v3-schema.json"
+        },
+        {
             "path": "test/data/dictionaries/valid-dictionary1/index.json",
             "typeFile": "types/ext/dictionary-data.d.ts",
             "type": "Index",

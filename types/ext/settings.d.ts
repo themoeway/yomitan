@@ -261,6 +261,7 @@ export type TranslationOptions = {
     collapseEmphaticSequences: TranslationCollapseEmphaticSequences;
     textReplacements: TranslationTextReplacementOptions;
     searchResolution: SearchResolution;
+    enableGrammarWildcards: boolean;
 };
 
 export type SearchResolution = 'letter' | 'word';
